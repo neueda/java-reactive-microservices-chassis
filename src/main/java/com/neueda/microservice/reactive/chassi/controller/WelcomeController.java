@@ -1,7 +1,7 @@
-package com.neueda.reactiveapitemplate.controller;
+package com.neueda.microservice.reactive.chassi.controller;
 
-import com.neueda.reactiveapitemplate.model.User;
-import com.neueda.reactiveapitemplate.service.UserService;
+import com.neueda.microservice.reactive.chassi.model.User;
+import com.neueda.microservice.reactive.chassi.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;

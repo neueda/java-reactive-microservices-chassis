@@ -1,6 +1,6 @@
-package com.neueda.reactiveapitemplate.repository;
+package com.neueda.microservice.reactive.chassi.repository;
 
-import com.neueda.reactiveapitemplate.model.User;
+import com.neueda.microservice.reactive.chassi.model.User;
 import org.springframework.data.repository.reactive.ReactiveCrudRepository;
 import org.springframework.stereotype.Repository;
 

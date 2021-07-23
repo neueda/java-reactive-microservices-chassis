@@ -1,7 +1,7 @@
-package com.neueda.reactiveapitemplate.service;
+package com.neueda.microservice.reactive.chassi.service;
 
-import com.neueda.reactiveapitemplate.model.User;
-import com.neueda.reactiveapitemplate.repository.UserRepository;
+import com.neueda.microservice.reactive.chassi.repository.UserRepository;
+import com.neueda.microservice.reactive.chassi.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import reactor.core.publisher.Flux;

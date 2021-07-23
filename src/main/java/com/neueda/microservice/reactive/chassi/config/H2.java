@@ -1,4 +1,4 @@
-package com.neueda.reactiveapitemplate.config;
+package com.neueda.microservice.reactive.chassi.config;
 
 import org.h2.tools.Server;
 import org.springframework.context.event.EventListener;
