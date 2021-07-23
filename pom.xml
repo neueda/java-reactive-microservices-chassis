@@ -18,7 +18,7 @@
 	
 	<properties>
 		<java.version>11</java.version>
-		<springdoc.version>1.5.2</springdoc.version>
+		<springdoc.version>1.5.9</springdoc.version>
 		<spring-cloud.version>2020.0.3</spring-cloud.version>
 		<testcontainers.version>1.15.3</testcontainers.version>
 	</properties>
@@ -89,16 +89,11 @@
 		<!-- API Documentation -->
 		<dependency>
 			<groupId>org.springdoc</groupId>
-			<artifactId>springdoc-openapi-ui</artifactId>
-			<version>${springdoc.version}</version>
+			<artifactId>springdoc-openapi-webflux-ui</artifactId>
 		</dependency>
 		<dependency>
 			<groupId>org.springdoc</groupId>
 			<artifactId>springdoc-openapi-webflux-core</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>org.springdoc</groupId>
-			<artifactId>springdoc-openapi-webflux-ui</artifactId>
 		</dependency>
 		<dependency>
 			<groupId>org.springframework.restdocs</groupId>
@@ -156,6 +151,13 @@
 	
 	<dependencyManagement>
 		<dependencies>
+			<dependency>
+				<groupId>org.springdoc</groupId>
+				<artifactId>springdoc-openapi</artifactId>
+				<version>${springdoc.version}</version>
+				<type>pom</type>
+				<scope>import</scope>
+			</dependency>
 			<dependency>
 				<groupId>org.springframework.cloud</groupId>
 				<artifactId>spring-cloud-dependencies</artifactId>
