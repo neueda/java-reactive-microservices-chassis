@@ -1,0 +1,14 @@
+databaseChangeLog:
+- preConditions:
+  - and:
+    - dbms:
+        type: h2
+    - runningAs:
+        username: sa
+
+- include:
+    relativeToChangelogFile: true
+    file: changes/create-table-changelog-1.xml
+- include:
+    relativeToChangelogFile: true
+    file: changes/insert-data-changelog-2.xml
