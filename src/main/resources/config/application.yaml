@@ -13,7 +13,7 @@ spring:
   liquibase:
     enabled: true
     test-rollback-on-update: true
-    url: jdbc:h2:mem:testdb;DB_CLOSE_DELAY=-1
+    url: jdbc:h2:file:./target/test-data/chassisdb
     user: sa
     password:
 
