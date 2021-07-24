@@ -1,3 +1,0 @@
-DELETE FROM USER;
-INSERT INTO  USER (name) VALUES ('Sree');
-INSERT INTO  USER (name) VALUES ('Pushvinder');

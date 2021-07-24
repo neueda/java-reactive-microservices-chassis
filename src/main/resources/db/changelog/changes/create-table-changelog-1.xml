@@ -1,0 +1,21 @@
+<?xml version="1.1" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.0.xsd">
+
+    <changeSet id="1" author="Berchris">
+        <createTable tableName="chassis">
+            <column name="id" type="bigint" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false" primaryKeyName="chassis_id_pk"/>
+            </column>
+            <column name="name" type="varchar(50)">
+                <constraints nullable="false" notNullConstraintName="name_nn"/>
+            </column>
+            <column name="description" type="varchar(255)"/>
+        </createTable>
+        <rollback>
+            <dropTable tableName="chassis"/>
+        </rollback>
+    </changeSet>
+</databaseChangeLog>

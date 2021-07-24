@@ -1,4 +1,4 @@
-package com.neueda.microservice.reactive.chassi.model;
+package com.neueda.microservice.reactive.chassis.model;
 
 
 import org.springframework.data.annotation.Id;

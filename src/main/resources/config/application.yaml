@@ -1,0 +1,24 @@
+debug: off
+
+server:
+  port: 8080
+  error:
+    include-exception: true
+    include-stacktrace: always
+
+spring:
+  sql:
+    init:
+      mode: never
+  liquibase:
+    enabled: true
+    test-rollback-on-update: true
+    url: jdbc:h2:mem:testdb;DB_CLOSE_DELAY=-1
+    user: sa
+    password:
+    change-log: classpath:db/changelog/db.changelog-master.xml
+
+springdoc:
+  api-docs:
+    enabled: true
+
