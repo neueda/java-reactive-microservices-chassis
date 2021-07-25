@@ -1,0 +1,27 @@
+spring:
+  config:
+    import: "configtree:db/credentials/"
+
+  h2:
+    console:
+      enabled: off
+
+  sql:
+    init:
+      mode: never
+
+  liquibase:
+    url: jdbc:${liquibase.database}
+    user: ${liquibase.username}
+    password: ${liquibase.password}
+    test-rollback-on-update: on
+
+  r2dbc:
+    url: r2dbc:pool:${app.database}
+    username: ${app.username}
+    password: ${app.password}
+    pool:
+      initial-size: 10
+      max-size: 10
+      max-idle-time: 30m
+      validation-query: SELECT 1
