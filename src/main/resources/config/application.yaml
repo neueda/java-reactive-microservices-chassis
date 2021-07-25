@@ -1,23 +1,36 @@
-debug: off
+spring:
+  application:
+    name: @project.name@
+
+  config:
+    import: "file:db/config.yaml"
+
+  codec:
+    log-request-details: on
 
 server:
   port: 8080
   error:
-    include-exception: true
+    include-exception: on
     include-stacktrace: always
-
-spring:
-  sql:
-    init:
-      mode: never
-  liquibase:
-    enabled: true
-    test-rollback-on-update: true
-    url: jdbc:h2:file:./target/test-data/chassisdb
-    user: sa
-    password:
 
 springdoc:
   api-docs:
-    enabled: true
+    enabled: on
+    path: /api-docs
+
+debug: off
+trace: off
+logging:
+  file:
+    name: ${spring.application.name}.log
+  level:
+    root: error
+    web: trace
+    sql: trace
+    org:
+      springframework:
+        jdbc:
+          datasource: trace
+        r2dbc: trace
 

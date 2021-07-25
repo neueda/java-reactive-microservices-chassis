@@ -8,7 +8,7 @@ databaseChangeLog:
 
 - include:
     relativeToChangelogFile: true
-    file: changes/create-table-changelog-1.xml
+    file: v1/create-table-changelog.xml
 - include:
     relativeToChangelogFile: true
-    file: changes/insert-data-changelog-2.xml
+    file: v1/insert-data-changelog.xml
