@@ -1,6 +1,6 @@
 package com.neueda.microservice.reactive.chassis.service;
 
-import com.neueda.microservice.reactive.chassis.domain.ChassisEntity;
+import com.neueda.microservice.reactive.chassis.entity.ChassisEntity;
 import com.neueda.microservice.reactive.chassis.model.Chassis;
 import com.neueda.microservice.reactive.chassis.repository.ChassisRepository;
 import lombok.RequiredArgsConstructor;

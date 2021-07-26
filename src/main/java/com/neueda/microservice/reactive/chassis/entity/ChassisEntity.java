@@ -1,4 +1,4 @@
-package com.neueda.microservice.reactive.chassis.domain;
+package com.neueda.microservice.reactive.chassis.entity;
 
 import lombok.Data;
 import org.springframework.data.annotation.Id;

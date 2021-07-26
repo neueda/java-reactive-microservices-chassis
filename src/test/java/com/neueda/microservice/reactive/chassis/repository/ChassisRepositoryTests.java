@@ -1,7 +1,7 @@
 package com.neueda.microservice.reactive.chassis.repository;
 
 
-import com.neueda.microservice.reactive.chassis.domain.ChassisEntity;
+import com.neueda.microservice.reactive.chassis.entity.ChassisEntity;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
