@@ -1,5 +1,6 @@
 package com.neueda.microservice.reactive.chassis.controller;
 
+import com.neueda.microservice.reactive.chassis.exception.IdFormatException;
 import com.neueda.microservice.reactive.chassis.model.Chassis;
 import com.neueda.microservice.reactive.chassis.service.ChassisService;
 import lombok.RequiredArgsConstructor;
@@ -23,8 +24,12 @@ public class ChassisController {
     }
 
     @GetMapping("chassis/{id}")
-    public Mono<Chassis> getChassisById(@PathVariable Long id) {
-        return chassisService.searchChassisById(id);
+    public Mono<Chassis> getChassisById(@PathVariable String id) {
+        try {
+            return chassisService.searchChassisById(Long.valueOf(id));
+        } catch(NumberFormatException e) {
+            throw new IdFormatException(e, "/v1/chassis/" + id);
+        }
     }
 
     @GetMapping("chassisSearch")
