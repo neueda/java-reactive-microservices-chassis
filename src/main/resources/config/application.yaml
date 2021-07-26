@@ -15,13 +15,13 @@ spring:
 
   liquibase:
     url: jdbc:${liquibase.database}
-    user: ${liquibase.username}
+    user: ${liquibase.username:sa}
     password: ${liquibase.password}
     test-rollback-on-update: on
 
   r2dbc:
     url: r2dbc:pool:${app.database}
-    username: ${app.username}
+    username: ${app.username:sa}
     password: ${app.password}
     pool:
       initial-size: 10
