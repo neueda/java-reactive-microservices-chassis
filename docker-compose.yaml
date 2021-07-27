@@ -5,8 +5,14 @@ services:
     image: chassis:openj9
     build:
       context: .
+    networks:
+    - microservice
     ports:
     - 8080:8080
     volumes:
     - ./db:/opt/app/reactive-microservice/db
     - ./log:/var/log/reactive-microservice
+
+networks:
+  microservice:
+    name: microservice_network
