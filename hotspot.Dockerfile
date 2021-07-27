@@ -1,4 +1,8 @@
-FROM adoptopenjdk:16-jre-hotspot
+# To be build and run with:
+# docker build --build-arg JAR=java-microservices-chassis-0.0.1-SNAPSHOT.jar -f hotspot.Dockerfile -t chassis:hotspot .
+# docker run --rm -p 8082:8080 --name chassis-hotspot -d chassis:hotspot
+
+FROM adoptopenjdk:16-jdk-hotspot
 
 ARG JAR
 
