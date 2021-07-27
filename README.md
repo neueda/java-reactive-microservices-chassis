@@ -7,7 +7,10 @@ To confirm which implementation of JVM is really more efficient I have built for
 **adoptopenjdk:16-jre-hotspot** and the another using **adoptopenjdk:16-jre-openj9**. It can be found below the memory and CPU
 usage for each of then, as well as, the result of their performance test with Apache HTTP server benchmarking tool (ab).
 
-### Docker containers
+### Pre-Load testing
+
+**Container Resources Usage:**
+
 |NAME                 |CPU %     |MEM USAGE / LIMIT     |MEM %     |NET I/O          |BLOCK I/O
 |---------------------|----------|----------------------|----------|-----------------|--------------
 |chassis-openj9       |0.00%     |165.1MiB / 3.844GiB   |4.20%     |209kB / 8.1kB    |42.1MB / 123kB
@@ -15,9 +18,11 @@ usage for each of then, as well as, the result of their performance test with Ap
 
 ### Load testing
 
+**Loading test command:**
+
 `ab -c 50 -n 1000000 -r http://<container-url>:<container-port>/v1/chassis`
 
-**adoptopenjdk:16-jre-openj9**
+**OpenJ9 JVM load testing:**
 
 ```
 Document Path:          /v1/chassis  
@@ -61,7 +66,7 @@ Percentage of the requests served within a certain time (ms)
 
 
 ---
-**adoptopenjdk:16-jre-hotspot**
+**Hotspot JVM load testing:**
 
 ```
 Document Path:          /v1/chassis
