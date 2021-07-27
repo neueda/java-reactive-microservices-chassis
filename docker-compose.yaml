@@ -1,0 +1,12 @@
+version: "3.9"
+services:
+  chassis:
+    container_name: chassis-openj9
+    image: chassis:openj9
+    build:
+      context: .
+    ports:
+    - 8080:8080
+    volumes:
+    - ./db:/opt/app/reactive-microservice/db
+    - ./log:/var/log/reactive-microservice
