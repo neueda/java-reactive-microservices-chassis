@@ -55,7 +55,7 @@ debug: off
 trace: off
 logging:
   file:
-    path: /var/log/${spring.application.name}
+    path: /var/log/@log.dir@
   level:
     root: error
     web: trace

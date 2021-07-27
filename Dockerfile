@@ -12,7 +12,9 @@ COPY pom.xml ./
 COPY src ./src
 COPY db ./db
 
-RUN mvn package "-Dproject.artifactId=$APP_NAME" "-DbuildName=$APP_NAME"
+# The '-Dlog.dir' defines the directory name under /var/log/ where the app will save the logs
+# The '-Dbuild.name' defines the jar file name generated after the build
+RUN mvn package "-Dlog.dir=$APP_NAME" "-Dbuild.name=$APP_NAME"
 
 ################ STAGE: DEPLOY ##################
 FROM adoptopenjdk:16-jre-openj9

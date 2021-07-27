@@ -18,7 +18,6 @@
 	<description>Microservice Chassis for Reactive Restful API with Spring Boot</description>
 	
 	<properties>
-		<buildName>${project.artifactId}-${project.version}</buildName>
 		<java.version>16</java.version>
 		<springdoc.version>1.5.9</springdoc.version>
 		<spring-cloud.version>2020.0.3</spring-cloud.version>
@@ -26,6 +25,9 @@
 		<testcontainers.version>1.15.3</testcontainers.version>
 		<spring-cloud-contract-plugin.version>3.0.3</spring-cloud-contract-plugin.version>
 		<asciidoctor-plugin.version>1.5.8</asciidoctor-plugin.version>
+
+		<build.name>${project.artifactId}-${project.version}</build.name>
+		<log.dir>${project.artifactId}</log.dir>
 	</properties>
 
 	<dependencies>
@@ -170,7 +172,7 @@
 	</dependencyManagement>
 
 	<build>
-		<finalName>${buildName}</finalName>
+		<finalName>${build.name}</finalName>
 		<plugins>
 			<plugin>
 				<groupId>org.springframework.cloud</groupId>
