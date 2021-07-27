@@ -1,4 +1,48 @@
-## Comparing Hotspot vs OpenJ9
+# Java Reactive Microservice Chassis
+Microservice Chassis for Reactive Restful API with Spring Boot.
+
+## Table of Contents
+- [Getting Started](#getting-started)
+    - [Requirements](#requirements)
+    - [Usage](#usage)
+- [JVM Performance Analysis](#jvm-performance-analysis)
+  - [Comparing HotSpot vs OpenJ9](#comparing-hotspot-vs-openj9)
+  - [Pre-Load testing](#pre-load-testing)
+  - [Load testing](#load-testing)
+  - [Conclusion](#conclusion)
+- [Dependencies](#dependencies)
+  - [Web Framework](#web-framework)
+  - [Monitoring](#monitoring)
+  - [Persistence](#persistence)
+  - [Data Migration](#data-migration)
+  - [Development Aid](#development-aid)
+  - [API Documentation](#api-documentation)
+  - [Testing](#testing)
+
+- [Contributing](#contributing)
+- [License](#license)
+
+## Getting Started
+
+### Requirements
+:whale: [Docker](https://www.docker.com)
+
+[Docker-Compose](https://docs.docker.com/compose)
+
+### Usage
+Run the restful application server:
+```shell
+$ docker-compose up -d
+```
+
+Stop the restful application server:
+```shell
+$ docker-compose stop chassis
+```
+
+## JVM Performance Analysis
+
+### Comparing HotSpot vs OpenJ9
 OpenJ9 is a JVM implementation originally developed by IBM. Built to run in devices with limited memory. Some states
 that OpenJ9 is a good fit to microservices running in cloud solutions such as Kubernetes. OpenJ9 is an open-source
 project and its source code can be found on the GitHub page https://github.com/eclipse/openj9.
@@ -120,3 +164,31 @@ Every project has its own requirements and demands hence the JVM implementation 
 For this one in particular which is using the Spring Boot Webflux (a reactive-stack web application built on a
 [Reactive Streams API](https://www.reactive-streams.org/) and running on the non-blocking [Netty](https://netty.io)
 server) the OpenJ9 seems to be the best fit.
+
+## Dependencies
+#### Web Framework
+- [Spring Web Flow](https://spring.io/projects/spring-webflow)
+#### Monitoring
+- [Spring Actuator](https://docs.spring.io/spring-boot/docs/current/reference/html/actuator.html)
+- [Spring Cloud Sleuth](https://spring.io/projects/spring-cloud-sleuth)
+#### Persistence
+- [Spring Data R2DBC](https://spring.io/projects/spring-data-r2dbc)
+#### Data Migration
+- [Liquibase](https://docs.liquibase.com/home.html)
+#### Development Aid
+- [Lombok](https://projectlombok.org/features/all)
+- [Spring Boot Dev Tools](https://docs.spring.io/spring-boot/docs/current/reference/html/using.html#using.devtools)
+#### API Documentation
+- [SpringDoc OpenAPI](https://springdoc.org)
+- [Spring Rest Docs](https://spring.io/projects/spring-restdocs)
+#### Testing
+- [Spring Boot Test](https://docs.spring.io/spring-framework/docs/current/reference/html/testing.html)
+- [Reactor Test](https://projectreactor.io/docs/core/release/reference/#testing)
+- [Testcontainers](https://www.testcontainers.org)
+- [Spring Cloud Contract Testing](https://cloud.spring.io/spring-cloud-contract/reference/html/getting-started.html#getting-started)
+
+## Contributing
+Bugs, feature requests and more, in [GitHub Issues](https://github.com/neueda/java-microservices-chassis/issues).
+
+## License
+[MIT License](https://github.com/neueda/java-microservices-chassis/blob/main/LICENSE.md).
