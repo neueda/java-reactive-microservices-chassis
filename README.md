@@ -1,11 +1,12 @@
 ## Comparing Hotspot vs OpenJ9
-OpenJ9 is a JVM implementation originally developed by IBM. Built to run in devices with limited memory some states
-OpenJ9 is a good fit to microservices running solutions such as Kubernetes. OpenJ9 is an open-source project and its
-GitHub page is https://github.com/eclipse/openj9 where it can be found the source code.
+OpenJ9 is a JVM implementation originally developed by IBM. Built to run in devices with limited memory. Some states
+that OpenJ9 is a good fit to microservices running in cloud solutions such as Kubernetes. OpenJ9 is an open-source
+project and its source code can be found on the GitHub page https://github.com/eclipse/openj9.
 
-To confirm which implementation of JVM is really more efficient I have built for this project one docker image using
-**adoptopenjdk:16-jre-hotspot** and the another using **adoptopenjdk:16-jre-openj9**. It can be found below the memory and CPU
-usage for each of then, as well as, the result of their performance test with Apache HTTP server benchmarking tool (ab).
+To confirm which implementation of JVM would be more efficient for this current project, I build two docker images, one
+using `adoptopenjdk:16-jre-hotspot` and the other `adoptopenjdk:16-jre-openj9`. For the performance test had being used
+the _Apache HTTP server benchmarking tool_ (ab), which shows how many requests per second your application is capable to
+serve.
 
 ### Pre-Load testing
 
@@ -67,7 +68,7 @@ Percentage of the requests served within a certain time (ms)
 
 
 ---
-**Hotspot JVM load testing:**
+**HotSpot JVM load testing:**
 
 ```
 Document Path:          /v1/chassis
@@ -110,3 +111,12 @@ Percentage of the requests served within a certain time (ms)
 |chassis-hotspot      |136.09%   |488.5MiB / 3.844GiB   |12.41%    |572MB / 673MB    |49.8MB / 7.61MB
 
 ### Conclusion
+Based on the testing results, it can be observed a smaller consumption of CPU of about 15% on the OpenJ9 JVM
+implementation while its throughput is about 18% higher than the Hotspot one. However, where the OpenJ9 really
+standouts is its performance regarding the memory usage. OpenJ9 consumes about 45% less memory than HotSpot
+implementation.
+
+Every project has its own requirements and demands hence the JVM implementation chosen must align with its needs.
+For this one in particular which is using the Spring Boot Webflux (a reactive-stack web application built on a
+[Reactive Streams API](https://www.reactive-streams.org/) and running on the non-blocking [Netty](https://netty.io)
+server) the OpenJ9 seems to be the best fit.
