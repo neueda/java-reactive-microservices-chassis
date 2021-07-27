@@ -32,7 +32,7 @@ Microservice Chassis for Reactive Restful API with Spring Boot.
 ### Usage
 Run the restful application server:
 ```shell
-$ docker-compose up -d
+$ docker-compose up --build -d
 ```
 
 Stop the restful application server:
