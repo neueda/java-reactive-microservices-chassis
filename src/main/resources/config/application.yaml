@@ -46,6 +46,11 @@ springdoc:
     enabled: on
     path: /api-docs
 
+apidoc:
+  title: @project.name@
+  description: @project.description@
+  version: @project.version@
+
 debug: off
 trace: off
 logging:

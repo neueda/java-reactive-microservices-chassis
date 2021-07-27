@@ -1,18 +1,23 @@
 package com.neueda.microservice.reactive.chassis.configuration;
 
+import com.neueda.microservice.reactive.chassis.properties.ApiInfoProperties;
 import io.swagger.v3.oas.models.OpenAPI;
 import io.swagger.v3.oas.models.info.Info;
+import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 @Configuration
+@RequiredArgsConstructor
 public class OpenApiConfig {
+
+    private final ApiInfoProperties props;
 
     @Bean
     public OpenAPI apiInfo() {
         return new OpenAPI().info(
-                new Info().title("Java Reactive Microservice Chassis")
-                        .description("Microservice Chassis for Reactive Restful API with Spring Boot")
-                        .version("0.0.1"));
+                new Info().title(props.title())
+                        .description(props.description())
+                        .version(props.version()));
     }
 }
