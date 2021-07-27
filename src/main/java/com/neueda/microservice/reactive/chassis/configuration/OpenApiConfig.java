@@ -11,7 +11,7 @@ public class OpenApiConfig {
     @Bean
     public OpenAPI apiInfo() {
         return new OpenAPI().info(
-                new Info().title("Java Microservice Chassis")
+                new Info().title("Java Reactive Microservice Chassis")
                         .description("Microservice Chassis for Reactive Restful API with Spring Boot")
                         .version("0.0.1"));
     }
