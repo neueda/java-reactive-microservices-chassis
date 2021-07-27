@@ -55,7 +55,7 @@ debug: off
 trace: off
 logging:
   file:
-    path: /var/log/@log.dir@
+    path: /var/log/@build.name@
   level:
     root: error
     web: trace

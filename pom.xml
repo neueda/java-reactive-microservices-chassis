@@ -25,9 +25,7 @@
 		<testcontainers.version>1.15.3</testcontainers.version>
 		<spring-cloud-contract-plugin.version>3.0.3</spring-cloud-contract-plugin.version>
 		<asciidoctor-plugin.version>1.5.8</asciidoctor-plugin.version>
-
 		<build.name>${project.artifactId}-${project.version}</build.name>
-		<log.dir>${project.artifactId}</log.dir>
 	</properties>
 
 	<dependencies>

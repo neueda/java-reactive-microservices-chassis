@@ -1,0 +1,6 @@
+README.md
+docker-compose.yaml
+Dockerfile
+.gitignore
+log/
+target/
