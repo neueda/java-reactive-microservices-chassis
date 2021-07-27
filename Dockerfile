@@ -1,20 +1,30 @@
-# To be build and run with:
-#docker build --build-arg JAR=java-microservices-chassis-0.0.1-SNAPSHOT.jar -t chassis:openj9 .
+# To build and run:
+#docker build -t chassis:openj9 .
 #docker run --rm -p 8080:8080 --name chassis-openj9 -d chassis:openj9
 
+################ STAGE: BUILD ##################
+FROM maven:3.8.1-adoptopenjdk-16-openj9 AS builder
+
+ENV APP_NAME="reactive-microservice"
+
+WORKDIR /tmp/build/$APP_NAME
+COPY pom.xml ./
+COPY src ./src
+COPY db ./db
+
+RUN mvn package "-Dproject.artifactId=$APP_NAME" "-DbuildName=$APP_NAME"
+
+################ STAGE: DEPLOY ##################
 FROM adoptopenjdk:16-jre-openj9
 
-ARG JAR
+WORKDIR /opt/app/reactive-microservice
+RUN mkdir -p /var/log/reactive-microservice
 
-WORKDIR /opt/app/java-microservices-chassis
-RUN mkdir -p /var/log/java-microservices-chassis
+EXPOSE 8080/tcp
 
-EXPOSE 8080
+COPY --from=builder /tmp/build/reactive-microservice/db db/
+COPY --from=builder /tmp/build/reactive-microservice/target/reactive-microservice.jar ./
 
-COPY /db /opt/app/java-microservices-chassis/db/
-COPY target/${JAR} /opt/app/java-microservices-chassis/java-microservices-chassis.jar
+RUN chmod -R 777 db/
 
-
-RUN chmod -R 777 /opt/app/java-microservices-chassis/db/
-
-ENTRYPOINT ["java", "-jar", "/opt/app/java-microservices-chassis/java-microservices-chassis.jar"]
+ENTRYPOINT ["java", "-jar", "reactive-microservice.jar"]

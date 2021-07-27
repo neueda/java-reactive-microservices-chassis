@@ -14,10 +14,11 @@
 	<groupId>com.neueda</groupId>
 	<artifactId>java-microservices-chassis</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>java-microservices-chassisEntity</name>
+	<name>Java Reactive Microservice Chassis</name>
 	<description>Microservice Chassis for Reactive Restful API with Spring Boot</description>
 	
 	<properties>
+		<buildName>${project.artifactId}-${project.version}</buildName>
 		<java.version>16</java.version>
 		<springdoc.version>1.5.9</springdoc.version>
 		<spring-cloud.version>2020.0.3</spring-cloud.version>
@@ -169,6 +170,7 @@
 	</dependencyManagement>
 
 	<build>
+		<finalName>${buildName}</finalName>
 		<plugins>
 			<plugin>
 				<groupId>org.springframework.cloud</groupId>

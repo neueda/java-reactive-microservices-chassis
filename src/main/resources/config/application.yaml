@@ -5,7 +5,7 @@ spring:
     import: "configtree:db/"
 
   application:
-    name: @project.name@
+    name: @project.artifactId@
 
   h2:
     console:
