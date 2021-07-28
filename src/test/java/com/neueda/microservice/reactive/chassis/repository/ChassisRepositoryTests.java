@@ -40,7 +40,7 @@ public class ChassisRepositoryTests {
     @Test
     void readsAllEntitiesCorrectly() {
         var chassisItem = new ChassisEntity();
-        chassisItem.setName("Chassis test");
+        chassisItem.setName("chassis_all_items test");
 
         insertChassisItem(chassisItem);
 
