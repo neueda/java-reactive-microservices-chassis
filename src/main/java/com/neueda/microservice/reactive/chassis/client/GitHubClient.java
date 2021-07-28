@@ -2,12 +2,11 @@ package com.neueda.microservice.reactive.chassis.client;
 
 import org.springframework.stereotype.Service;
 import org.springframework.web.reactive.function.client.WebClient;
-import org.springframework.web.util.UriComponentsBuilder;
 import reactor.core.publisher.Mono;
 
 import java.net.URI;
 
-import static org.springframework.web.util.UriComponentsBuilder.*;
+import static org.springframework.web.util.UriComponentsBuilder.fromUri;
 
 @Service
 public class GitHubClient {

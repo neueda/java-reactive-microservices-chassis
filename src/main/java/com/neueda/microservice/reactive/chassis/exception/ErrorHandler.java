@@ -17,10 +17,16 @@ public class ErrorHandler {
         return logAndRespond(ex, ex.getPath());
     }
 
+    @ExceptionHandler(MandatoryPathParameterException.class)
+    @ResponseStatus(HttpStatus.NOT_FOUND)
+    private ErrorResponse handleMandatoryPathParameter(MandatoryPathParameterException ex) {
+        return logAndRespond(ex, ex.getPath());
+    }
+
     private ErrorResponse logAndRespond(Exception ex, String path) {
         String errorMsg = ex.getLocalizedMessage();
-
         log.error(errorMsg, ex);
+
         return new ErrorResponse(errorMsg, path, ex.getClass().getTypeName());
     }
 }

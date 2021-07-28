@@ -2,6 +2,7 @@ package com.neueda.microservice.reactive.chassis.controller;
 
 import com.neueda.microservice.reactive.chassis.client.GitHubClient;
 import com.neueda.microservice.reactive.chassis.exception.IdFormatException;
+import com.neueda.microservice.reactive.chassis.exception.MandatoryPathParameterException;
 import com.neueda.microservice.reactive.chassis.model.Chassis;
 import com.neueda.microservice.reactive.chassis.service.ChassisService;
 import lombok.RequiredArgsConstructor;
@@ -12,8 +13,6 @@ import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
 import javax.validation.Valid;
-import java.util.Optional;
-import java.util.concurrent.atomic.AtomicReference;
 
 @RestController
 @RequiredArgsConstructor
@@ -32,8 +31,8 @@ public class ChassisController {
     public Mono<Chassis> getChassisById(@PathVariable String id) {
         try {
             return chassisService.searchChassisById(Long.valueOf(id));
-        } catch(NumberFormatException e) {
-            throw new IdFormatException(e, "/v1/chassis/" + id);
+        } catch(NumberFormatException ex) {
+            throw new IdFormatException("/v1/chassis/" + id, ex);
         }
     }
 
@@ -47,7 +46,7 @@ public class ChassisController {
         if (StringUtils.hasText(username))
             return gitHubClient.searchUser(username);
 
-        throw new IllegalArgumentException("username path is mandatory. current value is: [" + username + "]");
+        throw new MandatoryPathParameterException("chassisClient/{username}", "'username' is mandatory. Value: [" + username + "]");
     }
 
     @PostMapping("chassis")
