@@ -181,7 +181,7 @@
 					<testFramework>JUNIT5</testFramework>
 					<testMode>WEBTESTCLIENT</testMode>
 					<packageWithBaseClasses>
-						com.neueda.microservice.reactive.chassis.contractTest
+						com.neueda.microservice.reactive.chassis.contractsBase
 					</packageWithBaseClasses>
 				</configuration>
 			</plugin>
