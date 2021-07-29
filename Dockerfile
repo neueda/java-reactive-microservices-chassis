@@ -12,10 +12,11 @@ COPY pom.xml ./
 COPY src ./src
 COPY db ./db
 
-RUN mvn dependency:go-offline
+RUN mvn dependency:resolve-plugins dependency:go-offline
 # '-Dbuild.name' defines the name of the jar file to be generated, as well as,
 # the directory name under /var/log/ where the app logs will be saved
-RUN mvn -o package "-Dbuild.name=$APP_NAME"
+#RUN mvn -o package "-Dbuild.name=$APP_NAME"
+RUN mvn package "-Dbuild.name=$APP_NAME" "-Dmaven.test.skip=true"
 
 ################ STAGE: DEPLOY ##################
 FROM adoptopenjdk:16-jre-openj9
@@ -32,4 +33,4 @@ COPY --from=builder /tmp/build/$APP_NAME/target/${APP_NAME}.jar ./
 RUN chmod -R 777 db/
 
 ENV APP_JAR ${APP_NAME}.jar
-ENTRYPOINT ["java", "-jar", "$APP_JAR"]
+ENTRYPOINT ["/bin/bash", "-c", "java -jar $APP_JAR"]
