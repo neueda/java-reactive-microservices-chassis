@@ -22,8 +22,8 @@ public class ChassisService {
 
     private final ChassisRepository chassisRepository;
 
-    private final Function<ChassisEntity, Chassis>
-            toViewModel = e -> new Chassis(e.getName(), e.getDescription());
+    private final Function<ChassisEntity, Chassis> toViewModel =
+            e -> new Chassis(e.getName(), e.getDescription());
 
     public Flux<Chassis> retrieveAllChassis() {
         return chassisRepository.findAll().map(toViewModel);

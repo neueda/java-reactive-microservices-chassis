@@ -13,7 +13,7 @@ import reactor.test.StepVerifier;
 import java.util.Arrays;
 
 @DataR2dbcTest
-public class ChassisRepositoryTests {
+public class ChassisRepositoryIT {
 
     @Autowired
     private ChassisRepository chassisRepository;
@@ -22,36 +22,38 @@ public class ChassisRepositoryTests {
     private DatabaseClient database;
 
     @BeforeEach
-    void setUp() {
+    void setup() {
         Hooks.onOperatorDebug();
 
-        var statements = Arrays.asList(
-                "DROP TABLE IF EXISTS chassis_entity;",
-                "CREATE TABLE chassis_entity ( id IDENTITY PRIMARY KEY, name VARCHAR(50) NOT NULL, description VARCHAR(255));");
-
-        statements.forEach(it -> database.sql(it)
-                .fetch()
-                .rowsUpdated()
-                .as(StepVerifier::create)
-                .expectNextCount(1)
-                .verifyComplete());
+//        var statements = Arrays.asList(
+//                "DROP TABLE IF EXISTS chassis_entity;",
+//                "CREATE TABLE chassis_entity ( id IDENTITY PRIMARY KEY, name VARCHAR(50) NOT NULL, description VARCHAR(255));");
+//
+//        statements.forEach(it -> database.sql(it)
+//                .fetch()
+//                .rowsUpdated()
+//                .as(StepVerifier::create)
+//                .expectNextCount(1)
+//                .verifyComplete());
     }
 
     @Test
-    void readsAllEntitiesCorrectly() {
-        var chassisItem = new ChassisEntity();
-        chassisItem.setName("find_all_chassis test");
+    void shouldReadsAllChassisEntities() {
+        // given
+        var chassisItem = ChassisEntity.builder()
+                .name("find_all_chassis test")
+                .build();
+        insertChassisEntities(chassisItem);
 
-        insertChassisItem(chassisItem);
-
+        // when
         chassisRepository.findAll()
                 .as(StepVerifier::create)
+                // then
                 .expectNextCount(1)
                 .verifyComplete();
     }
 
-    private void insertChassisItem(ChassisEntity... chassisEntities) {
-
+    private void insertChassisEntities(ChassisEntity... chassisEntities) {
         chassisRepository.saveAll(Arrays.asList(chassisEntities))
                 .as(StepVerifier::create)
                 .expectNextCount(1)

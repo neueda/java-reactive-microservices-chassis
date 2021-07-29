@@ -1,0 +1,56 @@
+spring:
+  main:
+    banner-mode: off
+
+  h2:
+    console:
+      enabled: off
+
+  sql:
+    init:
+      mode: never
+
+  liquibase:
+    enabled: false
+    change-log: "classpath:/db/changelog/db.changelog-master.xml"
+    url: jdbc:h2:file:./target/tmp/chassisdb
+    user: sa
+    password:
+    test-rollback-on-update: on
+
+  r2dbc:
+    url: r2dbc:pool:h2:file:///./target/tmp/chassisdb?options=DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=false
+    username: sa
+    password:
+    pool:
+      initial-size: 5
+      max-size: 10
+      max-idle-time: 30m
+      validation-query: SELECT 1
+
+  codec:
+    log-request-details: on
+
+server:
+  port: 8080
+  error:
+    include-exception: on
+    include-stacktrace: always
+
+springdoc:
+  api-docs:
+    enabled: off
+
+debug: off
+trace: off
+logging:
+  level:
+    root: error
+    web: trace
+    sql: trace
+    org:
+      springframework:
+        jdbc:
+          datasource: trace
+        r2dbc: trace
+
