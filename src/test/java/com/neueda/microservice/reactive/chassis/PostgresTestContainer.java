@@ -34,7 +34,7 @@ public abstract class PostgresTestContainer {
         registry.add("spring.liquibase.user", () -> "sa");
 
         // r2dbc
-        registry.add("spring.liquibase.url", () -> "r2dbc:pool:h2:file:///./target/tmp/chassisdb?options=DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=false");
-        registry.add("spring.liquibase.user", () -> "sa");
+        registry.add("spring.r2dbc.url", () -> "r2dbc:pool:h2:file:///./target/tmp/chassisdb?options=DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=false");
+        registry.add("spring.r2dbc.user", () -> "sa");
     }
 }
