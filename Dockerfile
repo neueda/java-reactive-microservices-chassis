@@ -30,5 +30,5 @@ COPY --from=builder /tmp/build/$APP_NAME/target/${APP_NAME}.jar ./
 
 RUN chmod -R 777 db/
 
-ENV APP_JAR ${APP_NAME}.jar
+ENV APP_JAR=${APP_NAME}.jar
 ENTRYPOINT ["/bin/bash", "-c", "java -jar $APP_JAR"]
