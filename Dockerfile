@@ -14,7 +14,7 @@ COPY db ./db
 
 # '-Dbuild.name' defines the name of the jar file to be generated, as well as,
 # the directory name under /var/log/ where the app logs will be saved
-RUN mvn package "-Dbuild.name=$APP_NAME" "-Dmaven.test.skip=true"
+RUN mvn package "-Dbuild.name=$APP_NAME"
 
 ################ STAGE: DEPLOY ##################
 FROM adoptopenjdk:16-jre-openj9
