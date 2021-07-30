@@ -3,11 +3,14 @@ package com.neueda.microservice.reactive.chassis.repository;
 
 import com.neueda.microservice.reactive.chassis.PostgresTestContainer;
 import com.neueda.microservice.reactive.chassis.entity.ChassisEntity;
+import io.r2dbc.spi.ConnectionFactory;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.test.autoconfigure.data.r2dbc.DataR2dbcTest;
-import org.springframework.r2dbc.core.DatabaseClient;
+import org.springframework.core.io.Resource;
 import reactor.core.publisher.Hooks;
 import reactor.test.StepVerifier;
 
@@ -19,10 +22,18 @@ class ChassisRepositoryIT extends PostgresTestContainer {
     @Autowired
     private ChassisRepository chassisRepository;
 
+    @BeforeAll
+    static void init(
+            @Autowired ConnectionFactory connectionFactory,
+            @Value("/db/delete_all_chassis_entity.sql") Resource script) {
+
+        setConnectionFactory(connectionFactory);
+        executeSqlScript(script);
+    }
+
     @BeforeEach
-    void setUp(@Autowired DatabaseClient database) {
+    void setUp() {
         Hooks.onOperatorDebug();
-        cleanChassisEntityTable(database);
     }
 
     @Test
