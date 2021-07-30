@@ -33,7 +33,6 @@ class ReactiveMicroserviceApplicationIT extends PostgresTestContainer {
 	@BeforeEach
 	void setUp(@Autowired DatabaseClient database) {
 		Hooks.onOperatorDebug();
-		//insertItemInChassisEntityTable(database, new Chassis("integration test", "description text"));
 	}
 
 	@Test
