@@ -15,7 +15,7 @@ import static org.mockito.BDDMockito.given;
 
 @WebFluxTest(ChassisController.class)
 @Tag("ContractBase")
-public abstract class ChassisBase extends ContractTestSetup {
+abstract class ChassisBase extends ContractTestSetup {
 
     @Autowired
     private ChassisController chassisController;

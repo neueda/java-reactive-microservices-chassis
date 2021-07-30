@@ -16,7 +16,7 @@ import static org.mockito.BDDMockito.given;
 import static org.springframework.http.MediaType.APPLICATION_JSON;
 
 @WebFluxTest(ChassisController.class)
-public class ChassisControllerTests {
+class ChassisControllerTests {
 
     @Autowired
     private WebTestClient webClient;

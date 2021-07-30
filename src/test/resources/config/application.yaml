@@ -41,6 +41,11 @@ springdoc:
   api-docs:
     enabled: off
 
+apidoc:
+  title: Java Reactive Microservice Test
+  description: Microservice Test for Reactive Restful API with Spring Boot
+  version: TEST
+
 debug: off
 trace: off
 logging:
