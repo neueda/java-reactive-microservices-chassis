@@ -15,8 +15,8 @@ import reactor.core.publisher.Mono;
 import javax.validation.Valid;
 
 @RestController
-@RequiredArgsConstructor
 @RequestMapping("/v1")
+@RequiredArgsConstructor
 public class ChassisController {
 
     private final ChassisService chassisService;
