@@ -17,7 +17,7 @@ import static org.mockito.BDDMockito.given;
 import static org.springframework.http.MediaType.APPLICATION_JSON;
 import static org.springframework.restdocs.webtestclient.WebTestClientRestDocumentation.document;
 
-@WebFluxTest(ChassisController.class)
+@WebFluxTest
 @AutoConfigureRestDocs
 class ChassisControllerTests {
 

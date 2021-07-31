@@ -6,22 +6,17 @@ import org.springframework.util.StringUtils;
 import org.springframework.web.reactive.function.client.WebClient;
 import reactor.core.publisher.Mono;
 
-import java.net.URI;
-
 import static java.lang.String.format;
-import static org.springframework.web.util.UriComponentsBuilder.fromUri;
 
 @Service
 public class GitHubClient {
 
-    private final URI baseUri;
     private final ClientHelper clientHelper;
 
     public GitHubClient(WebClient.Builder webClientBuilder) {
-        this.baseUri = URI.create("https://api.github.com/search");
         this.clientHelper = new ClientHelper(
                 webClientBuilder
-                        .baseUrl(baseUri.toString())
+                        .baseUrl("https://api.github.com/search")
                         .build());
     }
 
@@ -32,10 +27,10 @@ public class GitHubClient {
                             "and contains at least one non-whitespace character. Current value: [%s]", username));
         }
 
-        return clientHelper.performGetRequest(fromUri(baseUri)
-                .path("/users")
-                .queryParam("q", username + "+repos:>0")
-                .build()
-                .toUri(), String.class);
+        return clientHelper.performGetRequest(
+                uriBuilder -> uriBuilder.pathSegment("/users")
+                        .queryParam("q", username + "+repos:>0")
+                        .build(),
+                String.class);
     }
 }
