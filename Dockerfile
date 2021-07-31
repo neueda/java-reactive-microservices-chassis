@@ -9,7 +9,6 @@ ARG APP_NAME
 
 WORKDIR build/$APP_NAME
 COPY pom.xml ./
-COPY src/main/layers.xml ./
 COPY src src/
 COPY db db/
 
