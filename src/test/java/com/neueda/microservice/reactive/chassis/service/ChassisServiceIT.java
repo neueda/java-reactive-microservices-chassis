@@ -11,7 +11,6 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.test.autoconfigure.data.r2dbc.DataR2dbcTest;
 import org.springframework.context.annotation.Import;
 import org.springframework.core.io.Resource;
-import org.springframework.r2dbc.core.DatabaseClient;
 import reactor.core.publisher.Hooks;
 import reactor.test.StepVerifier;
 
@@ -32,7 +31,7 @@ class ChassisServiceIT extends PostgresTestContainer {
     }
 
     @BeforeEach
-    void setUp(@Autowired DatabaseClient database) {
+    void setUp() {
         Hooks.onOperatorDebug();
     }
 
@@ -42,9 +41,10 @@ class ChassisServiceIT extends PostgresTestContainer {
         insertAChassisEntity(
                 new Chassis("partial name find test", "description text"));
 
-        //when
+        // when
         chassisService.searchChassisByName("find")
                 .as(StepVerifier::create)
+                // then
                 .expectNextCount(1)
                 .verifyComplete();
     }
@@ -52,6 +52,7 @@ class ChassisServiceIT extends PostgresTestContainer {
     private void insertAChassisEntity(Chassis chassis) {
         chassisService.addChassis(chassis)
                 .as(StepVerifier::create)
+                // then
                 .expectNextCount(1)
                 .verifyComplete();
     }
