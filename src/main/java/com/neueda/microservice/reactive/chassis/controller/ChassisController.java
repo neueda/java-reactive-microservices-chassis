@@ -7,12 +7,19 @@ import com.neueda.microservice.reactive.chassis.model.Chassis;
 import com.neueda.microservice.reactive.chassis.service.ChassisService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
-import org.springframework.util.StringUtils;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseStatus;
+import org.springframework.web.bind.annotation.RestController;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
 import javax.validation.Valid;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/v1")
@@ -21,6 +28,7 @@ public class ChassisController {
 
     private final ChassisService chassisService;
     private final GitHubClient gitHubClient;
+
 
     @GetMapping("chassis")
     public Flux<Chassis> getAllChassis() {
@@ -42,11 +50,11 @@ public class ChassisController {
     }
 
     @GetMapping({"chassisClient", "chassisClient/{username}"})
-    public Mono<String> getChassisClientResponse(@PathVariable(required = false) String username) {
-        if (StringUtils.hasText(username))
-            return gitHubClient.searchUser(username);
+    public Mono<String> getChassisClientResponse(@PathVariable Optional<String> username) {
+        String value = username.orElseThrow(() ->
+                new MandatoryPathParameterException("chassisClient/{username}", "'username' is mandatory"));
 
-        throw new MandatoryPathParameterException("chassisClient/{username}", "'username' is mandatory. Value: [" + username + "]");
+        return gitHubClient.searchUser(value);
     }
 
     @PostMapping("chassis")
