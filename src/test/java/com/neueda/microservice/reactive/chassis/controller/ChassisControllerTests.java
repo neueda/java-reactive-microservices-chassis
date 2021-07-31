@@ -64,6 +64,7 @@ class ChassisControllerTests {
                 // then
                 .expectStatus().isOk()
                 .expectBody(String.class)
+                .consumeWith(document("github-user-search"))
                 .isEqualTo(clientResponse);
     }
 }
