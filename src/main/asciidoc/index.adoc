@@ -1,0 +1,36 @@
+= AsciiDoc Example Initial Document
+Doc Writer <berchris.requiao@neueda.com>
+:icons: font
+
+This _Hello World_ document has been written in `plain text` with
+http://asciidoc.org[AsciiDoc].
+
+[TIP]
+Use http://asciidoctor.org[Asciidoctor] to convert AsciiDoc into other formats.
+footnote:[Not to mention the final result is amazing!]. It provides built-in converters
+for three formats by default: https://docs.asciidoctor.org/asciidoctor/latest/html-backend[HTML5],
+https://docs.asciidoctor.org/asciidoctor/latest/docbook-backend[DocBook4], and
+https://docs.asciidoctor.org/asciidoctor/latest/manpage-backend[man page]. Feel free to
+icon:twitter[role=aqua] about it!
+
+== Sample Section
+
+[square]
+* item 1
+* item 2
+
+[source,java]
+----
+System.out.println("Hello, World!");
+----
+
+=== List all chassis call
+.request
+include::{snippets}/list-chassis/curl-request.adoc[]
+include::{snippets}/list-chassis/http-request.adoc[]
+include::{snippets}/list-chassis/httpie-request.adoc[]
+
+.response
+include::{snippets}/list-chassis/http-response.adoc[]
+
+
