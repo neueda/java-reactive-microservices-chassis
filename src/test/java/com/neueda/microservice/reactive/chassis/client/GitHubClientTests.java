@@ -39,13 +39,13 @@ public class GitHubClientTests {
         stubFor(get(urlEqualTo(testUrl))
                 .willReturn(aResponse()
                         .withHeader(CONTENT_TYPE, APPLICATION_JSON_VALUE)
-                        .withBody("Hello World!")));
+                        .withBody("[]")));
 
         // when
         String response = client.searchUser(testQuery).block();
 
         // then
-        then(response).isEqualTo("Hello World!");
+        then(response).isEqualTo("[]");
         verify(getRequestedFor(urlEqualTo(testUrl)));
     }
 }
