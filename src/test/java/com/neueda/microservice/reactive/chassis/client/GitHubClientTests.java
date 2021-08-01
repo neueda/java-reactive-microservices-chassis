@@ -39,16 +39,17 @@ public class GitHubClientTests {
         // given
         var testQuery = "testuser";
         var testUrl = format("/search/users?q=%s+repos:%%3E0", testQuery);
+        var expected = "{\"total_count\":0,\"incomplete_results\":false,\"items\":[]}";
         stubFor(get(urlEqualTo(testUrl))
                 .willReturn(aResponse()
                         .withHeader(CONTENT_TYPE, APPLICATION_JSON_VALUE)
-                        .withBody("[]")));
+                        .withBody(expected)));
 
         // when
         String response = client.searchUser(testQuery).block();
 
         // then
-        then(response).isEqualTo("[]");
+        then(response).isEqualTo(expected);
         verify(getRequestedFor(urlEqualTo(testUrl)));
     }
 }

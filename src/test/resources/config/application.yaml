@@ -32,7 +32,6 @@ spring:
     log-request-details: on
 
 server:
-  port: 8080
   error:
     include-exception: on
     include-stacktrace: always
