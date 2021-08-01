@@ -9,7 +9,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.core.io.Resource;
-import org.springframework.r2dbc.core.DatabaseClient;
 import org.springframework.test.web.reactive.server.WebTestClient;
 import reactor.core.publisher.Hooks;
 
@@ -31,7 +30,7 @@ class ReactiveMicroserviceApplicationIT extends PostgresTestContainer {
 	}
 
 	@BeforeEach
-	void setUp(@Autowired DatabaseClient database) {
+	void setUp() {
 		Hooks.onOperatorDebug();
 	}
 
