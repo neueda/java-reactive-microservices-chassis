@@ -29,7 +29,7 @@ public class GitHubClient {
         }
 
         return clientHelper.performGetRequest(
-                uriBuilder -> uriBuilder.pathSegment("users")
+                uriBuilder -> uriBuilder.pathSegment("search").pathSegment("users")
                         .queryParam("q", username + "+repos:>0")
                         .build(),
                 String.class);

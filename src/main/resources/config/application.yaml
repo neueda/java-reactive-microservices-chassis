@@ -42,7 +42,7 @@ server:
     include-stacktrace: always
 
 client:
-  base-url: https://api.github.com/search
+  base-url: https://api.github.com
 
 springdoc:
   api-docs:

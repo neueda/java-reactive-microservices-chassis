@@ -18,6 +18,9 @@ import static org.springframework.http.MediaType.APPLICATION_JSON;
 @SpringBootTest(webEnvironment = RANDOM_PORT)
 class ReactiveMicroserviceApplicationIT extends PostgresTestContainer {
 
+	@Autowired
+	private WebTestClient webClient;
+
 	@BeforeAll
 	static void init(
 			@Autowired ConnectionFactory connectionFactory,
@@ -35,7 +38,7 @@ class ReactiveMicroserviceApplicationIT extends PostgresTestContainer {
 	}
 
 	@Test
-	void shouldHaveNoChassis(@Autowired WebTestClient webClient) {
+	void shouldHaveNoChassis() {
 		webClient.get()
 				.uri("/v1/chassis")
 				.accept(APPLICATION_JSON)
