@@ -1,4 +1,5 @@
 version: "3.9"
+
 services:
   chassis:
     container_name: chassis-openj9
