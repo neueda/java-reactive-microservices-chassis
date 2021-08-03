@@ -37,12 +37,11 @@ public abstract class PostgresTestContainer {
         registry.add("spring.liquibase.password", postgresContainer::getPassword);
 
         // R2DBC DataSource
-        Supplier<Object> getR2dbcUrl = () -> format("r2dbc:pool:postgresql://%s:%d/%s",
-                postgresContainer.getHost(),
-                postgresContainer.getFirstMappedPort(),
-                postgresContainer.getDatabaseName());
-
-        registry.add("spring.r2dbc.url", getR2dbcUrl);
+        registry.add("spring.r2dbc.url",
+                () -> format("r2dbc:pool:postgresql://%s:%d/%s",
+                        postgresContainer.getHost(),
+                        postgresContainer.getFirstMappedPort(),
+                        postgresContainer.getDatabaseName()));
         registry.add("spring.r2dbc.username", postgresContainer::getUsername);
         registry.add("spring.r2dbc.password", postgresContainer::getPassword);
     }
