@@ -20,14 +20,14 @@ public abstract class PostgresTestContainer {
             DockerImageName.parse("postgres").withTag("13.3-alpine");
 
     @Container
-    private static final PostgreSQLContainer<?> container =
+    private static final PostgreSQLContainer<?> postgresContainer =
             new PostgreSQLContainer<>(postgresImage).withReuse(true);
 
     @DynamicPropertySource
     private static void setDatasourceProperties(DynamicPropertyRegistry registry) {
-        String databaseName = container.getDatabaseName();
+        String databaseName = postgresContainer.getDatabaseName();
         String postgresUrl = format("postgresql://%s:%d/%s",
-                container.getHost(), container.getFirstMappedPort(), databaseName);
+                postgresContainer.getHost(), postgresContainer.getFirstMappedPort(), databaseName);
 
         // Liquibase DataSource
         registry.add("spring.liquibase.url", () -> "jdbc:" + postgresUrl);
@@ -42,7 +42,7 @@ public abstract class PostgresTestContainer {
 
     public static void executeSqlScript(Resource script) {
         var connectionFactory =
-                ConnectionFactories.get(PostgreSQLR2DBCDatabaseContainer.getOptions(container));
+                ConnectionFactories.get(PostgreSQLR2DBCDatabaseContainer.getOptions(postgresContainer));
 
         Mono.from(connectionFactory.create())
                 .flatMap(c -> ScriptUtils.executeSqlScript(c, script))
