@@ -17,7 +17,7 @@ services:
 volumes:
   db_credentials:
     name: db-data
-  logs:
+  log:
     name: log-data
 
 networks:
