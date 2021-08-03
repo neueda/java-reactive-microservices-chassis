@@ -27,17 +27,20 @@ Microservice Chassis for Reactive Restful API with Spring Boot.
 ### Requirements
 :whale: [Docker](https://www.docker.com)
 
-[Docker-Compose](https://docs.docker.com/compose)
-
 ### Usage
 Run the restful application server:
 ```shell
-$ docker-compose up --build -d
+$ docker compose up --build -d
 ```
 
 Stop the restful application server:
 ```shell
-$ docker-compose stop chassis
+$ docker compose stop chassis
+```
+
+Stop and remove containers and networks:
+```shell
+$ docker compose down
 ```
 
 ## JVM Performance Analysis
