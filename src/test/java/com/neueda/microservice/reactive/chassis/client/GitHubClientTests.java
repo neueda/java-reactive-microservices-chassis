@@ -37,8 +37,8 @@ public class GitHubClientTests {
     @Test
     void shouldReturnUsersFound() {
         // given
-        var testQuery = "testuser";
-        var testUrl = format("/search/users?q=%s+repos:%%3E0", testQuery);
+        var testValue = "testuser";
+        var testUrl = format("/search/users?q=%s+repos:%%3E0", testValue);
         var expected = "{\"total_count\":0,\"incomplete_results\":false,\"items\":[]}";
         stubFor(get(urlEqualTo(testUrl))
                 .willReturn(aResponse()
@@ -46,7 +46,7 @@ public class GitHubClientTests {
                         .withBody(expected)));
 
         // when
-        String response = client.searchUsernameContaining(testQuery).block();
+        String response = client.searchUsernameContaining(testValue).block();
 
         // then
         then(response).isEqualTo(expected);
