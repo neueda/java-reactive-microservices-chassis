@@ -14,13 +14,12 @@ services:
     - db_credentials:/opt/app/reactive-microservice/db
     - logs:/var/log/reactive-microservice
 
-networks:
-  microservice:
-    name: microservice-network
-
 volumes:
   db_credentials:
     name: db-data
   logs:
     name: logs-data
 
+networks:
+  microservice:
+    name: microservice-network
