@@ -12,8 +12,6 @@ import org.testcontainers.junit.jupiter.Testcontainers;
 import org.testcontainers.utility.DockerImageName;
 import reactor.core.publisher.Mono;
 
-import java.util.function.Supplier;
-
 import static java.lang.String.format;
 
 @Testcontainers
