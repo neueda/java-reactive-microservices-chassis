@@ -12,6 +12,8 @@ import org.testcontainers.junit.jupiter.Testcontainers;
 import org.testcontainers.utility.DockerImageName;
 import reactor.core.publisher.Mono;
 
+import java.util.function.Supplier;
+
 import static java.lang.String.format;
 
 @Testcontainers
@@ -24,21 +26,25 @@ public abstract class PostgresTestContainer {
     private static final PostgreSQLContainer<?> postgresContainer =
             new PostgreSQLContainer<>(postgresImage).withReuse(true);
 
+    private static String getR2dbcUrl() {
+        return format("r2dbc:pool:postgresql://%s:%d/%s",
+                postgresContainer.getHost(),
+                postgresContainer.getFirstMappedPort(),
+                postgresContainer.getDatabaseName());
+    }
+
     @DynamicPropertySource
     private static void setDatasourceProperties(DynamicPropertyRegistry registry) {
-        String databaseName = postgresContainer.getDatabaseName();
-        String postgresUrl = format("postgresql://%s:%d/%s",
-                postgresContainer.getHost(), postgresContainer.getFirstMappedPort(), databaseName);
 
         // Liquibase DataSource
-        registry.add("spring.liquibase.url", () -> "jdbc:" + postgresUrl);
-        registry.add("spring.liquibase.user", () -> databaseName);
-        registry.add("spring.liquibase.password", () -> databaseName);
+        registry.add("spring.liquibase.url", postgresContainer::getJdbcUrl);
+        registry.add("spring.liquibase.user", postgresContainer::getDatabaseName);
+        registry.add("spring.liquibase.password", postgresContainer::getDatabaseName);
 
         // R2DBC DataSource
-        registry.add("spring.r2dbc.url", () -> "r2dbc:pool:" + postgresUrl);
-        registry.add("spring.r2dbc.username", () -> databaseName);
-        registry.add("spring.r2dbc.password", () -> databaseName);
+        registry.add("spring.r2dbc.url", PostgresTestContainer::getR2dbcUrl);
+        registry.add("spring.r2dbc.username", postgresContainer::getDatabaseName);
+        registry.add("spring.r2dbc.password", postgresContainer::getDatabaseName);
     }
 
     public static void executeSqlScript(Resource script) {
