@@ -3,7 +3,6 @@ package com.neueda.microservice.reactive.chassis.repository;
 
 import com.neueda.microservice.reactive.chassis.PostgresTestContainer;
 import com.neueda.microservice.reactive.chassis.entity.ChassisEntity;
-import io.r2dbc.spi.ConnectionFactory;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -24,10 +23,8 @@ class ChassisRepositoryIT extends PostgresTestContainer {
 
     @BeforeAll
     static void init(
-            @Autowired ConnectionFactory connectionFactory,
             @Value("/db/delete_all_chassis_entity.sql") Resource script) {
 
-        setConnectionFactory(connectionFactory);
         executeSqlScript(script);
     }
 

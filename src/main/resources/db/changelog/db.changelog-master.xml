@@ -4,12 +4,12 @@
         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
         xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.4.xsd">
 
-    <preConditions>
-        <and>
-            <dbms type="h2"/>
-            <runningAs username="sa"/>
-        </and>
-    </preConditions>
+<!--    <preConditions>-->
+<!--        <and>-->
+<!--            <dbms type="postgres"/>-->
+<!--            <runningAs username="app"/>-->
+<!--        </and>-->
+<!--    </preConditions>-->
 
     <include relativeToChangelogFile="true" file="v1/create-table-changelog.xml"/>
     <include relativeToChangelogFile="true" file="v1/insert-data-changelog.xml"/>

@@ -11,17 +11,10 @@ spring:
       mode: never
 
   liquibase:
-    enabled: false
     change-log: "classpath:/db/changelog/db.changelog-master.xml"
-    url: jdbc:h2:file:./target/tmp/chassisdb
-    user: sa
-    password:
     test-rollback-on-update: on
 
   r2dbc:
-    url: r2dbc:pool:h2:file:///./target/tmp/chassisdb?options=DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=false
-    username: sa
-    password:
     pool:
       initial-size: 5
       max-size: 10
@@ -35,6 +28,8 @@ server:
   error:
     include-exception: on
     include-stacktrace: always
+    include-message: always
+    include-binding-errors: always
 
 client:
   base-url: https://mock.server.com
@@ -57,8 +52,7 @@ logging:
     sql: trace
     org:
       springframework:
-        jdbc:
-          datasource: trace
+        jdbc: trace
         r2dbc: trace
     liquibase:
       database: trace

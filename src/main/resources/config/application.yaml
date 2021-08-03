@@ -37,9 +37,6 @@ spring:
 
 server:
   port: 8080
-  error:
-    include-exception: on
-    include-stacktrace: always
 
 client:
   base-url: https://api.github.com
@@ -65,8 +62,7 @@ logging:
     sql: trace
     org:
       springframework:
-        jdbc:
-          datasource: trace
+        jdbc: trace
         r2dbc: trace
     liquibase:
       database: trace
