@@ -16,6 +16,7 @@ import static java.lang.String.format;
 
 @Testcontainers
 public abstract class PostgresTestContainer {
+    
     private static final DockerImageName postgresImage =
             DockerImageName.parse("postgres").withTag("13.3-alpine");
 
