@@ -6,8 +6,8 @@
 
     <preConditions>
         <and>
-            <dbms type="h2"/>
-            <runningAs username="sa"/>
+            <dbms type="postgresql"/>
+            <runningAs username="test"/>
         </and>
     </preConditions>
 

@@ -44,15 +44,15 @@ public class ChassisController {
         }
     }
 
-    @GetMapping("chassisHasInName")
+    @GetMapping("chassisNameContain")
     public Flux<Chassis> getChassisByName(@RequestParam String value) {
         return chassisService.searchChassisByNameContaining(value);
     }
 
-    @GetMapping({"chassisClient", "chassisClient/{usernamePart}"})
+    @GetMapping({"chassisClientNameContain", "chassisClientNameContain/{usernamePart}"})
     public Mono<String> getChassisClientResponse(@PathVariable Optional<String> usernamePart) {
         String value = usernamePart.orElseThrow(() ->
-                new MandatoryPathParameterException("chassisClient/{username}", "'username' is mandatory"));
+                new MandatoryPathParameterException("chassisClientNameContain/{usernamePart}", "'username' is mandatory"));
 
         return gitHubClient.searchUsernameContaining(value);
     }

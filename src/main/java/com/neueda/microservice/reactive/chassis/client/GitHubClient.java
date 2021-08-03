@@ -23,7 +23,7 @@ public class GitHubClient {
 
     public Mono<String> searchUsernameContaining(String value) {
         if (!StringUtils.hasText(value)) {
-            throw new MandatoryPathParameterException("chassisClient/{username}",
+            throw new MandatoryPathParameterException("chassisClientNameContain/{usernamePart}",
                     format("'username' have to have length greater than 0, " +
                             "and contains at least one non-whitespace character. Current value: [%s]", value));
         }

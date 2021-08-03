@@ -25,19 +25,19 @@ public abstract class PostgresTestContainer {
 
     @DynamicPropertySource
     private static void setDatasourceProperties(DynamicPropertyRegistry registry) {
-        final String postgresUrl =
-                format("postgresql://%s:%d/test", container.getHost(), container.getFirstMappedPort());
+        String databaseName = container.getDatabaseName();
+        String postgresUrl = format("postgresql://%s:%d/%s",
+                container.getHost(), container.getFirstMappedPort(), databaseName);
 
         // Liquibase DataSource
-        registry.add("spring.liquibase.enabled", () -> "true");
-        registry.add("spring.liquibase.url", () -> format("jdbc:%s?loggerLevel=DEBUG", postgresUrl));
-        registry.add("spring.liquibase.user", () -> "test");
-        registry.add("spring.liquibase.password", () -> "test");
+        registry.add("spring.liquibase.url", () -> "jdbc:" + postgresUrl);
+        registry.add("spring.liquibase.user", () -> databaseName);
+        registry.add("spring.liquibase.password", () -> databaseName);
 
         // R2DBC DataSource
-        registry.add("spring.r2dbc.url", () -> format("r2dbc:pool:%s", postgresUrl));
-        registry.add("spring.r2dbc.username", () -> "test");
-        registry.add("spring.r2dbc.password", () -> "test");
+        registry.add("spring.r2dbc.url", () -> "r2dbc:pool:" + postgresUrl);
+        registry.add("spring.r2dbc.username", () -> databaseName);
+        registry.add("spring.r2dbc.password", () -> databaseName);
     }
 
     public static void executeSqlScript(Resource script) {

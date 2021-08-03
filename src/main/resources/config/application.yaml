@@ -16,10 +16,11 @@ spring:
       mode: never
 
   liquibase:
-    change-log: "classpath:/db/changelog/db.changelog-master.xml"
+    change-log: "db/changelog/db.changelog-master.xml"
     url: jdbc:${liquibase.database}
     user: ${liquibase.username:sa}
     password: ${liquibase.password}
+    contexts: prod
     test-rollback-on-update: on
 
   r2dbc:

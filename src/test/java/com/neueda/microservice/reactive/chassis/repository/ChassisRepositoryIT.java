@@ -23,7 +23,7 @@ class ChassisRepositoryIT extends PostgresTestContainer {
 
     @BeforeAll
     static void init(
-            @Value("/db/delete_all_chassis_entity.sql") Resource script) {
+            @Value("db/delete_all_chassis_entity.sql") Resource script) {
 
         executeSqlScript(script);
     }
