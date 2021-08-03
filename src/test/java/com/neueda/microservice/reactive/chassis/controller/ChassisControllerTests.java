@@ -52,9 +52,9 @@ class ChassisControllerTests {
     @Test
     void shouldRetrieveAllChassisClientItems() {
         // given
-        var clientResponse = "Client Response";
+        var expected = "{\"total_count\":0,\"incomplete_results\":false,\"items\":[]}";
         given(gitHubClient.searchUsernameContaining(anyString()))
-                .willReturn(Mono.just(clientResponse));
+                .willReturn(Mono.just(expected));
 
         // when
         webClient.get()
@@ -65,6 +65,6 @@ class ChassisControllerTests {
                 .expectStatus().isOk()
                 .expectBody(String.class)
                 .consumeWith(document("github-user-search"))
-                .isEqualTo(clientResponse);
+                .isEqualTo(expected);
     }
 }
