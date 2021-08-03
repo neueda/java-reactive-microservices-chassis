@@ -18,7 +18,7 @@ volumes:
   db_credentials:
     name: db-data
   logs:
-    name: logs-data
+    name: log-data
 
 networks:
   microservice:
