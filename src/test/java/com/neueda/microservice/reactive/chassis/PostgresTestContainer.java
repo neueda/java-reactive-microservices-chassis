@@ -12,6 +12,8 @@ import org.testcontainers.junit.jupiter.Testcontainers;
 import org.testcontainers.utility.DockerImageName;
 import reactor.core.publisher.Mono;
 
+import java.util.function.Supplier;
+
 import static java.lang.String.format;
 
 @Testcontainers
@@ -24,7 +26,7 @@ public abstract class PostgresTestContainer {
     private static final PostgreSQLContainer<?> postgresContainer =
             new PostgreSQLContainer<>(postgresImage).withReuse(true);
 
-    private static Supplier<String> getR2dbcUrl() {
+    private static Supplier<Object> getR2dbcUrl() {
         return () -> format("r2dbc:pool:postgresql://%s:%d/%s",
                 postgresContainer.getHost(),
                 postgresContainer.getFirstMappedPort(),
@@ -33,7 +35,6 @@ public abstract class PostgresTestContainer {
 
     @DynamicPropertySource
     private static void setDatasourceProperties(DynamicPropertyRegistry registry) {
-
         // Liquibase DataSource
         registry.add("spring.liquibase.url", postgresContainer::getJdbcUrl);
         registry.add("spring.liquibase.user", postgresContainer::getUsername);
