@@ -16,12 +16,12 @@ import static java.lang.String.format;
 
 @Testcontainers
 public abstract class PostgresTestContainer {
-    private static final DockerImageName imageName =
+    private static final DockerImageName postgresImage =
             DockerImageName.parse("postgres").withTag("13.3-alpine");
 
     @Container
     private static final PostgreSQLContainer<?> container =
-            new PostgreSQLContainer<>(imageName).withReuse(true);
+            new PostgreSQLContainer<>(postgresImage).withReuse(true);
 
     @DynamicPropertySource
     private static void setDatasourceProperties(DynamicPropertyRegistry registry) {
