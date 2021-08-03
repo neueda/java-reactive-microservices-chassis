@@ -21,14 +21,18 @@ icon:twitter[role=aqua] about it!
 
 [source,java]
 ----
-System.out.println("Hello, World!");
+public class HelloWorldApplication {
+    public static void main(String[] args) {
+        System.out.println("Hello, World!");
+    }
+}
 ----
 
 === List all chassis call
 .request
-include::{snippets}/list-chassis/curl-request.adoc[]
-include::{snippets}/list-chassis/http-request.adoc[]
 include::{snippets}/list-chassis/httpie-request.adoc[]
+include::{snippets}/list-chassis/http-request.adoc[]
+include::{snippets}/list-chassis/curl-request.adoc[]
 
 .response
 include::{snippets}/list-chassis/http-response.adoc[]
