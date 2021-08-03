@@ -21,16 +21,16 @@ public class GitHubClient {
                         .build());
     }
 
-    public Mono<String> searchUser(String username) {
-        if (!StringUtils.hasText(username)) {
+    public Mono<String> searchUsernameContaining(String value) {
+        if (!StringUtils.hasText(value)) {
             throw new MandatoryPathParameterException("chassisClient/{username}",
                     format("'username' have to have length greater than 0, " +
-                            "and contains at least one non-whitespace character. Current value: [%s]", username));
+                            "and contains at least one non-whitespace character. Current value: [%s]", value));
         }
 
         return clientHelper.performGetRequest(
                 uriBuilder -> uriBuilder.pathSegment("search").pathSegment("users")
-                        .queryParam("q", username + "+repos:>0")
+                        .queryParam("q", value + "+repos:>0")
                         .build(),
                 String.class);
     }

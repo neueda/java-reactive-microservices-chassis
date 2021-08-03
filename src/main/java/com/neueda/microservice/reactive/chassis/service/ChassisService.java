@@ -33,7 +33,7 @@ public class ChassisService {
         return chassisRepository.findById(id).map(toViewModel);
     }
 
-    public Flux<Chassis> searchChassisByName(String name) {
+    public Flux<Chassis> searchChassisByNameContaining(String name) {
         ChassisEntity chassisEntity =
                 ChassisEntity.builder()
                         .name(name)

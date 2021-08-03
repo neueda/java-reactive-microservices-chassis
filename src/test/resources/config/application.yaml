@@ -60,4 +60,6 @@ logging:
         jdbc:
           datasource: trace
         r2dbc: trace
+    liquibase:
+      database: trace
 

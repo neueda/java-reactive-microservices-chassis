@@ -46,7 +46,7 @@ public class GitHubClientTests {
                         .withBody(expected)));
 
         // when
-        String response = client.searchUser(testQuery).block();
+        String response = client.searchUsernameContaining(testQuery).block();
 
         // then
         then(response).isEqualTo(expected);

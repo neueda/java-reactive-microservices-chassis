@@ -58,7 +58,7 @@ debug: off
 trace: off
 logging:
   file:
-    path: /var/log/@build.name@
+    path: /var/log/spring-boot/@build.name@
   level:
     root: error
     web: trace
@@ -68,4 +68,5 @@ logging:
         jdbc:
           datasource: trace
         r2dbc: trace
-
+    liquibase:
+      database: trace

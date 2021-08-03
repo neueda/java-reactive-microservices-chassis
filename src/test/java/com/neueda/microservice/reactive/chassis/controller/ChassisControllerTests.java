@@ -53,7 +53,7 @@ class ChassisControllerTests {
     void shouldRetrieveAllChassisClientItems() {
         // given
         var clientResponse = "Client Response";
-        given(gitHubClient.searchUser(anyString()))
+        given(gitHubClient.searchUsernameContaining(anyString()))
                 .willReturn(Mono.just(clientResponse));
 
         // when

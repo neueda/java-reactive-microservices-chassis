@@ -25,7 +25,7 @@ FROM adoptopenjdk:16-jre-openj9
 ARG APP_NAME
 
 WORKDIR app/$APP_NAME
-RUN mkdir -p /var/log/$APP_NAME
+RUN mkdir -p /var/log/spring-boot/$APP_NAME
 
 EXPOSE 8080/tcp
 

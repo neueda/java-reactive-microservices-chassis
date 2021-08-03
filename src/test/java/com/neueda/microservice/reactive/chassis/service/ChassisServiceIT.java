@@ -42,7 +42,7 @@ class ChassisServiceIT extends PostgresTestContainer {
                 new Chassis("partial name find test", "description text"));
 
         // when
-        chassisService.searchChassisByName("find")
+        chassisService.searchChassisByNameContaining("find")
                 .as(StepVerifier::create)
                 // then
                 .expectNextCount(1)
