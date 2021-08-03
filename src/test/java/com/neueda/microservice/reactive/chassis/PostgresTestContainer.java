@@ -15,6 +15,7 @@ import reactor.core.publisher.Mono;
 import java.util.function.Supplier;
 
 import static java.lang.String.format;
+import static java.util.Collections.singletonMap;
 
 @Testcontainers
 public abstract class PostgresTestContainer {
@@ -24,14 +25,9 @@ public abstract class PostgresTestContainer {
 
     @Container
     private static final PostgreSQLContainer<?> postgresContainer =
-            new PostgreSQLContainer<>(postgresImage).withReuse(true);
-
-    private static Supplier<Object> getR2dbcUrl() {
-        return () -> format("r2dbc:pool:postgresql://%s:%d/%s",
-                postgresContainer.getHost(),
-                postgresContainer.getFirstMappedPort(),
-                postgresContainer.getDatabaseName());
-    }
+            new PostgreSQLContainer<>(postgresImage)
+                    .withTmpFs(singletonMap("/test_tmpfs", "rw"))
+                    .withReuse(true);
 
     @DynamicPropertySource
     private static void setDatasourceProperties(DynamicPropertyRegistry registry) {
@@ -41,7 +37,12 @@ public abstract class PostgresTestContainer {
         registry.add("spring.liquibase.password", postgresContainer::getPassword);
 
         // R2DBC DataSource
-        registry.add("spring.r2dbc.url", getR2dbcUrl());
+        Supplier<Object> getR2dbcUrl = () -> format("r2dbc:pool:postgresql://%s:%d/%s",
+                postgresContainer.getHost(),
+                postgresContainer.getFirstMappedPort(),
+                postgresContainer.getDatabaseName());
+
+        registry.add("spring.r2dbc.url", getR2dbcUrl);
         registry.add("spring.r2dbc.username", postgresContainer::getUsername);
         registry.add("spring.r2dbc.password", postgresContainer::getPassword);
     }
