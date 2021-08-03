@@ -33,10 +33,10 @@ public class ChassisService {
         return chassisRepository.findById(id).map(toViewModel);
     }
 
-    public Flux<Chassis> searchChassisByNameContaining(String name) {
+    public Flux<Chassis> searchChassisByNameContaining(String value) {
         ChassisEntity chassisEntity =
                 ChassisEntity.builder()
-                        .name(name)
+                        .name(value)
                         .build();
 
         ExampleMatcher matcher = matching().withMatcher("name", contains());
