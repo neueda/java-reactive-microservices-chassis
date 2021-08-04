@@ -15,17 +15,20 @@ import reactor.core.publisher.Mono;
 import static java.lang.String.format;
 import static java.util.Collections.singletonMap;
 
-@Testcontainers
 public abstract class PostgresTestContainer {
     
     private static final DockerImageName postgresImage =
             DockerImageName.parse("postgres").withTag("13.3-alpine");
 
-    @Container
     private static final PostgreSQLContainer<?> postgresContainer =
             new PostgreSQLContainer<>(postgresImage)
                     .withTmpFs(singletonMap("/test_tmpfs", "rw"))
                     .withReuse(true);
+
+    // https://github.com/testcontainers/testcontainers-java/issues/2352
+    static {
+        postgresContainer.start();
+    }
 
     @DynamicPropertySource
     private static void setDatasourceProperties(DynamicPropertyRegistry registry) {
