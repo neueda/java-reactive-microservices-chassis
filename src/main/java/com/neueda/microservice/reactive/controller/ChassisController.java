@@ -60,7 +60,7 @@ public class ChassisController {
                     schema = @Schema(implementation = Chassis.class))))
     @PostMapping("chassis")
     @ResponseStatus(HttpStatus.CREATED)
-    public Mono<Chassis> create(
+    public Mono<Chassis> addChassisElement(
             @Parameter(description = "Chassis element to be created")
             @Valid @RequestBody Chassis chassis) {
         return chassisService.addChassis(chassis);

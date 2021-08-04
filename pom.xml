@@ -221,9 +221,7 @@
 				<configuration>
 					<testFramework>JUNIT5</testFramework>
 					<testMode>WEBTESTCLIENT</testMode>
-					<packageWithBaseClasses>
-						com.neueda.microservice.reactive.contractsBase
-					</packageWithBaseClasses>
+					<packageWithBaseClasses>${project.groupId}.contractsBase</packageWithBaseClasses>
 				</configuration>
 			</plugin>
 			<plugin>
