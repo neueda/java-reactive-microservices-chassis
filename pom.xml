@@ -19,12 +19,17 @@
 	
 	<properties>
 		<java.version>16</java.version>
+		<!-- dependency -->
 		<springdoc.version>1.5.9</springdoc.version>
 		<spring-cloud.version>2020.0.3</spring-cloud.version>
 		<testcontainers.version>1.15.3</testcontainers.version>
+		<!-- plugin -->
 		<spring-cloud-contract-plugin.version>3.0.3</spring-cloud-contract-plugin.version>
 		<asciidoctor-plugin.version>1.5.8</asciidoctor-plugin.version>
+		<openapi-plugin.version>1.1</openapi-plugin.version>
+		<!-- consumed by spring-boot application -->
 		<build.name>${project.artifactId}-${project.version}</build.name>
+		<management.port>8081</management.port>
 	</properties>
 
 	<dependencies>
@@ -182,6 +187,20 @@
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
+				<executions>
+					<execution>
+						<id>pre-integration-test</id>
+						<goals>
+							<goal>start</goal>
+						</goals>
+					</execution>
+					<execution>
+						<id>post-integration-test</id>
+						<goals>
+							<goal>stop</goal>
+						</goals>
+					</execution>
+				</executions>
 				<configuration>
 					<excludes>
 						<exclude>
@@ -231,6 +250,25 @@
 						<version>${spring-restdocs.version}</version>
 					</dependency>
 				</dependencies>
+			</plugin>
+			<plugin>
+				<groupId>org.springdoc</groupId>
+				<artifactId>springdoc-openapi-maven-plugin</artifactId>
+				<version>${openapi-plugin.version}</version>
+				<executions>
+					<execution>
+						<phase>integration-test</phase>
+						<goals>
+							<goal>generate</goal>
+						</goals>
+					</execution>
+				</executions>
+				<configuration>
+					<apiDocsUrl>http://localhost:${management.port}/actuator/openapi/springdocDefault/yaml</apiDocsUrl>
+					<outputFileName>openapi.yaml</outputFileName>
+					<outputDir>${project.build.directory}/generated-docs</outputDir>
+					<attachArtifact>true</attachArtifact>
+				</configuration>
 			</plugin>
 		</plugins>
 	</build>

@@ -44,7 +44,7 @@ client:
 
 management:
   server:
-    port: 8081
+    port: @management.port@
   endpoints:
     web:
       exposure:
