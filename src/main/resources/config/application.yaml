@@ -42,10 +42,17 @@ server:
 client:
   base-url: https://api.github.com
 
+management:
+  server:
+    port: 8081
+  endpoints:
+    web:
+      exposure:
+        include: health, openapi, swaggerui # For yaml format access /actuator/openapi/springdocDefault/yaml
+
 springdoc:
-  api-docs:
-    enabled: on
-    path: /api-docs
+  use-management-port: on
+  show-actuator: on
 
 apidoc:
   title: @project.name@

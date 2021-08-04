@@ -189,6 +189,8 @@ server) the OpenJ9 seems to be the best fit.
 - [Reactor Test](https://projectreactor.io/docs/core/release/reference/#testing)
 - [Testcontainers](https://www.testcontainers.org)
 - [Spring Cloud Contract Testing](https://cloud.spring.io/spring-cloud-contract/reference/html/getting-started.html#getting-started)
+#### Containerization
+- [Layered Jar](https://docs.spring.io/spring-boot/docs/2.5.3/maven-plugin/reference/htmlsingle/#packaging.layers)
 
 ## Contributing
 Bugs, feature requests and more, in [GitHub Issues](https://github.com/neueda/java-microservices-chassis/issues).

@@ -28,6 +28,7 @@ WORKDIR app/$APP_NAME
 RUN mkdir -p /var/log/spring-boot/$APP_NAME
 
 EXPOSE 8080/tcp
+EXPOSE 8081/tcp
 
 COPY --from=builder build/$APP_NAME/layers/dependencies/ ./
 COPY --from=builder build/$APP_NAME/layers/spring-boot-loader/ ./
