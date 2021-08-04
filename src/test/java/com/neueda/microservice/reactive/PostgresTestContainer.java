@@ -29,8 +29,7 @@ public abstract class PostgresTestContainer {
     // https://github.com/testcontainers/testcontainers-java/issues/2352
     static {
         postgresContainer.start();
-        postgresContainer.followOutput(
-                new Slf4jLogConsumer(log).withSeparateOutputStreams());
+        postgresContainer.followOutput(new Slf4jLogConsumer(log).withSeparateOutputStreams());
     }
 
     @DynamicPropertySource
