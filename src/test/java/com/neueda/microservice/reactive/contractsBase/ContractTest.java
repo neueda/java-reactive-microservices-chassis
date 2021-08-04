@@ -5,7 +5,7 @@ import org.junit.jupiter.api.Tag;
 import org.springframework.web.context.WebApplicationContext;
 
 @Tag("ContractTest")
-abstract class ContractTestSetup {
+abstract class ContractTest {
     void standaloneSetup(Object... controllers) {
         RestAssuredWebTestClient.standaloneSetup(controllers);
     }

@@ -13,7 +13,7 @@ import reactor.core.publisher.Flux;
 import static org.mockito.BDDMockito.given;
 
 @WebFluxTest(ChassisController.class)
-abstract class ChassisBase extends ContractTestSetup {
+abstract class ChassisBase extends ContractTest {
 
     @Autowired
     private ChassisController chassisController;
