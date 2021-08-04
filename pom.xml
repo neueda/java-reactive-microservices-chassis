@@ -203,7 +203,7 @@
 					<testFramework>JUNIT5</testFramework>
 					<testMode>WEBTESTCLIENT</testMode>
 					<packageWithBaseClasses>
-						com.neueda.microservice.reactive.chassis.contractsBase
+						com.neueda.microservice.reactive.contractsBase
 					</packageWithBaseClasses>
 				</configuration>
 			</plugin>
