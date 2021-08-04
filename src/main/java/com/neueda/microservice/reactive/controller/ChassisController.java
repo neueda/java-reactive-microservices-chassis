@@ -30,7 +30,7 @@ import javax.validation.Valid;
 import java.util.Optional;
 
 @RestController
-@RequestMapping("/v1")
+@RequestMapping("/api/v1")
 @RequiredArgsConstructor
 public class ChassisController {
 

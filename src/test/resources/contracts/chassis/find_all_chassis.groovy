@@ -6,7 +6,7 @@ Contract.make {
     description "should return a list of chassis items"
 
     request {
-        url "/v1/chassis"
+        url "/api/v1/chassis"
         method GET()
     }
 

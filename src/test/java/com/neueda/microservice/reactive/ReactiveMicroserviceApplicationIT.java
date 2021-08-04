@@ -37,7 +37,7 @@ class ReactiveMicroserviceApplicationIT extends PostgresTestContainer {
 	@Test
 	void shouldHaveNoChassis() {
 		webClient.get()
-				.uri("/v1/chassis")
+				.uri("/api/v1/chassis")
 				.accept(APPLICATION_JSON)
 				.exchange()
 				.expectStatus().isOk()

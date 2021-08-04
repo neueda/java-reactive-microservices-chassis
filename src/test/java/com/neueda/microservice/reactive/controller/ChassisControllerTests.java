@@ -39,7 +39,7 @@ class ChassisControllerTests {
 
         // when
         webClient.get()
-                .uri("/v1/chassis")
+                .uri("/api/v1/chassis")
                 .accept(APPLICATION_JSON)
                 .exchange()
                 // then
@@ -58,7 +58,7 @@ class ChassisControllerTests {
 
         // when
         webClient.get()
-                .uri("/v1/chassisClientNameContain/clientPartialNameTest")
+                .uri("/api/v1/chassisClientNameContain/clientPartialNameTest")
                 .accept(APPLICATION_JSON)
                 .exchange()
                 // then
