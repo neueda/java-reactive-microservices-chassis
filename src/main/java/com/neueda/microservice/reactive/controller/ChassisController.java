@@ -37,7 +37,6 @@ public class ChassisController {
     private final ChassisService chassisService;
     private final GitHubClient gitHubClient;
 
-
     @Operation(tags = "chassis",
             summary = "Get all chassis elements",
             description = "Return all existing chassis elements from system database")
