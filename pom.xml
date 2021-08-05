@@ -11,8 +11,8 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	
-	<groupId>com.neueda.microservice.reactive.chassis</groupId>
-	<artifactId>java-microservices-chassis</artifactId>
+	<groupId>com.neueda.microservice.reactive</groupId>
+	<artifactId>java-reactive-microservices-chassis</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>Java Reactive Microservice Chassis</name>
 	<description>Microservice Chassis for Reactive Restful API with Spring Boot</description>
