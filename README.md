@@ -171,7 +171,7 @@ server) the OpenJ9 seems to be the best fit.
 
 ## Dependencies
 #### Web Framework
-- [Spring Web Flow](https://spring.io/projects/spring-webflow)
+- [Spring WebFlux](https://docs.spring.io/spring-framework/docs/5.3.9/reference/html/web-reactive.html#spring-webflux)
 #### Monitoring
 - [Spring Actuator](https://docs.spring.io/spring-boot/docs/current/reference/html/actuator.html)
 - [Spring Cloud Sleuth](https://spring.io/projects/spring-cloud-sleuth)
