@@ -12,8 +12,8 @@ Microservice Chassis for Reactive Restful API with Spring Boot.
   - [Conclusion](#conclusion)
 - [Dependencies](#dependencies)
   - [Web Framework](#web-framework)
-  - [Monitoring](#monitoring)
   - [Persistence](#persistence)
+  - [Monitoring](#monitoring)
   - [Data Migration](#data-migration)
   - [Development Aid](#development-aid)
   - [API Documentation](#api-documentation)
@@ -172,11 +172,11 @@ server) the OpenJ9 seems to be the best fit.
 ## Dependencies
 #### Web Framework
 - [Spring WebFlux](https://docs.spring.io/spring-framework/docs/5.3.9/reference/html/web-reactive.html#spring-webflux)
+#### Persistence
+- [Spring Data R2DBC](https://spring.io/projects/spring-data-r2dbc)
 #### Monitoring
 - [Spring Actuator](https://docs.spring.io/spring-boot/docs/current/reference/html/actuator.html)
 - [Spring Cloud Sleuth](https://spring.io/projects/spring-cloud-sleuth)
-#### Persistence
-- [Spring Data R2DBC](https://spring.io/projects/spring-data-r2dbc)
 #### Data Migration
 - [Liquibase](https://docs.liquibase.com/home.html)
 #### Development Aid
