@@ -175,7 +175,7 @@ server) the OpenJ9 seems to be the best fit.
 #### Persistence
 - [Spring Data R2DBC](https://spring.io/projects/spring-data-r2dbc)
 #### Monitoring
-- [Spring Actuator](https://docs.spring.io/spring-boot/docs/2.5.3/reference/html/actuator.html)
+- [Spring Boot Actuator](https://docs.spring.io/spring-boot/docs/2.5.3/reference/html/actuator.html)
 - [Spring Cloud Sleuth](https://spring.io/projects/spring-cloud-sleuth)
 #### Data Migration
 - [Liquibase](https://docs.liquibase.com/home.html)
