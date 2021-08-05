@@ -1,6 +1,6 @@
 # To build and run:
 #docker build -t chassis:openj9 .
-#docker run --rm -p 8080:8080 --name chassis-openj9 -d chassis:openj9
+#docker run --rm -p 8080:8080 -p 8081:8081 --name chassis-openj9 -d chassis:openj9
 
 ARG APP_NAME="reactive-microservice"
 ################ STAGE: BUILD ##################
