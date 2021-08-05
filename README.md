@@ -197,4 +197,4 @@ server) the OpenJ9 seems to be the best fit.
 Bugs, feature requests and more, in [GitHub Issues](https://github.com/neueda/java-microservices-chassis/issues).
 
 ## License
-[MIT License](https://github.com/neueda/java-microservices-chassis/blob/main/LICENSE.md).
+[MIT License](https://github.com/neueda/java-microservices-chassis/blob/main/LICENSE).
