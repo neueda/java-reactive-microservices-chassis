@@ -63,7 +63,7 @@ debug: off
 trace: off
 logging:
   file:
-    path: /var/log/spring-boot/@build.name@
+    name: /var/log/spring-boot/@build.name@.log
   level:
     root: error
     web: trace

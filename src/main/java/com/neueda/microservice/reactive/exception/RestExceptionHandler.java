@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 
 @RestControllerAdvice
 @Slf4j
-public class ErrorHandler {
+public class RestExceptionHandler {
 
     @ExceptionHandler(IdFormatException.class)
     @ResponseStatus(HttpStatus.PRECONDITION_FAILED)

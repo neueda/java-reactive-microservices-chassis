@@ -12,9 +12,9 @@ COPY pom.xml ./
 COPY src src/
 COPY db db/
 
-RUN mvn dependency:resolve-plugins dependency:go-offline
+RUN mvn dependency:go-offline dependency:resolve-plugins
 # '-Dbuild.name' defines the name of the jar file to be generated, as well as,
-# the directory name under /var/log/ where the app logs will be saved
+# the name of log file saved under /var/log/spring-boot
 RUN mvn package "-Dbuild.name=$APP_NAME"
 RUN mkdir layers && \
     cd layers && \
@@ -24,8 +24,8 @@ RUN mkdir layers && \
 FROM adoptopenjdk:16-jre-openj9
 ARG APP_NAME
 
-WORKDIR app/$APP_NAME
-RUN mkdir -p /var/log/spring-boot/$APP_NAME
+WORKDIR /opt/app/$APP_NAME
+RUN mkdir -p /var/log/spring-boot
 
 EXPOSE 8080/tcp
 EXPOSE 8081/tcp
