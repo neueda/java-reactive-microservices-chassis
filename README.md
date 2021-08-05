@@ -175,18 +175,18 @@ server) the OpenJ9 seems to be the best fit.
 #### Persistence
 - [Spring Data R2DBC](https://spring.io/projects/spring-data-r2dbc)
 #### Monitoring
-- [Spring Actuator](https://docs.spring.io/spring-boot/docs/current/reference/html/actuator.html)
+- [Spring Actuator](https://docs.spring.io/spring-boot/docs/2.5.3/reference/html/actuator.html)
 - [Spring Cloud Sleuth](https://spring.io/projects/spring-cloud-sleuth)
 #### Data Migration
 - [Liquibase](https://docs.liquibase.com/home.html)
 #### Development Aid
 - [Lombok](https://projectlombok.org/features/all)
-- [Spring Boot Dev Tools](https://docs.spring.io/spring-boot/docs/current/reference/html/using.html#using.devtools)
+- [Spring Boot Dev Tools](https://docs.spring.io/spring-boot/docs/2.5.3/reference/html/using.html#using.devtools)
 #### API Documentation
 - [SpringDoc OpenAPI](https://springdoc.org)
 - [Spring Rest Docs](https://spring.io/projects/spring-restdocs)
 #### Testing
-- [Spring Boot Test](https://docs.spring.io/spring-framework/docs/current/reference/html/testing.html)
+- [Spring Boot Test](https://docs.spring.io/spring-framework/docs/5.3.9/reference/html/testing.html)
 - [Reactor Test](https://projectreactor.io/docs/core/release/reference/#testing)
 - [Testcontainers](https://www.testcontainers.org)
 - [Spring Cloud Contract Testing](https://cloud.spring.io/spring-cloud-contract/reference/html/getting-started.html#getting-started)
