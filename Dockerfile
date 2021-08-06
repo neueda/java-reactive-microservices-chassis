@@ -10,7 +10,7 @@ ARG APP_NAME
 WORKDIR build/$APP_NAME
 COPY pom.xml ./
 COPY src src/
-COPY db db/
+COPY config config/
 
 RUN mvn dependency:go-offline dependency:resolve-plugins
 # '-Dbuild.name' defines the name of the jar file to be generated, as well as,
@@ -34,7 +34,7 @@ COPY --from=builder build/$APP_NAME/layers/dependencies/ ./
 COPY --from=builder build/$APP_NAME/layers/spring-boot-loader/ ./
 COPY --from=builder build/$APP_NAME/layers/snapshot-dependencies/ ./
 COPY --from=builder build/$APP_NAME/layers/application/ ./
-COPY --from=builder build/$APP_NAME/db db/
-RUN chmod -R u+r db/
+COPY --from=builder build/$APP_NAME/config config/
+RUN chmod -R u+r config/
 
 ENTRYPOINT ["java", "org.springframework.boot.loader.JarLauncher"]
