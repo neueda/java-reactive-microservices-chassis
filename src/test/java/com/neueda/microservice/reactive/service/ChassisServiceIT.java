@@ -1,8 +1,8 @@
 package com.neueda.microservice.reactive.service;
 
 import com.neueda.microservice.reactive.PostgresTestContainer;
+import com.neueda.microservice.reactive.exception.EntityNotFoundException;
 import com.neueda.microservice.reactive.model.Chassis;
-import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,16 +20,22 @@ class ChassisServiceIT extends PostgresTestContainer {
     @Autowired
     private ChassisService chassisService;
 
-    @BeforeAll
-    static void init(
+    @BeforeEach
+    void setUp(
             @Value("db/delete_all_chassis_entity.sql") Resource script) {
 
+        Hooks.onOperatorDebug();
         executeSqlScript(script);
     }
 
-    @BeforeEach
-    void setUp() {
-        Hooks.onOperatorDebug();
+    @Test
+    void shouldThrowNotFoundException() {
+        // when
+        chassisService.getChassisById(1L)
+                .as(StepVerifier::create)
+                // then
+                .expectError(EntityNotFoundException.class)
+                .verify();
     }
 
     @Test

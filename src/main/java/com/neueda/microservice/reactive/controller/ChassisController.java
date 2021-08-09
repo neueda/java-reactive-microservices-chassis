@@ -75,24 +75,23 @@ public class ChassisController {
                     content = @Content(
                             mediaType = MediaType.APPLICATION_JSON_VALUE,
                             schema = @Schema(implementation = Chassis.class))),
-            @ApiResponse(responseCode = "400",
+            @ApiResponse(responseCode = "404",
                     description = "Chassis element with supplied id not found",
                     content = @Content(
                             mediaType = MediaType.APPLICATION_JSON_VALUE,
                             schema = @Schema(implementation = ErrorResponse.class))),
-            @ApiResponse(responseCode = "412",
+            @ApiResponse(responseCode = "400",
                     description = "Chassis element id supplied is not a valid number",
                     content = @Content(
                             mediaType = MediaType.APPLICATION_JSON_VALUE,
                             schema = @Schema(implementation = ErrorResponse.class)))
     })
     @GetMapping("chassis/{id}")
-    public Mono<Chassis> getChassisById(
+    public Mono<Chassis> retrieveChassisById(
             @Parameter(description = "Id containing in the GitHub username")
             @PathVariable String id) {
-
         try {
-            return chassisService.searchChassisById(Long.valueOf(id));
+            return chassisService.getChassisById(Long.valueOf(id));
         } catch(NumberFormatException ex) {
             throw new IdFormatException("/v1/chassis/" + id, ex);
         }

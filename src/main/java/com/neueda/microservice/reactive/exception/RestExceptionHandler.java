@@ -12,14 +12,14 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 public class RestExceptionHandler {
 
     @ExceptionHandler(IdFormatException.class)
-    @ResponseStatus(HttpStatus.PRECONDITION_FAILED)
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
     private ErrorResponse handleNumberFormatError(IdFormatException ex) {
         return logAndRespond(ex, ex.getPath());
     }
 
-    @ExceptionHandler(MandatoryPathParameterException.class)
+    @ExceptionHandler(InvalidParameterException.class)
     @ResponseStatus(HttpStatus.NOT_FOUND)
-    private ErrorResponse handleMandatoryPathParameter(MandatoryPathParameterException ex) {
+    private ErrorResponse handleMandatoryPathParameter(InvalidParameterException ex) {
         return logAndRespond(ex, ex.getPath());
     }
 

@@ -1,6 +1,7 @@
 package com.neueda.microservice.reactive.service;
 
 import com.neueda.microservice.reactive.entity.ChassisEntity;
+import com.neueda.microservice.reactive.exception.EntityNotFoundException;
 import com.neueda.microservice.reactive.model.Chassis;
 import com.neueda.microservice.reactive.repository.ChassisRepository;
 import lombok.RequiredArgsConstructor;
@@ -29,8 +30,12 @@ public class ChassisService {
         return chassisRepository.findAll().map(toViewModel);
     }
 
-    public Mono<Chassis> searchChassisById(Long id) {
-        return chassisRepository.findById(id).map(toViewModel);
+    public Mono<Chassis> getChassisById(Long id) {
+        return chassisRepository.findById(id)
+                .map(toViewModel)
+                .switchIfEmpty(Mono.error(new EntityNotFoundException(
+                        "/v1/chassis/" + id,
+                        "No element with ID " + id + " could be found")));
     }
 
     public Flux<Chassis> searchChassisByNameContaining(String value) {
