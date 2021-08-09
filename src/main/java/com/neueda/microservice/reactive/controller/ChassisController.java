@@ -93,7 +93,7 @@ public class ChassisController {
         try {
             return chassisService.getChassisById(Long.valueOf(id));
         } catch(NumberFormatException ex) {
-            throw new IdFormatException("/v1/chassis/" + id, ex);
+            throw new IdFormatException("/api/v1/chassis/" + id, ex);
         }
     }
 
@@ -136,7 +136,7 @@ public class ChassisController {
         return gitHubClient.searchUsernameContaining(
                 usernamePart.orElseThrow(() ->
                         new MandatoryPathParameterException(
-                                "chassisClientNameContain/{usernamePart}",
+                                "/api/v1/chassisClientNameContain/{usernamePart}",
                                 "'username' is mandatory")));
     }
 }

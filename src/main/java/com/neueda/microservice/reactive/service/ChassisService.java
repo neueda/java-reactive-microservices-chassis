@@ -34,7 +34,7 @@ public class ChassisService {
         return chassisRepository.findById(id)
                 .map(toViewModel)
                 .switchIfEmpty(Mono.error(new EntityNotFoundException(
-                        "/v1/chassis/" + id,
+                        "/api/v1/chassis/" + id,
                         "No element with ID " + id + " could be found")));
     }
 
