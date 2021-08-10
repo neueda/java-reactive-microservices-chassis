@@ -16,6 +16,7 @@ import java.util.function.Function;
 
 import static org.springframework.data.domain.ExampleMatcher.GenericPropertyMatchers.contains;
 import static org.springframework.data.domain.ExampleMatcher.matching;
+import static reactor.core.publisher.Mono.error;
 
 @Service
 @RequiredArgsConstructor
@@ -33,9 +34,10 @@ public class ChassisService {
     public Mono<Chassis> getChassisById(Long id) {
         return chassisRepository.findById(id)
                 .map(toViewModel)
-                .switchIfEmpty(Mono.error(new EntityNotFoundException(
-                        "/api/v1/chassis/" + id,
-                        "No element with ID " + id + " could be found")));
+                .switchIfEmpty(
+                        error(new EntityNotFoundException(
+                                "/api/v1/chassis/" + id,
+                                "No element with ID " + id + " could be found")));
     }
 
     public Flux<Chassis> searchChassisByNameContaining(String value) {
