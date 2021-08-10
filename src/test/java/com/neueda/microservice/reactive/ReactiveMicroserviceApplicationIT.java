@@ -25,8 +25,8 @@ class ReactiveMicroserviceApplicationIT extends PostgresTestContainer {
 			@Value("db/delete_all_chassis_entity.sql") Resource deleteScript,
 			@Value("db/insert_one_chassis_entity.sql") Resource insertScript) {
 
-		executeSqlScript(deleteScript);
-		executeSqlScript(insertScript);
+		executeScript(deleteScript);
+		executeScript(insertScript);
 	}
 
 	@BeforeEach

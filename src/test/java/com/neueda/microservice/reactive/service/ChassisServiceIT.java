@@ -25,7 +25,7 @@ class ChassisServiceIT extends PostgresTestContainer {
             @Value("db/delete_all_chassis_entity.sql") Resource script) {
 
         Hooks.onOperatorDebug();
-        executeSqlScript(script);
+        executeScript(script);
     }
 
     @Test
@@ -52,6 +52,7 @@ class ChassisServiceIT extends PostgresTestContainer {
     }
 
     private void insertAChassisEntity(Chassis chassis) {
+        // when
         chassisService.addChassis(chassis)
                 .as(StepVerifier::create)
                 // then

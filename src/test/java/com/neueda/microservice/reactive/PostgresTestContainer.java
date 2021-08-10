@@ -3,7 +3,6 @@ package com.neueda.microservice.reactive;
 import io.r2dbc.spi.ConnectionFactories;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.core.io.Resource;
-import org.springframework.r2dbc.connection.init.ScriptUtils;
 import org.springframework.test.context.DynamicPropertyRegistry;
 import org.springframework.test.context.DynamicPropertySource;
 import org.testcontainers.containers.PostgreSQLContainer;
@@ -14,6 +13,7 @@ import reactor.core.publisher.Mono;
 
 import static java.lang.String.format;
 import static java.util.Collections.singletonMap;
+import static org.springframework.r2dbc.connection.init.ScriptUtils.executeSqlScript;
 
 @Slf4j
 public abstract class PostgresTestContainer {
@@ -49,12 +49,12 @@ public abstract class PostgresTestContainer {
         registry.add("spring.r2dbc.password", postgresContainer::getPassword);
     }
 
-    public static void executeSqlScript(Resource script) {
+    public static void executeScript(Resource script) {
         var connectionFactory =
                 ConnectionFactories.get(PostgreSQLR2DBCDatabaseContainer.getOptions(postgresContainer));
 
         Mono.from(connectionFactory.create())
-                .flatMap(c -> ScriptUtils.executeSqlScript(c, script))
+                .flatMap(c -> executeSqlScript(c, script))
                 .block();
     }
 }

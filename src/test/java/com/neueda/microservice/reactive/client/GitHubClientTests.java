@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cloud.contract.wiremock.AutoConfigureWireMock;
 import org.springframework.test.context.junit.jupiter.SpringJUnitConfig;
 import org.springframework.web.reactive.function.client.WebClient;
+import reactor.test.StepVerifier;
 
 import java.net.URI;
 
@@ -18,7 +19,6 @@ import static com.github.tomakehurst.wiremock.client.WireMock.stubFor;
 import static com.github.tomakehurst.wiremock.client.WireMock.urlEqualTo;
 import static com.github.tomakehurst.wiremock.client.WireMock.verify;
 import static java.lang.String.format;
-import static org.assertj.core.api.BDDAssertions.then;
 import static org.springframework.http.HttpHeaders.CONTENT_TYPE;
 import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 
@@ -46,10 +46,11 @@ public class GitHubClientTests {
                         .withBody(expected)));
 
         // when
-        String response = client.searchUsernameContaining(testValue).block();
-
-        // then
-        then(response).isEqualTo(expected);
+        client.searchUsernameContaining(testValue)
+                .as(StepVerifier::create)
+                // then
+                .expectNext(expected)
+                .verifyComplete();
         verify(getRequestedFor(urlEqualTo(testUrl)));
     }
 }

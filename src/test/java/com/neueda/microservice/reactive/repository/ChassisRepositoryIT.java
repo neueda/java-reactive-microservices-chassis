@@ -25,7 +25,7 @@ class ChassisRepositoryIT extends PostgresTestContainer {
     static void init(
             @Value("db/delete_all_chassis_entity.sql") Resource script) {
 
-        executeSqlScript(script);
+        executeScript(script);
     }
 
     @BeforeEach
@@ -50,8 +50,10 @@ class ChassisRepositoryIT extends PostgresTestContainer {
     }
 
     private void insertChassisEntities(ChassisEntity... chassisEntities) {
+        // when
         chassisRepository.saveAll(Arrays.asList(chassisEntities))
                 .as(StepVerifier::create)
+                // then
                 .expectNextCount(1)
                 .verifyComplete();
     }
