@@ -41,10 +41,7 @@ public class ChassisService {
     }
 
     public Flux<Chassis> searchChassisByNameContaining(String value) {
-        ChassisEntity chassisEntity =
-                ChassisEntity.builder()
-                        .name(value)
-                        .build();
+        ChassisEntity chassisEntity = new ChassisEntity().setName(value);
 
         ExampleMatcher matcher = matching().withMatcher("name", contains());
         Example<ChassisEntity> example = Example.of(chassisEntity, matcher);
