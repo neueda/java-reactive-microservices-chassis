@@ -4,11 +4,12 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.web.reactive.function.client.WebClient;
 import org.springframework.web.util.UriBuilder;
 import reactor.core.publisher.Mono;
-import reactor.util.retry.Retry;
 
 import java.net.URI;
 import java.time.Duration;
 import java.util.function.Function;
+
+import static reactor.util.retry.Retry.backoff;
 
 @RequiredArgsConstructor
 class ClientHelper {
@@ -20,6 +21,6 @@ class ClientHelper {
                 .uri(uriFunction)
                 .retrieve()
                 .bodyToMono(clazz)
-                .retryWhen(Retry.backoff(3, Duration.ofSeconds(3)));
+                .retryWhen(backoff(3, Duration.ofSeconds(3)));
     }
 }
