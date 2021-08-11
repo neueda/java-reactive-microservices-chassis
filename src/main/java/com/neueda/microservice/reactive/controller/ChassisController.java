@@ -14,7 +14,6 @@ import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -28,6 +27,8 @@ import reactor.core.publisher.Mono;
 
 import javax.validation.Valid;
 import java.util.Optional;
+
+import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 
 @RestController
 @RequestMapping("/api/v1")
@@ -43,7 +44,7 @@ public class ChassisController {
     @ApiResponses(@ApiResponse(responseCode = "200",
             description = "Chassis elements retrieved",
             content = @Content(
-                    mediaType = MediaType.APPLICATION_JSON_VALUE,
+                    mediaType = APPLICATION_JSON_VALUE,
                     schema = @Schema(implementation = Chassis[].class))))
     @GetMapping("chassis")
     public Flux<Chassis> getAllChassis() {
@@ -56,9 +57,9 @@ public class ChassisController {
     @ApiResponses(@ApiResponse(responseCode = "201",
             description = "Chassis element added",
             content = @Content(
-                    mediaType = MediaType.APPLICATION_JSON_VALUE,
+                    mediaType = APPLICATION_JSON_VALUE,
                     schema = @Schema(implementation = Chassis.class))))
-    @PostMapping("chassis")
+    @PostMapping(path = "chassis", consumes = APPLICATION_JSON_VALUE)
     @ResponseStatus(HttpStatus.CREATED)
     public Mono<Chassis> addChassisElement(
             @Parameter(description = "Chassis element to be created")
@@ -73,17 +74,17 @@ public class ChassisController {
             @ApiResponse(responseCode = "200",
                     description = "Chassis element found",
                     content = @Content(
-                            mediaType = MediaType.APPLICATION_JSON_VALUE,
+                            mediaType = APPLICATION_JSON_VALUE,
                             schema = @Schema(implementation = Chassis.class))),
             @ApiResponse(responseCode = "404",
                     description = "Chassis element with supplied id not found",
                     content = @Content(
-                            mediaType = MediaType.APPLICATION_JSON_VALUE,
+                            mediaType = APPLICATION_JSON_VALUE,
                             schema = @Schema(implementation = ErrorResponse.class))),
             @ApiResponse(responseCode = "400",
                     description = "Chassis element id supplied is not a valid number",
                     content = @Content(
-                            mediaType = MediaType.APPLICATION_JSON_VALUE,
+                            mediaType = APPLICATION_JSON_VALUE,
                             schema = @Schema(implementation = ErrorResponse.class)))
     })
     @GetMapping("chassis/{id}")
@@ -103,7 +104,7 @@ public class ChassisController {
     @ApiResponses(@ApiResponse(responseCode = "200",
             description = "Chassis elements retrieved",
             content = @Content(
-                    mediaType = MediaType.APPLICATION_JSON_VALUE,
+                    mediaType = APPLICATION_JSON_VALUE,
                     schema = @Schema(implementation = Chassis[].class))))
     @GetMapping("chassisNameContain")
     public Flux<Chassis> getChassisByName(
@@ -120,12 +121,12 @@ public class ChassisController {
             @ApiResponse(responseCode = "200",
                     description = "GitHub users retrieved",
                     content = @Content(
-                            mediaType = MediaType.APPLICATION_JSON_VALUE,
+                            mediaType = APPLICATION_JSON_VALUE,
                             schema = @Schema(example = "{\"total_count\":0,\"incomplete_results\":false,\"items\":[]}"))),
             @ApiResponse(responseCode = "404",
                     description = "Username value not supplied",
                     content = @Content(
-                            mediaType = MediaType.APPLICATION_JSON_VALUE,
+                            mediaType = APPLICATION_JSON_VALUE,
                             schema = @Schema(implementation = ErrorResponse.class)))
     })
     @GetMapping({"chassisClientNameContain", "chassisClientNameContain/{usernamePart}"})
