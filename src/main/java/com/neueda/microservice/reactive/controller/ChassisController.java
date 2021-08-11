@@ -64,6 +64,7 @@ public class ChassisController {
     public Mono<Chassis> addChassisElement(
             @Parameter(description = "Chassis element to be created")
             @Valid @RequestBody Chassis chassis) {
+
         return chassisService.addChassis(chassis);
     }
 
@@ -91,6 +92,7 @@ public class ChassisController {
     public Mono<Chassis> retrieveChassisById(
             @Parameter(description = "Id containing in the GitHub username")
             @PathVariable String id) {
+
         try {
             return chassisService.getChassisById(Long.valueOf(id));
         } catch(NumberFormatException ex) {
