@@ -43,6 +43,7 @@ class ChassisRepositoryIT extends PostgresTestContainer {
         chassisRepository.findAll()
                 .as(StepVerifier::create)
                 // then
+                .expectSubscription()
                 .expectNextCount(1)
                 .verifyComplete();
     }
@@ -52,6 +53,7 @@ class ChassisRepositoryIT extends PostgresTestContainer {
         chassisRepository.saveAll(Arrays.asList(chassisEntities))
                 .as(StepVerifier::create)
                 // then
+                .expectSubscription()
                 .expectNextCount(1)
                 .verifyComplete();
     }

@@ -34,6 +34,7 @@ class ChassisServiceIT extends PostgresTestContainer {
         chassisService.getChassisById(1L)
                 .as(StepVerifier::create)
                 // then
+                .expectSubscription()
                 .verifyError(EntityNotFoundException.class);
     }
 
@@ -47,6 +48,7 @@ class ChassisServiceIT extends PostgresTestContainer {
         chassisService.searchChassisByNameContaining("find")
                 .as(StepVerifier::create)
                 // then
+                .expectSubscription()
                 .expectNextCount(1)
                 .verifyComplete();
     }
@@ -56,6 +58,7 @@ class ChassisServiceIT extends PostgresTestContainer {
         chassisService.addChassis(chassis)
                 .as(StepVerifier::create)
                 // then
+                .expectSubscription()
                 .expectNextCount(1)
                 .verifyComplete();
     }

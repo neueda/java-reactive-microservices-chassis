@@ -49,6 +49,7 @@ public class GitHubClientTests {
         client.searchUsernameContaining(testValue)
                 .as(StepVerifier::create)
                 // then
+                .expectSubscription()
                 .expectNext(expected)
                 .verifyComplete();
         verify(getRequestedFor(urlEqualTo(testUrl)));
