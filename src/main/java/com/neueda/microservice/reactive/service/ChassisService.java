@@ -24,37 +24,34 @@ public class ChassisService {
 
     private final ChassisRepository chassisRepository;
 
-    private final Function<ChassisEntity, Chassis> toViewModel =
-            e -> new Chassis(e.getName(), e.getDescription());
-
-    public Flux<Chassis> retrieveAllChassis() {
-        return chassisRepository.findAll().map(toViewModel);
+    public Flux<ChassisEntity> retrieveAllChassis() {
+        return chassisRepository.findAll();
     }
 
-    public Mono<Chassis> getChassisById(Long id) {
+    public Mono<ChassisEntity> getChassisById(Long id) {
         return chassisRepository.findById(id)
-                .map(toViewModel)
                 .switchIfEmpty(
                         error(new EntityNotFoundException(
                                 "/api/v1/chassis/" + id,
                                 "No element with ID " + id + " could be found")));
     }
 
-    public Flux<Chassis> searchChassisByNameContaining(String value) {
+    public Flux<ChassisEntity> searchChassisByNameContaining(String value) {
         ChassisEntity chassisEntity = new ChassisEntity().setName(value);
 
         ExampleMatcher matcher = matching().withMatcher("name", contains());
         Example<ChassisEntity> example = Example.of(chassisEntity, matcher);
 
-        return chassisRepository.findAll(example).map(toViewModel);
+        return chassisRepository.findAll(example);
     }
 
     @Transactional
-    public Mono<Chassis> addChassis(Chassis chassis) {
+    public Mono<ChassisEntity> addChassis(Chassis chassis) {
         ChassisEntity chassisEntity = new ChassisEntity();
         chassisEntity.setName(chassis.name());
         chassisEntity.setDescription(chassis.description());
 
-        return chassisRepository.save(chassisEntity).map(toViewModel);
+
+        return chassisRepository.save(chassisEntity);
     }
 }

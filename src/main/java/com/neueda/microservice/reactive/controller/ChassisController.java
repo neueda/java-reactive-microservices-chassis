@@ -1,6 +1,7 @@
 package com.neueda.microservice.reactive.controller;
 
 import com.neueda.microservice.reactive.client.GitHubClient;
+import com.neueda.microservice.reactive.entity.ChassisEntity;
 import com.neueda.microservice.reactive.exception.IdFormatException;
 import com.neueda.microservice.reactive.exception.MandatoryPathParameterException;
 import com.neueda.microservice.reactive.model.Chassis;
@@ -21,22 +22,25 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseStatus;
-import org.springframework.web.bind.annotation.RestController;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
 import javax.validation.Valid;
 import java.util.Optional;
+import java.util.function.Function;
 
 import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 
-@RestController
+//@RestController
 @RequestMapping("/api/v1")
 @RequiredArgsConstructor
 public class ChassisController {
 
     private final ChassisService chassisService;
     private final GitHubClient gitHubClient;
+
+    private final Function<ChassisEntity, Chassis> toChassisModel =
+            e -> new Chassis(e.getName(), e.getDescription());
 
     @Operation(tags = "chassis",
             summary = "Get all chassis elements",
@@ -48,7 +52,7 @@ public class ChassisController {
                     schema = @Schema(implementation = Chassis[].class))))
     @GetMapping("chassis")
     public Flux<Chassis> getAllChassis() {
-        return chassisService.retrieveAllChassis();
+        return chassisService.retrieveAllChassis().map(toChassisModel);
     }
 
     @Operation(tags = "chassis",
@@ -65,7 +69,7 @@ public class ChassisController {
             @Parameter(description = "Chassis element to be created")
             @Valid @RequestBody Chassis chassis) {
 
-        return chassisService.addChassis(chassis);
+        return chassisService.addChassis(chassis).map(toChassisModel);
     }
 
     @Operation(tags = "chassis",
@@ -94,7 +98,7 @@ public class ChassisController {
             @PathVariable String id) {
 
         try {
-            return chassisService.getChassisById(Long.valueOf(id));
+            return chassisService.getChassisById(Long.valueOf(id)).map(toChassisModel);
         } catch(NumberFormatException ex) {
             throw new IdFormatException("/api/v1/chassis/" + id, ex);
         }
@@ -113,7 +117,7 @@ public class ChassisController {
             @Parameter(description = "String containing in the chassis element name to be searched")
             @RequestParam String value) {
 
-        return chassisService.searchChassisByNameContaining(value);
+        return chassisService.searchChassisByNameContaining(value).map(toChassisModel);
     }
 
     @Operation(tags = "chassis-clients",
