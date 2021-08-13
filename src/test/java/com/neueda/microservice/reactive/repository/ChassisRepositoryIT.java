@@ -37,7 +37,7 @@ class ChassisRepositoryIT extends PostgresTestContainer {
     void shouldReadsAllChassisEntities() {
         // given
         insertChassisEntities(
-                new ChassisEntity().setName("find_all_chassis test"));
+                new ChassisEntity().setName("list_all_chassis test"));
 
         // when
         chassisRepository.findAll()

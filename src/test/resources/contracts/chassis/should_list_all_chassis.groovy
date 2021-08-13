@@ -3,7 +3,7 @@ package contracts.chassis
 import org.springframework.cloud.contract.spec.Contract
 
 Contract.make {
-    description "should return a list of chassis items"
+    description "should return a list of all chassis items"
 
     request {
         url "/api/v1/chassis"
