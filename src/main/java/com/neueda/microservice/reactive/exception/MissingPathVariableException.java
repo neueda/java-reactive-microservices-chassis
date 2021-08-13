@@ -1,8 +1,10 @@
 package com.neueda.microservice.reactive.exception;
 
+import static java.lang.String.format;
+
 public class MissingPathVariableException extends IllegalArgumentException {
 
-    public MissingPathVariableException(String variableName, String variableType) {
-        super("Required path variable '" + variableName + "' for method parameter type " + variableType + " is not present");
+    public MissingPathVariableException(String baseUrl, String variableName) {
+        super(format("For path %s/{%s}", baseUrl, variableName));
     }
 }

@@ -2,10 +2,10 @@ package com.neueda.microservice.reactive.handler;
 
 import com.neueda.microservice.reactive.client.GitHubClient;
 import com.neueda.microservice.reactive.entity.ChassisEntity;
-import com.neueda.microservice.reactive.exception.EntityNotFoundException;
-import com.neueda.microservice.reactive.exception.IdFormatException;
+import com.neueda.microservice.reactive.exception.ItemNotFoundException;
 import com.neueda.microservice.reactive.exception.MissingPathVariableException;
 import com.neueda.microservice.reactive.exception.MissingQueryParameterException;
+import com.neueda.microservice.reactive.exception.ParameterFormatException;
 import com.neueda.microservice.reactive.model.Chassis;
 import com.neueda.microservice.reactive.model.ErrorResponse;
 import com.neueda.microservice.reactive.service.ChassisService;
@@ -21,7 +21,8 @@ import java.net.URI;
 import java.util.Optional;
 import java.util.function.Function;
 
-import static java.lang.Long.valueOf;
+import static com.neueda.microservice.reactive.handler.HandlerHelper.VAR_USERNAME_CONTAINS;
+import static com.neueda.microservice.reactive.handler.HandlerHelper.createErrorRespondAndLog;
 import static org.springframework.http.MediaType.APPLICATION_JSON;
 import static org.springframework.web.reactive.function.server.ServerResponse.badRequest;
 import static org.springframework.web.reactive.function.server.ServerResponse.created;
@@ -30,7 +31,7 @@ import static org.springframework.web.reactive.function.server.ServerResponse.ok
 
 @Component
 @RequiredArgsConstructor
-public class ChassisHandler {
+public class ChassisRouteHandler {
 
     private final ChassisService chassisService;
     private final GitHubClient gitHubClient;
@@ -41,10 +42,8 @@ public class ChassisHandler {
     public Mono<ServerResponse> getChassisItem(ServerRequest request) {
 
         return Mono.just(request.pathVariable("id"))
-                .flatMap(stringId -> isLong(stringId)
-                        ? Mono.just(valueOf(stringId))
-                        : Mono.error(new IdFormatException("/api/v1/chassis/" + stringId, new NumberFormatException())))
-                .flatMap(chassisService::getChassisById)
+                .flatMap(HandlerHelper::parseLong)
+                .flatMap(chassisService::getChassisItemById)
                 .map(toChassisModel)
                 .flatMap(chassis -> ok()
                         .contentType(APPLICATION_JSON)
@@ -55,13 +54,13 @@ public class ChassisHandler {
 
         return ok()
                 .contentType(APPLICATION_JSON)
-                .body(chassisService.retrieveAllChassis().map(toChassisModel), Chassis.class);
+                .body(chassisService.findAllChassisItem().map(toChassisModel), Chassis.class);
     }
 
     public Mono<ServerResponse> createChassisItem(ServerRequest request) {
 
         return request.bodyToMono(Chassis.class)
-                .flatMap(chassisService::addChassis)
+                .flatMap(chassisService::addChassisItem)
                 .flatMap(entity -> created(URI.create("/chassis/" + entity.getId()))
                         .contentType(APPLICATION_JSON)
                         .bodyValue(new Chassis(entity.getName(), entity.getDescription())));
@@ -76,12 +75,12 @@ public class ChassisHandler {
                 .map(Optional::get)
                 .flatMap(v -> ok()
                         .contentType(APPLICATION_JSON)
-                        .body(chassisService.searchChassisByNameContaining(v).map(toChassisModel), Chassis.class));
+                        .body(chassisService.findAllChassisItemByNameContaining(v).map(toChassisModel), Chassis.class));
     }
 
     public Mono<ServerResponse> getChassisWebClientResponse(ServerRequest request) {
 
-        return Mono.just(request.pathVariable("usernamePart"))
+        return Mono.just(request.pathVariable(VAR_USERNAME_CONTAINS))
                 .filter(StringUtils::hasText)
                 .flatMap(gitHubClient::searchUsernameContaining)
                 .flatMap(v -> ok()
@@ -89,42 +88,25 @@ public class ChassisHandler {
                         .bodyValue(v));
     }
 
-    public Mono<ServerResponse> validUsernamePart(ServerRequest request) {
-        return Mono.error(new MissingPathVariableException("usernamePart", String.class.getTypeName()));
+    public Mono<ServerResponse> invalidClientNamePath(ServerRequest request) {
+
+        return Mono.error(new MissingPathVariableException(request.path(), VAR_USERNAME_CONTAINS));
     }
 
 
     public Mono<ServerResponse> errorFilter(ServerRequest request, HandlerFunction<ServerResponse> next) {
 
-        //ToDo: This filter exception handler must me improved
-        return next.handle(request).log()
-                .onErrorResume(IdFormatException.class, ex -> badRequest()
+        //ToDo: This exception handler filter still need be improved
+        return next.handle(request)
+                .onErrorResume(ParameterFormatException.class, ex -> badRequest()
                         .contentType(APPLICATION_JSON)
-                        .bodyValue(new ErrorResponse(
-                                ex.getLocalizedMessage(),
-                                request.path(),
-                                ex.getClass().getTypeName())))
+                        .body(createErrorRespondAndLog(ex, request.path()), ErrorResponse.class))
                 .onErrorResume(MissingPathVariableException.class, ex -> badRequest()
                         .contentType(APPLICATION_JSON)
-                        .bodyValue(new ErrorResponse(
-                                ex.getLocalizedMessage(),
-                                request.path(),
-                                ex.getClass().getTypeName())))
+                        .body(createErrorRespondAndLog(ex, request.path()), ErrorResponse.class))
                 .onErrorResume(MissingQueryParameterException.class, ex -> badRequest()
                         .contentType(APPLICATION_JSON)
-                        .bodyValue(new ErrorResponse(
-                                ex.getLocalizedMessage(),
-                                request.path(),
-                                ex.getClass().getTypeName())))
-                .onErrorResume(EntityNotFoundException.class, ex -> notFound().build());
-    }
-
-    private boolean isLong(String strNum) {
-        try {
-            Long.parseLong(strNum);
-            return true;
-        } catch (NumberFormatException nfe) {
-            return false;
-        }
+                        .body(createErrorRespondAndLog(ex, request.path()), ErrorResponse.class))
+                .onErrorResume(ItemNotFoundException.class, ex -> notFound().build().log());
     }
 }

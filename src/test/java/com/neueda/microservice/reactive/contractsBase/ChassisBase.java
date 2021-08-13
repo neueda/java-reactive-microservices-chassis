@@ -1,11 +1,9 @@
 package com.neueda.microservice.reactive.contractsBase;
 
 import com.neueda.microservice.reactive.client.GitHubClient;
-import com.neueda.microservice.reactive.configuration.ChassisRouter;
-import com.neueda.microservice.reactive.controller.ChassisController;
+import com.neueda.microservice.reactive.configuration.ChassisRouteConfig;
 import com.neueda.microservice.reactive.entity.ChassisEntity;
-import com.neueda.microservice.reactive.handler.ChassisHandler;
-import com.neueda.microservice.reactive.model.Chassis;
+import com.neueda.microservice.reactive.handler.ChassisRouteHandler;
 import com.neueda.microservice.reactive.service.ChassisService;
 import org.junit.jupiter.api.BeforeEach;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,7 +15,7 @@ import reactor.core.publisher.Flux;
 
 import static org.mockito.BDDMockito.given;
 
-@Import({ChassisRouter.class, ChassisHandler.class})
+@Import({ChassisRouteConfig.class, ChassisRouteHandler.class})
 @WebFluxTest
 abstract class ChassisBase extends ContractTest {
 
@@ -38,7 +36,7 @@ abstract class ChassisBase extends ContractTest {
                         .setName("test name")
                         .setDescription("description test");
 
-        given(chassisService.retrieveAllChassis())
+        given(chassisService.findAllChassisItem())
                 .willReturn(Flux.just(chassisEntity));
 
         webTestClientSetup(webClient);

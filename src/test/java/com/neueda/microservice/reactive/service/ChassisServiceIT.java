@@ -1,7 +1,7 @@
 package com.neueda.microservice.reactive.service;
 
 import com.neueda.microservice.reactive.PostgresTestContainer;
-import com.neueda.microservice.reactive.exception.EntityNotFoundException;
+import com.neueda.microservice.reactive.exception.ItemNotFoundException;
 import com.neueda.microservice.reactive.model.Chassis;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -31,11 +31,11 @@ class ChassisServiceIT extends PostgresTestContainer {
     @Test
     void shouldThrowNotFoundException() {
         // when
-        chassisService.getChassisById(1L)
+        chassisService.getChassisItemById(1L)
                 .as(StepVerifier::create)
                 // then
                 .expectSubscription()
-                .verifyError(EntityNotFoundException.class);
+                .verifyError(ItemNotFoundException.class);
     }
 
     @Test
@@ -45,7 +45,7 @@ class ChassisServiceIT extends PostgresTestContainer {
                 new Chassis("partial name find test", "description text"));
 
         // when
-        chassisService.searchChassisByNameContaining("find")
+        chassisService.findAllChassisItemByNameContaining("find")
                 .as(StepVerifier::create)
                 // then
                 .expectSubscription()
@@ -55,7 +55,7 @@ class ChassisServiceIT extends PostgresTestContainer {
 
     private void insertAChassisEntity(Chassis chassis) {
         // when
-        chassisService.addChassis(chassis)
+        chassisService.addChassisItem(chassis)
                 .as(StepVerifier::create)
                 // then
                 .expectSubscription()
