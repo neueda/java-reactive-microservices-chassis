@@ -30,20 +30,27 @@ public class HelloWorldApplication {
 
 === List all chassis call
 .request
-include::{snippets}/list-chassis/http-request.adoc[]
-include::{snippets}/list-chassis/httpie-request.adoc[]
-include::{snippets}/list-chassis/curl-request.adoc[]
+include::{snippets}/chassis-controller-tests/should-retrieve-all-chassis/http-request.adoc[]
+include::{snippets}/chassis-controller-tests/should-retrieve-all-chassis/httpie-request.adoc[]
+include::{snippets}/chassis-controller-tests/should-retrieve-all-chassis/curl-request.adoc[]
 
 .response
-include::{snippets}/list-chassis/http-response.adoc[]
+include::{snippets}/chassis-controller-tests/should-retrieve-all-chassis/http-response.adoc[]
 
 === GitHub search username
 .request
-include::{snippets}/github-user-search/http-request.adoc[]
-include::{snippets}/github-user-search/httpie-request.adoc[]
-include::{snippets}/github-user-search/curl-request.adoc[]
+include::{snippets}/chassis-controller-tests/should-retrieve-chassis-client-response/http-request.adoc[]
+include::{snippets}/chassis-controller-tests/should-retrieve-chassis-client-response/httpie-request.adoc[]
+include::{snippets}/chassis-controller-tests/should-retrieve-chassis-client-response/curl-request.adoc[]
 
 .response
-include::{snippets}/github-user-search/http-response.adoc[]
+include::{snippets}/chassis-controller-tests/should-retrieve-chassis-client-response/http-response.adoc[]
 
+=== Contract testing list all chassis
+.request
+include::{snippets}/chassis-test/validate_should_list_all_chassis/http-request.adoc[]
+include::{snippets}/chassis-test/validate_should_list_all_chassis/httpie-request.adoc[]
+include::{snippets}/chassis-test/validate_should_list_all_chassis/curl-request.adoc[]
 
+.response
+include::{snippets}/chassis-test/validate_should_list_all_chassis/http-response.adoc[]

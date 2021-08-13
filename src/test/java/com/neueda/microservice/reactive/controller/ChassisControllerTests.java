@@ -6,12 +6,16 @@ import com.neueda.microservice.reactive.entity.ChassisEntity;
 import com.neueda.microservice.reactive.handler.ChassisRouteHandler;
 import com.neueda.microservice.reactive.model.Chassis;
 import com.neueda.microservice.reactive.service.ChassisService;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.restdocs.AutoConfigureRestDocs;
+import org.springframework.boot.test.autoconfigure.web.reactive.AutoConfigureWebTestClient;
 import org.springframework.boot.test.autoconfigure.web.reactive.WebFluxTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Import;
+import org.springframework.restdocs.webtestclient.WebTestClientRestDocumentationConfigurer;
 import org.springframework.test.web.reactive.server.WebTestClient;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
@@ -26,14 +30,26 @@ import static org.springframework.restdocs.webtestclient.WebTestClientRestDocume
 @AutoConfigureRestDocs
 class ChassisControllerTests {
 
-    @Autowired
-    private WebTestClient webClient;
-
     @MockBean
     private ChassisService chassisService;
 
     @MockBean
     private GitHubClient gitHubClient;
+
+    private WebTestClient webClient;
+
+    @BeforeEach
+    void setUp(
+            @Autowired ApplicationContext context,
+            @Autowired WebTestClientRestDocumentationConfigurer configurer) {
+
+        webClient = WebTestClient
+                .bindToApplicationContext(context)
+                .configureClient()
+                .filter(configurer)
+                .entityExchangeResultConsumer(document("{class-name}/{method-name}"))
+                .build();
+    }
 
     @Test
     void shouldRetrieveAllChassis() {
@@ -55,12 +71,11 @@ class ChassisControllerTests {
                 // then
                 .expectStatus().isOk()
                 .expectBodyList(Chassis.class)
-                .consumeWith(document("list-chassis"))
                 .contains(new Chassis("Chassis Under Test", "Description Text"));
     }
 
     @Test
-    void shouldRetrieveAllChassisClientItems() {
+    void shouldRetrieveChassisClientResponse() {
         // given
         var expected = "{\"total_count\":0,\"incomplete_results\":false,\"items\":[]}";
         given(gitHubClient.searchUsernameContaining(anyString()))
@@ -74,7 +89,6 @@ class ChassisControllerTests {
                 // then
                 .expectStatus().isOk()
                 .expectBody(String.class)
-                .consumeWith(document("github-user-search"))
                 .isEqualTo(expected);
     }
 }

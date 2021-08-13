@@ -234,7 +234,7 @@
 				<configuration>
 					<testFramework>JUNIT5</testFramework>
 					<testMode>WEBTESTCLIENT</testMode>
-					<packageWithBaseClasses>${project.groupId}.contractsBase</packageWithBaseClasses>
+					<packageWithBaseClasses>${project.groupId}.contracts</packageWithBaseClasses>
 				</configuration>
 			</plugin>
 			<plugin>
