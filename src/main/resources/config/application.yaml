@@ -2,7 +2,7 @@ spring:
   main:
     banner-mode: log
   config:
-    import: "configtree:config/"
+    import: configtree:config/
 
   application:
     name: @project.artifactId@
@@ -16,7 +16,7 @@ spring:
       mode: never
 
   liquibase:
-    change-log: "db/changelog/db.changelog-master.xml"
+    change-log: db/changelog/db.changelog-master.xml
     url: ${db.url.jdbc}
     user: ${db.username:sa}
     password: ${db.password}

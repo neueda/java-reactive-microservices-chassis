@@ -49,7 +49,7 @@ public abstract class PostgresTestContainer {
         registry.add("spring.r2dbc.password", postgresContainer::getPassword);
     }
 
-    public static void executeScript(Resource script) {
+    protected static void executeScript(Resource script) {
         var connectionFactory =
                 ConnectionFactories.get(PostgreSQLR2DBCDatabaseContainer.getOptions(postgresContainer));
 

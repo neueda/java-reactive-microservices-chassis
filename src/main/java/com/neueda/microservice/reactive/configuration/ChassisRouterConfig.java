@@ -1,7 +1,7 @@
 package com.neueda.microservice.reactive.configuration;
 
 import com.neueda.microservice.reactive.client.GitHubClient;
-import com.neueda.microservice.reactive.handler.ChassisRouteHandler;
+import com.neueda.microservice.reactive.handler.ChassisRouterHandler;
 import com.neueda.microservice.reactive.model.Chassis;
 import com.neueda.microservice.reactive.model.ErrorResponse;
 import com.neueda.microservice.reactive.service.ChassisService;
@@ -15,6 +15,8 @@ import io.swagger.v3.oas.annotations.parameters.RequestBody;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import org.springdoc.core.annotations.RouterOperation;
 import org.springdoc.core.annotations.RouterOperations;
+import org.springframework.boot.autoconfigure.web.ErrorProperties;
+import org.springframework.boot.autoconfigure.web.ErrorProperties.IncludeAttribute;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -22,11 +24,13 @@ import org.springframework.web.reactive.function.server.RouterFunction;
 import org.springframework.web.reactive.function.server.ServerResponse;
 
 import static com.neueda.microservice.reactive.handler.HandlerHelper.VAR_USERNAME_CONTAINS;
+import static org.springframework.http.MediaType.APPLICATION_JSON;
 import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
+import static org.springframework.web.reactive.function.server.RequestPredicates.accept;
 import static org.springframework.web.reactive.function.server.RouterFunctions.route;
 
 @Configuration
-public class ChassisRouteConfig {
+public class ChassisRouterConfig {
 
     @RouterOperations({
             @RouterOperation(path = "/api/v1/chassis/{id}",
@@ -115,17 +119,28 @@ public class ChassisRouteConfig {
                             }))
     })
     @Bean
-    public RouterFunction<ServerResponse> routes(ChassisRouteHandler handler) {
+    public RouterFunction<ServerResponse> routes(ChassisRouterHandler handler) {
         return route()
                 .path("/api/v1", b1 -> b1
                         .path("/chassis", b2 -> b2
                                 .GET("/{id}", handler::getChassisItem)
                                 .GET( handler::listChassisItem)
-                                .POST( handler::createChassisItem))
+                                .POST(accept(APPLICATION_JSON), handler::createChassisItem))
                         .GET("/chassisNameContain", handler::listChassisContainingName)
                         .GET("/chassisClientNameContain", handler::invalidClientNamePath)
                         .GET("/chassisClientNameContain/{" + VAR_USERNAME_CONTAINS + "}", handler::getChassisWebClientResponse))
-                .filter(handler::errorFilter)
+                .filter(handler::errorHandlerFilter)
                 .build();
+    }
+
+    @Bean
+    public ErrorProperties errorProperties() {
+        ErrorProperties errorProperties = new ErrorProperties();
+        errorProperties.setIncludeException(true);
+        errorProperties.setIncludeMessage(IncludeAttribute.ALWAYS);
+        errorProperties.setIncludeBindingErrors(IncludeAttribute.ALWAYS);
+        errorProperties.setIncludeStacktrace(IncludeAttribute.ON_PARAM);
+
+        return errorProperties;
     }
 }

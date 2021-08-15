@@ -1,16 +1,16 @@
 package com.neueda.microservice.reactive.controller;
 
 import com.neueda.microservice.reactive.client.GitHubClient;
-import com.neueda.microservice.reactive.configuration.ChassisRouteConfig;
+import com.neueda.microservice.reactive.configuration.ChassisRouterConfig;
 import com.neueda.microservice.reactive.entity.ChassisEntity;
-import com.neueda.microservice.reactive.handler.ChassisRouteHandler;
+import com.neueda.microservice.reactive.handler.ChassisRouterHandler;
 import com.neueda.microservice.reactive.model.Chassis;
 import com.neueda.microservice.reactive.service.ChassisService;
+import com.neueda.microservice.reactive.validation.DefaultFunctionalValidator;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.restdocs.AutoConfigureRestDocs;
-import org.springframework.boot.test.autoconfigure.web.reactive.AutoConfigureWebTestClient;
 import org.springframework.boot.test.autoconfigure.web.reactive.WebFluxTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.context.ApplicationContext;
@@ -25,7 +25,9 @@ import static org.mockito.BDDMockito.given;
 import static org.springframework.http.MediaType.APPLICATION_JSON;
 import static org.springframework.restdocs.webtestclient.WebTestClientRestDocumentation.document;
 
-@Import({ChassisRouteConfig.class, ChassisRouteHandler.class})
+@Import({ChassisRouterConfig.class,
+        ChassisRouterHandler.class,
+        DefaultFunctionalValidator.class})
 @WebFluxTest
 @AutoConfigureRestDocs
 class ChassisControllerTests {

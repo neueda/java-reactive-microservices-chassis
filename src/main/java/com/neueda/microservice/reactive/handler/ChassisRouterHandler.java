@@ -5,10 +5,10 @@ import com.neueda.microservice.reactive.entity.ChassisEntity;
 import com.neueda.microservice.reactive.exception.ItemNotFoundException;
 import com.neueda.microservice.reactive.exception.MissingPathVariableException;
 import com.neueda.microservice.reactive.exception.MissingQueryParameterException;
-import com.neueda.microservice.reactive.exception.ParameterFormatException;
 import com.neueda.microservice.reactive.model.Chassis;
 import com.neueda.microservice.reactive.model.ErrorResponse;
 import com.neueda.microservice.reactive.service.ChassisService;
+import com.neueda.microservice.reactive.validation.FunctionalValidator;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 import org.springframework.util.StringUtils;
@@ -31,10 +31,11 @@ import static org.springframework.web.reactive.function.server.ServerResponse.ok
 
 @Component
 @RequiredArgsConstructor
-public class ChassisRouteHandler {
+public class ChassisRouterHandler {
 
     private final ChassisService chassisService;
     private final GitHubClient gitHubClient;
+    private final FunctionalValidator validator;
 
     private final Function<ChassisEntity, Chassis> toChassisModel =
             e -> new Chassis(e.getName(), e.getDescription());
@@ -60,6 +61,7 @@ public class ChassisRouteHandler {
     public Mono<ServerResponse> createChassisItem(ServerRequest request) {
 
         return request.bodyToMono(Chassis.class)
+                .flatMap(validator::valid)
                 .flatMap(chassisService::addChassisItem)
                 .flatMap(entity -> created(URI.create("/chassis/" + entity.getId()))
                         .contentType(APPLICATION_JSON)
@@ -94,17 +96,10 @@ public class ChassisRouteHandler {
     }
 
 
-    public Mono<ServerResponse> errorFilter(ServerRequest request, HandlerFunction<ServerResponse> next) {
+    public Mono<ServerResponse> errorHandlerFilter(ServerRequest request, HandlerFunction<ServerResponse> next) {
 
-        //ToDo: This exception handler filter still need be improved
         return next.handle(request)
-                .onErrorResume(ParameterFormatException.class, ex -> badRequest()
-                        .contentType(APPLICATION_JSON)
-                        .body(createErrorRespondAndLog(ex, request.path()), ErrorResponse.class))
-                .onErrorResume(MissingPathVariableException.class, ex -> badRequest()
-                        .contentType(APPLICATION_JSON)
-                        .body(createErrorRespondAndLog(ex, request.path()), ErrorResponse.class))
-                .onErrorResume(MissingQueryParameterException.class, ex -> badRequest()
+                .onErrorResume(IllegalArgumentException.class, ex -> badRequest()
                         .contentType(APPLICATION_JSON)
                         .body(createErrorRespondAndLog(ex, request.path()), ErrorResponse.class))
                 .onErrorResume(ItemNotFoundException.class, ex -> notFound().build().log());
