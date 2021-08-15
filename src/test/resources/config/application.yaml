@@ -55,6 +55,7 @@ logging:
     web: trace
     sql: trace
     org:
+      testcontainers: trace
       springframework:
         jdbc: trace
         r2dbc: trace

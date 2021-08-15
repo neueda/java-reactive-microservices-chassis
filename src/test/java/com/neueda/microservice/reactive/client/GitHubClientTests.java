@@ -31,7 +31,7 @@ public class GitHubClientTests {
     @BeforeAll
     static void init(@Autowired WireMockServer server) {
         URI baseUri = URI.create(server.baseUrl());
-        client = new GitHubClient(WebClient.builder(), new ClientProperties(baseUri));
+        client = new GitHubClient(WebClient.builder(), new ClientProperties(baseUri), "debug");
     }
 
     @Test

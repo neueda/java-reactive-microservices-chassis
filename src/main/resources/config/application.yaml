@@ -68,6 +68,11 @@ logging:
     root: error
     web: trace
     sql: trace
+# Enable uncomment below log level to log more detail from webclient call
+#    reactor:
+#      netty:
+#        http:
+#          client: debug
     org:
       springframework:
         jdbc: trace
