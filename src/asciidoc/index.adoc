@@ -1,6 +1,7 @@
 = AsciiDoc Example Initial Document
 Doc Writer <berchris.requiao@neueda.com>
 :icons: font
+:sourcedir: ../main/java/com/neueda/microservice/reactive
 
 This _Hello World_ document has been written in `plain text` with
 http://asciidoc.org[AsciiDoc].
@@ -13,44 +14,34 @@ https://docs.asciidoctor.org/asciidoctor/latest/docbook-backend[DocBook4], and
 https://docs.asciidoctor.org/asciidoctor/latest/manpage-backend[man page]. Feel free to
 icon:twitter[role=aqua] about it!
 
-== Sample Section
-
+== List Items Sample Section
 [square]
 * item 1
 * item 2
 
-[source,java]
+== Router Handler Function
+====
+[source,java,indent=0,role="primary]
+.Retrieve an item
 ----
-public class HelloWorldApplication {
-    public static void main(String[] args) {
-        System.out.println("Hello, World!");
-    }
-}
+include::{sourcedir}/handler/ChassisRouterHandler.java[tag=retrieve]
 ----
+<1> Convert the Entity object into a Model one
 
-=== List all chassis call
-.request
-include::{snippets}/chassis-controller-tests/should-retrieve-all-chassis-items/http-request.adoc[]
-include::{snippets}/chassis-controller-tests/should-retrieve-all-chassis-items//httpie-request.adoc[]
-include::{snippets}/chassis-controller-tests/should-retrieve-all-chassis-items//curl-request.adoc[]
+[source,java,indent=0,role="secondary"]
+.Create an item
+----
+include::{sourcedir}/handler/ChassisRouterHandler.java[tag=create]
+----
+<1> Process a validation from the request body object
+<2> Add the validated request body object into database
+====
 
-.response
-include::{snippets}/chassis-controller-tests/should-retrieve-all-chassis-items/http-response.adoc[]
+== List all chassis call
+operation::chassis-controller-tests/should-retrieve-all-chassis-items[snippets='curl-request,httpie-request,http-request,http-response']
 
-=== GitHub search username
-.request
-include::{snippets}/chassis-controller-tests/should-retrieve-chassis-client-response/http-request.adoc[]
-include::{snippets}/chassis-controller-tests/should-retrieve-chassis-client-response/httpie-request.adoc[]
-include::{snippets}/chassis-controller-tests/should-retrieve-chassis-client-response/curl-request.adoc[]
+== GitHub search username
+operation::chassis-controller-tests/should-retrieve-chassis-client-response[snippets='curl-request,httpie-request,http-request,http-response']
 
-.response
-include::{snippets}/chassis-controller-tests/should-retrieve-chassis-client-response/http-response.adoc[]
-
-=== Contract testing list all chassis
-.request
-include::{snippets}/chassis-test/validate_should_list_all_chassis_items/http-request.adoc[]
-include::{snippets}/chassis-test/validate_should_list_all_chassis_items/httpie-request.adoc[]
-include::{snippets}/chassis-test/validate_should_list_all_chassis_items/curl-request.adoc[]
-
-.response
-include::{snippets}/chassis-test/validate_should_list_all_chassis_items/http-response.adoc[]
+== Contract testing list all chassis
+operation::chassis-test/validate_should_list_all_chassis_items[snippets='curl-request,httpie-request,http-request,http-response']
