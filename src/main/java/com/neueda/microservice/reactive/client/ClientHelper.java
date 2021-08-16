@@ -21,16 +21,15 @@ class ClientHelper {
 
     private final WebClient webClient;
 
-    ClientHelper(WebClient.Builder webClientBuilder, ClientProperties props, String logLevel) {
+    ClientHelper(WebClient.Builder webClientBuilder, ClientProperties clientProps, String logLevel) {
         if (isLogEnabled(logLevel)) {
             webClientBuilder.clientConnector(
                     new ReactorClientHttpConnector(HttpClient.create().wiretap(
                             "reactor.netty.http.client.HttpClient",
                             LogLevel.DEBUG, AdvancedByteBufFormat.TEXTUAL)));
         }
-
         this.webClient = webClientBuilder
-                .baseUrl(props.baseUrl().toString())
+                .baseUrl(clientProps.baseUrl().toString())
                 .build();
     }
 
