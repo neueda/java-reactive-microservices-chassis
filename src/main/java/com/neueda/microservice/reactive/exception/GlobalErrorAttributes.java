@@ -8,6 +8,7 @@ import org.springframework.web.reactive.function.server.ServerRequest;
 
 import java.util.Map;
 
+// This bean is only called after the ErrorWebExceptionHandler has been processed
 @Component
 public class GlobalErrorAttributes extends DefaultErrorAttributes {
 
