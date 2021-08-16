@@ -24,8 +24,8 @@ public class GitHubClient {
     public GitHubClient(WebClient.Builder webClientBuilder, ClientProperties props,
                         @Value("${logging.level.reactor.netty.http.client:}") String logLevel) {
 
-        if (hasText(logLevel) && trimWhitespace(logLevel).equalsIgnoreCase("debug")) {
-            webClientBuilder = webClientBuilder.clientConnector(
+        if (ClientHelper.isLogEnabled(logLevel)) {
+            webClientBuilder.clientConnector(
                     new ReactorClientHttpConnector(HttpClient.create().wiretap(
                             "reactor.netty.http.client.HttpClient",
                             LogLevel.DEBUG, AdvancedByteBufFormat.TEXTUAL)));
