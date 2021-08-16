@@ -23,7 +23,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.reactive.function.server.RouterFunction;
 import org.springframework.web.reactive.function.server.ServerResponse;
 
-import static com.neueda.microservice.reactive.handler.HandlerHelper.VAR_USERNAME_CONTAINS;
+import static com.neueda.microservice.reactive.handler.HandlerHelper.VAR_IN_USERNAME;
 import static org.springframework.http.MediaType.APPLICATION_JSON;
 import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 import static org.springframework.web.reactive.function.server.RequestPredicates.accept;
@@ -82,7 +82,7 @@ public class ChassisRouterConfig {
                                     content = @Content(
                                             mediaType = APPLICATION_JSON_VALUE,
                                             schema = @Schema(implementation = Chassis.class))))),
-            @RouterOperation(path = "/api/v1/chassisNameContain",
+            @RouterOperation(path = "/api/v1/chassis/nameContain",
                     beanClass = ChassisService.class, beanMethod = "findAllChassisItemByNameContaining",
                     method = RequestMethod.GET,
                     operation = @Operation(operationId = "listChassisContainingName",
@@ -97,7 +97,7 @@ public class ChassisRouterConfig {
                                             mediaType = APPLICATION_JSON_VALUE,
                                             array = @ArraySchema(schema =
                                                 @Schema(implementation = Chassis.class)))))),
-            @RouterOperation(path = "/api/v1/chassisClientNameContain/{" + VAR_USERNAME_CONTAINS + "}",
+            @RouterOperation(path = "/api/v1/chassis/client/nameContain/{" + VAR_IN_USERNAME + "}",
                     beanClass = GitHubClient.class, beanMethod = "searchUsernameContaining",
                     method = RequestMethod.GET,
                     operation = @Operation(operationId = "getChassisWebClientResponse",
@@ -105,7 +105,7 @@ public class ChassisRouterConfig {
                             summary = "Get GitHub username containing the supplied value in its name",
                             description = "Return from GitHub all username containing the supplied value in its name and with one or more repos",
                             parameters = @Parameter(in = ParameterIn.PATH,
-                                    name = VAR_USERNAME_CONTAINS, required = true,
+                                    name = VAR_IN_USERNAME, required = true,
                                     description = "String containing in the GitHub username to be searched"),
                             responses = {
                                     @ApiResponse(responseCode = "200",
@@ -120,15 +120,14 @@ public class ChassisRouterConfig {
     })
     @Bean
     public RouterFunction<ServerResponse> routes(ChassisRouterHandler handler) {
-        return route()
-                .path("/api/v1", b1 -> b1
-                        .path("/chassis", b2 -> b2
-                                .GET("/{id}", handler::getChassisItem)
-                                .GET( handler::listChassisItem)
-                                .POST(accept(APPLICATION_JSON), handler::createChassisItem))
-                        .GET("/chassisNameContain", handler::listChassisContainingName)
-                        .GET("/chassisClientNameContain", handler::invalidClientNamePath)
-                        .GET("/chassisClientNameContain/{" + VAR_USERNAME_CONTAINS + "}", handler::getChassisWebClientResponse))
+        return route().path("/api/v1/chassis", b1 -> b1
+                        .path("/client", b2 -> b2
+                                .GET("/nameContain/{" + VAR_IN_USERNAME + "}", handler::getChassisWebClientResponse)
+                                .GET("/nameContain", handler::invalidClientNamePath))
+                        .GET("/nameContain", handler::listChassisContainingName)
+                        .GET("/{id}", handler::getChassisItem)
+                        .GET( handler::listChassisItem)
+                        .POST(accept(APPLICATION_JSON), handler::createChassisItem))
                 .filter(handler::errorHandlerFilter)
                 .build();
     }

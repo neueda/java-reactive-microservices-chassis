@@ -21,7 +21,7 @@ import java.net.URI;
 import java.util.Optional;
 import java.util.function.Function;
 
-import static com.neueda.microservice.reactive.handler.HandlerHelper.VAR_USERNAME_CONTAINS;
+import static com.neueda.microservice.reactive.handler.HandlerHelper.VAR_IN_USERNAME;
 import static com.neueda.microservice.reactive.handler.HandlerHelper.createErrorRespondAndLog;
 import static org.springframework.http.MediaType.APPLICATION_JSON;
 import static org.springframework.web.reactive.function.server.ServerResponse.badRequest;
@@ -82,7 +82,7 @@ public class ChassisRouterHandler {
 
     public Mono<ServerResponse> getChassisWebClientResponse(ServerRequest request) {
 
-        return Mono.just(request.pathVariable(VAR_USERNAME_CONTAINS))
+        return Mono.just(request.pathVariable(VAR_IN_USERNAME))
                 .filter(StringUtils::hasText)
                 .flatMap(gitHubClient::searchUsernameContaining)
                 .flatMap(v -> ok()
@@ -92,7 +92,7 @@ public class ChassisRouterHandler {
 
     public Mono<ServerResponse> invalidClientNamePath(ServerRequest request) {
 
-        return Mono.error(new MissingPathVariableException(request.path(), VAR_USERNAME_CONTAINS));
+        return Mono.error(new MissingPathVariableException(request.path(), VAR_IN_USERNAME));
     }
 
 

@@ -7,7 +7,7 @@ import reactor.core.publisher.Mono;
 
 public class HandlerHelper {
 
-    public static final String VAR_USERNAME_CONTAINS = "usernameContaining";
+    public static final String VAR_IN_USERNAME = "inUsername";
 
     static Mono<Long> parseLong(String strNum) {
         try {
