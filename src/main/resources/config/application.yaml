@@ -68,7 +68,7 @@ logging:
     root: error
     web: trace
     sql: trace
-# Enable uncomment below configuration in order to log more detail about webclient call
+# Uncomment below configuration in order to log more detail about webclient call
 #    reactor:
 #      netty:
 #        http:
