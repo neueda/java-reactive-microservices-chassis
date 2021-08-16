@@ -48,7 +48,6 @@ public class ChassisRouterHandler {
                     .build().toUri();
 
     public Mono<ServerResponse> getChassisItem(ServerRequest request) {
-
         return Mono.just(request.pathVariable("id"))
                 .flatMap(HandlerHelper::parseLong)
                 .flatMap(chassisService::getChassisItemById)
@@ -59,7 +58,6 @@ public class ChassisRouterHandler {
     }
 
     public Mono<ServerResponse> listChassisItems(ServerRequest request) {
-
         return ok()
                 .contentType(APPLICATION_JSON)
                 .body(chassisService.findAllChassisItems().map(toChassisModel), Chassis.class);
@@ -75,7 +73,6 @@ public class ChassisRouterHandler {
     }
 
     public Mono<ServerResponse> listChassisItemsContainingName(ServerRequest request) {
-
         return Mono.just(request.queryParam("value"))
                 .filter(Optional::isPresent)
                 .switchIfEmpty(
@@ -87,7 +84,6 @@ public class ChassisRouterHandler {
     }
 
     public Mono<ServerResponse> getChassisClientResponse(ServerRequest request) {
-
         return Mono.just(request.pathVariable(VAR_IN_USERNAME))
                 .filter(StringUtils::hasText)
                 .flatMap(gitHubClient::searchUsernameContaining)
@@ -97,13 +93,11 @@ public class ChassisRouterHandler {
     }
 
     public Mono<ServerResponse> invalidClientNamePath(ServerRequest request) {
-
         return Mono.error(new MissingPathVariableException(request.path(), VAR_IN_USERNAME));
     }
 
 
     public Mono<ServerResponse> errorHandlerFilter(ServerRequest request, HandlerFunction<ServerResponse> next) {
-
         return next.handle(request)
                 .onErrorResume(IllegalArgumentException.class, ex -> badRequest()
                         .contentType(APPLICATION_JSON)
