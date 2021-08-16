@@ -15,10 +15,13 @@ import org.springframework.util.StringUtils;
 import org.springframework.web.reactive.function.server.HandlerFunction;
 import org.springframework.web.reactive.function.server.ServerRequest;
 import org.springframework.web.reactive.function.server.ServerResponse;
+import org.springframework.web.util.UriBuilder;
+import org.springframework.web.util.UriComponentsBuilder;
 import reactor.core.publisher.Mono;
 
 import java.net.URI;
 import java.util.Optional;
+import java.util.function.BiFunction;
 import java.util.function.Function;
 
 import static com.neueda.microservice.reactive.handler.HandlerHelper.VAR_IN_USERNAME;
@@ -28,6 +31,7 @@ import static org.springframework.web.reactive.function.server.ServerResponse.ba
 import static org.springframework.web.reactive.function.server.ServerResponse.created;
 import static org.springframework.web.reactive.function.server.ServerResponse.notFound;
 import static org.springframework.web.reactive.function.server.ServerResponse.ok;
+import static org.springframework.web.util.UriComponentsBuilder.fromPath;
 
 @Component
 @RequiredArgsConstructor
@@ -39,6 +43,12 @@ public class ChassisRouterHandler {
 
     private final Function<ChassisEntity, Chassis> toChassisModel =
             e -> new Chassis(e.getName(), e.getDescription());
+
+    private final BiFunction<ServerRequest, ChassisEntity, URI> toUri =
+            (r,i) -> fromPath(r.path())
+                    .pathSegment(i.getId().toString())
+                    .build()
+                    .toUri();
 
     public Mono<ServerResponse> getChassisItem(ServerRequest request) {
 
@@ -59,11 +69,10 @@ public class ChassisRouterHandler {
     }
 
     public Mono<ServerResponse> createChassisItem(ServerRequest request) {
-
         return request.bodyToMono(Chassis.class)
                 .flatMap(validator::valid)
                 .flatMap(chassisService::addChassisItem)
-                .flatMap(entity -> created(URI.create("/chassis/" + entity.getId()))
+                .flatMap(entity -> created(toUri.apply(request, entity))
                         .contentType(APPLICATION_JSON)
                         .bodyValue(new Chassis(entity.getName(), entity.getDescription())));
     }
