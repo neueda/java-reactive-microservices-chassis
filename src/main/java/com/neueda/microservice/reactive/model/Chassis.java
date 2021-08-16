@@ -9,15 +9,11 @@ public record Chassis(
         String name,
         String description) {
 
-    public Chassis {
-        requireNonNull(name);
-
-        // The validation is only executed after the object creation
-        //if (name.isBlank())
-        //    throw new IllegalArgumentException("Name cannot be blank");
-    }
-
     public Chassis(String name) {
         this(name, null);
+    }
+
+    public Chassis {
+        requireNonNull(name);
     }
 }

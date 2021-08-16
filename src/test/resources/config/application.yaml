@@ -54,6 +54,10 @@ logging:
     root: error
     web: trace
     sql: trace
+    reactor:
+      netty:
+        http:
+          client: debug
     org:
       testcontainers: trace
       springframework:
