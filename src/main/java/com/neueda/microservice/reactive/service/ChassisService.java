@@ -22,7 +22,7 @@ public class ChassisService {
 
     private final ChassisRepository chassisRepository;
 
-    public Flux<ChassisEntity> findAllChassisItem() {
+    public Flux<ChassisEntity> findAllChassisItems() {
         return chassisRepository.findAll();
     }
 
@@ -32,7 +32,7 @@ public class ChassisService {
                         new ItemNotFoundException("No element with ID " + id + " could be found")));
     }
 
-    public Flux<ChassisEntity> findAllChassisItemByNameContaining(String value) {
+    public Flux<ChassisEntity> findAllChassisItemsByNameContaining(String value) {
         ChassisEntity chassisEntity = new ChassisEntity().setName(value);
 
         ExampleMatcher matcher = matching().withMatcher("name", contains());

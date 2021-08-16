@@ -64,7 +64,7 @@ class ChassisControllerTests {
                         .setName("Chassis Under Test")
                         .setDescription("Description Text");
 
-        given(chassisService.findAllChassisItem())
+        given(chassisService.findAllChassisItems())
                 .willReturn(Flux.just(chassisEntity));
 
         // when

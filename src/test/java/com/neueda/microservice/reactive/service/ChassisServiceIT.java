@@ -48,7 +48,7 @@ class ChassisServiceIT extends PostgresTestContainer {
                 new Chassis("partial name find test", "description text"));
 
         // when
-        chassisService.findAllChassisItemByNameContaining("find")
+        chassisService.findAllChassisItemsByNameContaining("find")
                 .as(StepVerifier::create)
                 // then
                 .expectSubscription()

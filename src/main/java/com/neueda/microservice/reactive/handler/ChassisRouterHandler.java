@@ -51,11 +51,11 @@ public class ChassisRouterHandler {
                         .bodyValue(chassis));
     }
 
-    public Mono<ServerResponse> listChassisItem(ServerRequest request) {
+    public Mono<ServerResponse> listChassisItems(ServerRequest request) {
 
         return ok()
                 .contentType(APPLICATION_JSON)
-                .body(chassisService.findAllChassisItem().map(toChassisModel), Chassis.class);
+                .body(chassisService.findAllChassisItems().map(toChassisModel), Chassis.class);
     }
 
     public Mono<ServerResponse> createChassisItem(ServerRequest request) {
@@ -68,7 +68,7 @@ public class ChassisRouterHandler {
                         .bodyValue(new Chassis(entity.getName(), entity.getDescription())));
     }
 
-    public Mono<ServerResponse> listChassisContainingName(ServerRequest request) {
+    public Mono<ServerResponse> listChassisItemsContainingName(ServerRequest request) {
 
         return Mono.just(request.queryParam("value"))
                 .filter(Optional::isPresent)
@@ -77,7 +77,7 @@ public class ChassisRouterHandler {
                 .map(Optional::get)
                 .flatMap(v -> ok()
                         .contentType(APPLICATION_JSON)
-                        .body(chassisService.findAllChassisItemByNameContaining(v).map(toChassisModel), Chassis.class));
+                        .body(chassisService.findAllChassisItemsByNameContaining(v).map(toChassisModel), Chassis.class));
     }
 
     public Mono<ServerResponse> getChassisWebClientResponse(ServerRequest request) {

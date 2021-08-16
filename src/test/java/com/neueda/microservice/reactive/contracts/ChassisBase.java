@@ -36,7 +36,7 @@ abstract class ChassisBase extends ContractTest {
                         .setName("test name")
                         .setDescription("description test");
 
-        given(chassisService.findAllChassisItem())
+        given(chassisService.findAllChassisItems())
                 .willReturn(Flux.just(chassisEntity));
     }
 }

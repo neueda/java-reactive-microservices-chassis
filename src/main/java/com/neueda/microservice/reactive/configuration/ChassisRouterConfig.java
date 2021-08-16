@@ -31,7 +31,6 @@ import static org.springframework.web.reactive.function.server.RouterFunctions.r
 
 @Configuration
 public class ChassisRouterConfig {
-
     @RouterOperations({
             @RouterOperation(path = "/api/v1/chassis/{id}",
                     beanClass = ChassisService.class, beanMethod = "getChassisItemById",
@@ -57,7 +56,7 @@ public class ChassisRouterConfig {
                                         description = "Chassis item with supplied ID not found",
                                         content = @Content)})),
             @RouterOperation(path = "/api/v1/chassis",
-                    beanClass = ChassisService.class, beanMethod = "findAllChassisItem",
+                    beanClass = ChassisService.class, beanMethod = "findAllChassisItems",
                     method = RequestMethod.GET,
                     operation = @Operation(operationId = "listChassisItem",
                             summary = "Get all chassis elements",
@@ -83,7 +82,7 @@ public class ChassisRouterConfig {
                                             mediaType = APPLICATION_JSON_VALUE,
                                             schema = @Schema(implementation = Chassis.class))))),
             @RouterOperation(path = "/api/v1/chassis/nameContain",
-                    beanClass = ChassisService.class, beanMethod = "findAllChassisItemByNameContaining",
+                    beanClass = ChassisService.class, beanMethod = "findAllChassisItemsByNameContaining",
                     method = RequestMethod.GET,
                     operation = @Operation(operationId = "listChassisContainingName",
                             summary = "Get chassis elements containing the supplied value in its name",
@@ -124,9 +123,9 @@ public class ChassisRouterConfig {
                         .path("/client", b2 -> b2
                                 .GET("/nameContain/{" + VAR_IN_USERNAME + "}", handler::getChassisWebClientResponse)
                                 .GET("/nameContain", handler::invalidClientNamePath))
-                        .GET("/nameContain", handler::listChassisContainingName)
+                        .GET("/nameContain", handler::listChassisItemsContainingName)
                         .GET("/{id}", handler::getChassisItem)
-                        .GET( handler::listChassisItem)
+                        .GET( handler::listChassisItems)
                         .POST(accept(APPLICATION_JSON), handler::createChassisItem))
                 .filter(handler::errorHandlerFilter)
                 .build();

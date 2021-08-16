@@ -3,6 +3,7 @@ package com.neueda.microservice.reactive.client;
 import com.github.tomakehurst.wiremock.WireMockServer;
 import com.neueda.microservice.reactive.properties.ClientProperties;
 import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cloud.contract.wiremock.AutoConfigureWireMock;
@@ -35,7 +36,8 @@ public class GitHubClientTests {
     }
 
     @Test
-    void shouldReturnUsersFound() {
+    @DisplayName("Should return no user found")
+    void shouldReturnNoUsersFound() {
         // given
         var testValue = "testuser";
         var testUrl = format("/search/users?q=%s+repos:%%3E0", testValue);
