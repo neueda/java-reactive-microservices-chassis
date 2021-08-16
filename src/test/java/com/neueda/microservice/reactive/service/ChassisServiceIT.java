@@ -4,6 +4,7 @@ import com.neueda.microservice.reactive.PostgresTestContainer;
 import com.neueda.microservice.reactive.exception.ItemNotFoundException;
 import com.neueda.microservice.reactive.model.Chassis;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -29,7 +30,8 @@ class ChassisServiceIT extends PostgresTestContainer {
     }
 
     @Test
-    void shouldThrowNotFoundException() {
+    @DisplayName("Should throws a item not found exception")
+    void shouldThrowsNotFoundException() {
         // when
         chassisService.getChassisItemById(1L)
                 .as(StepVerifier::create)
@@ -39,6 +41,7 @@ class ChassisServiceIT extends PostgresTestContainer {
     }
 
     @Test
+    @DisplayName("Should find all item with the provided partial name")
     void shouldFindAChassisByPartialName() {
         // given
         insertAChassisEntity(

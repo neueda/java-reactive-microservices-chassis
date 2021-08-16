@@ -3,6 +3,7 @@ package com.neueda.microservice.reactive;
 import com.neueda.microservice.reactive.model.Chassis;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -35,7 +36,8 @@ class ReactiveMicroserviceApplicationIT extends PostgresTestContainer {
 	}
 
 	@Test
-	void shouldHaveNoChassis() {
+	@DisplayName("Should a list with one chassis item")
+	void shouldHaveOneChassisItem() {
 		webClient.get()
 				.uri("/api/v1/chassis")
 				.accept(APPLICATION_JSON)

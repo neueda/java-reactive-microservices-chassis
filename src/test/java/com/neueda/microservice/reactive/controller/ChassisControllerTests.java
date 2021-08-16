@@ -8,6 +8,7 @@ import com.neueda.microservice.reactive.model.Chassis;
 import com.neueda.microservice.reactive.service.ChassisService;
 import com.neueda.microservice.reactive.validation.DefaultFunctionalValidator;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.restdocs.AutoConfigureRestDocs;
@@ -54,6 +55,7 @@ class ChassisControllerTests {
     }
 
     @Test
+    @DisplayName("Should retrieve all chassis")
     void shouldRetrieveAllChassis() {
         // given
         var chassisEntity =
@@ -77,6 +79,7 @@ class ChassisControllerTests {
     }
 
     @Test
+    @DisplayName("Should retrieve chassis client response")
     void shouldRetrieveChassisClientResponse() {
         // given
         var expected = "{\"total_count\":0,\"incomplete_results\":false,\"items\":[]}";

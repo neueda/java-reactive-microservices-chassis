@@ -5,6 +5,7 @@ import com.neueda.microservice.reactive.PostgresTestContainer;
 import com.neueda.microservice.reactive.entity.ChassisEntity;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -34,7 +35,8 @@ class ChassisRepositoryIT extends PostgresTestContainer {
     }
 
     @Test
-    void shouldReadsAllChassisEntities() {
+    @DisplayName("Should get all chassis entities")
+    void shouldGetAllChassisEntities() {
         // given
         insertChassisEntities(
                 new ChassisEntity().setName("list_all_chassis test"));
