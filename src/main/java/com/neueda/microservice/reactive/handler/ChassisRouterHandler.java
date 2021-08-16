@@ -80,7 +80,7 @@ public class ChassisRouterHandler {
                         .body(chassisService.findAllChassisItemsByNameContaining(v).map(toChassisModel), Chassis.class));
     }
 
-    public Mono<ServerResponse> getChassisWebClientResponse(ServerRequest request) {
+    public Mono<ServerResponse> getChassisClientResponse(ServerRequest request) {
 
         return Mono.just(request.pathVariable(VAR_IN_USERNAME))
                 .filter(StringUtils::hasText)

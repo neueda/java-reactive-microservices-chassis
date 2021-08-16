@@ -99,7 +99,7 @@ public class ChassisRouterConfig {
             @RouterOperation(path = "/api/v1/chassis/client/nameContain/{" + VAR_IN_USERNAME + "}",
                     beanClass = GitHubClient.class, beanMethod = "searchUsernameContaining",
                     method = RequestMethod.GET,
-                    operation = @Operation(operationId = "getChassisWebClientResponse",
+                    operation = @Operation(operationId = "getChassisClientResponse",
                             tags = "github-client",
                             summary = "Get GitHub username containing the supplied value in its name",
                             description = "Return from GitHub all username containing the supplied value in its name and with one or more repos",
@@ -121,7 +121,7 @@ public class ChassisRouterConfig {
     public RouterFunction<ServerResponse> routes(ChassisRouterHandler handler) {
         return route().path("/api/v1/chassis", b1 -> b1
                         .path("/client", b2 -> b2
-                                .GET("/nameContain/{" + VAR_IN_USERNAME + "}", handler::getChassisWebClientResponse)
+                                .GET("/nameContain/{" + VAR_IN_USERNAME + "}", handler::getChassisClientResponse)
                                 .GET("/nameContain", handler::invalidClientNamePath))
                         .GET("/nameContain", handler::listChassisItemsContainingName)
                         .GET("/{id}", handler::getChassisItem)
