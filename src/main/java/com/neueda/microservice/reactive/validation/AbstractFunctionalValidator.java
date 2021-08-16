@@ -6,14 +6,14 @@ import org.springframework.validation.Validator;
 import reactor.core.publisher.Mono;
 
 @RequiredArgsConstructor
-abstract class AbstractFunctionalValidator<U extends Validator, E extends BindException> implements FunctionalValidator {
+abstract class AbstractFunctionalValidator<V extends Validator, B extends BindException> implements FunctionalValidator {
 
-    private final U validator;
-    private final Class<E> exception;
+    private final V validator;
+    private final Class<B> exception;
 
     public final <T> Mono<T> valid(T target) {
         try {
-            E errors = exception.getDeclaredConstructor(Object.class, String.class)
+            B errors = exception.getDeclaredConstructor(Object.class, String.class)
                     .newInstance(target, target.getClass().getName());
 
             validator.validate(target, errors);

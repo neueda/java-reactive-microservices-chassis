@@ -15,8 +15,6 @@ import org.springframework.util.StringUtils;
 import org.springframework.web.reactive.function.server.HandlerFunction;
 import org.springframework.web.reactive.function.server.ServerRequest;
 import org.springframework.web.reactive.function.server.ServerResponse;
-import org.springframework.web.util.UriBuilder;
-import org.springframework.web.util.UriComponentsBuilder;
 import reactor.core.publisher.Mono;
 
 import java.net.URI;
@@ -47,8 +45,7 @@ public class ChassisRouterHandler {
     private final BiFunction<ServerRequest, ChassisEntity, URI> toUri =
             (r,i) -> fromPath(r.path())
                     .pathSegment(i.getId().toString())
-                    .build()
-                    .toUri();
+                    .build().toUri();
 
     public Mono<ServerResponse> getChassisItem(ServerRequest request) {
 
