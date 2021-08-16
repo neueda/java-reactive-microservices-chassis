@@ -28,6 +28,7 @@ public class GlobalErrorWebExceptionHandler extends DefaultErrorWebExceptionHand
         // https://github.com/spring-projects/spring-boot/issues/12414
         // https://docs.spring.io/spring-boot/docs/current/reference/html/features.html#features.developing-web-applications.spring-webflux.error-handling
         this.setMessageWriters(configurer.getWriters());
+        this.setMessageReaders(configurer.getReaders());
     }
 
     @Override
