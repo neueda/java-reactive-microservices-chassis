@@ -41,7 +41,6 @@ public class GlobalErrorWebExceptionHandler extends DefaultErrorWebExceptionHand
                             request.path(),
                             "CustomErrorPathException"));
         }
-
         return super.renderErrorResponse(request);
     }
 }
