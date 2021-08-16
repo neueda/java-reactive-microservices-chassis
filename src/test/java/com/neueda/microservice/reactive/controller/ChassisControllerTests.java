@@ -55,8 +55,8 @@ class ChassisControllerTests {
     }
 
     @Test
-    @DisplayName("Should retrieve all chassis")
-    void shouldRetrieveAllChassis() {
+    @DisplayName("Should retrieve all chassis items")
+    void shouldRetrieveAllChassisItems() {
         // given
         var chassisEntity =
                 new ChassisEntity()
