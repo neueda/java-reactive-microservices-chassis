@@ -52,7 +52,7 @@ public class ChassisRouterHandler {
         return Mono.just(request.pathVariable("id"))
                 .flatMap(HandlerHelper::parseLong)
                 .flatMap(chassisService::getChassisItemById)
-                .map(toChassisModel)// <1>
+                .map(toChassisModel) // <1>
                 .flatMap(chassis -> ok()
                         .contentType(APPLICATION_JSON)
                         .bodyValue(chassis));
@@ -68,8 +68,8 @@ public class ChassisRouterHandler {
     public Mono<ServerResponse> createChassisItem(ServerRequest request) {
         // tag::create[]
         return request.bodyToMono(Chassis.class)
-                .flatMap(validator::valid)// <1>
-                .flatMap(chassisService::addChassisItem)// <2>
+                .flatMap(validator::valid) // <1>
+                .flatMap(chassisService::addChassisItem) // <2>
                 .flatMap(entity -> created(toUri.apply(request, entity))
                         .contentType(APPLICATION_JSON)
                         .bodyValue(new Chassis(entity.getName(), entity.getDescription())));
