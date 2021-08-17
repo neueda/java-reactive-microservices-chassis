@@ -7,6 +7,11 @@ Berchris Requiao <berchris.requiao@neueda.com>
 :sectlinks:
 
 :sourcedir: ../main/java/com/neueda/microservice/reactive
+:test-resources: ../test/resources
+
+:block-switch: https://github.com/spring-io/spring-asciidoctor-extensions#block-switch
+:snippet-templates: https://github.com/spring-projects/spring-restdocs/tree/v2.0.5.RELEASE/spring-restdocs-core/src/main/resources/org/springframework/restdocs/templates/asciidoctor
+:snippet-customize: https://docs.spring.io/spring-restdocs/docs/current/reference/html5/#documenting-your-api-customizing-snippets
 
 [[abstract]]
 
@@ -21,12 +26,15 @@ https://docs.asciidoctor.org/asciidoctor/latest/docbook-backend[DocBook4], and
 https://docs.asciidoctor.org/asciidoctor/latest/manpage-backend[man page]. Feel free to
 icon:twitter[role=aqua] about it!
 
+
 [[sample-section]]
 == List Items Sample Section
+
 [square]
 * <<list-chassis, List chassis items>>
 * <<github, List GitHub users>>
 * <<contract-testing, Contract testing>>
+
 
 [[router-handler]]
 == Router Handler Function
@@ -47,8 +55,30 @@ include::{sourcedir}/handler/ChassisRouterHandler.java[tag=create]
 <1> Process a validation from the request body object.
 <2> Add the validated request body object into database.
 ====
+NOTE: This project uses the {block-switch}[Block Switch Spring Asciidoctor Extension^].
 
-[[list-demo]]
+[[block-switch]]
+== Use Block Switch with Generated Snippets
+Spring REST Docs uses {snippet-templates}[default templates^] to automatically generates the API snippets.
+To allow the generated snippets properly works with `Block Switch Spring Asciidoctor Extension` it is required to
+{snippet-customize}[customize the generated snippets^] yourself. The following example shows how to do so:
+
+====
+.Primary
+[source,adoc]
+....
+include::{test-resources}/org/springframework/restdocs/templates/asciidoctor/curl-request.snippet[]
+....
+
+.Secondary
+[source,adoc]
+....
+include::{test-resources}/org/springframework/restdocs/templates/asciidoctor/httpie-request.snippet[]
+....
+====
+
+
+[[list-chassis]]
 == List all chassis items
 
 === Request
@@ -62,11 +92,17 @@ include::{snippets}/chassis-controller-tests/should-retrieve-all-chassis-items/h
 .HTTP
 include::{snippets}/chassis-controller-tests/should-retrieve-all-chassis-items/http-request.adoc[]
 ====
+NOTE: The Spring REST Docs uses
+https://github.com/spring-projects/spring-restdocs/tree/v2.0.5.RELEASE/spring-restdocs-core/src/main/resources/org/springframework/restdocs/templates/asciidoctor[default templates^]
+to generates its snippets.
+To allow the generated snippets works with `Block Switch Spring Asciidoctor Extension` properly it is required to
+https://docs.spring.io/spring-restdocs/docs/current/reference/html5/#documenting-your-api-customizing-snippets[customize the generated snippets^].
 
 === Response
 ====
 include::{snippets}/chassis-controller-tests/should-retrieve-all-chassis-items/http-response.adoc[]
 ====
+
 
 [[github]]
 == List GitHub users
@@ -87,6 +123,7 @@ include::{snippets}/chassis-controller-tests/should-retrieve-chassis-client-resp
 ====
 include::{snippets}/chassis-controller-tests/should-retrieve-chassis-client-response/http-response.adoc[]
 ====
+
 
 [[contract-testing]]
 == Contract testing list all chassis items
