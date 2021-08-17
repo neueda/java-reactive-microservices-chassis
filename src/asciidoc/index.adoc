@@ -31,7 +31,7 @@ icon:twitter[role=aqua] about it!
 [[router-handler]]
 == Router Handler Function
 ====
-[source,java,indent=0,role="primary]
+[source,java,indent=0,role="primary"]
 .Retrieve
 ----
 include::{sourcedir}/handler/ChassisRouterHandler.java[tag=retrieve]
