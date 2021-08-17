@@ -2,8 +2,8 @@
 Berchris Requiao <berchris.requiao@neueda.com>
 :icons: font
 :source-highlighter: highlightjs
-:toc: left
-:toclevels: 3
+//:toc: left
+//:toclevels: 3
 :sectlinks:
 
 :sourcedir: ../main/java/com/neueda/microservice/reactive
@@ -30,16 +30,17 @@ icon:twitter[role=aqua] about it!
 
 [[router-handler]]
 == Router Handler Function
+
 ====
-[source,java,indent=0,role="primary"]
 .Retrieve
+[source,java,indent=0,role="primary"]
 ----
 include::{sourcedir}/handler/ChassisRouterHandler.java[tag=retrieve]
 ----
 <1> Convert the `Entity` object into a `Model` one.
 
-[source,java,indent=0,role="secondary"]
 .Create
+[source,java,indent=0,role="secondary"]
 ----
 include::{sourcedir}/handler/ChassisRouterHandler.java[tag=create]
 ----
@@ -49,18 +50,60 @@ include::{sourcedir}/handler/ChassisRouterHandler.java[tag=create]
 
 [[list-demo]]
 == List all chassis items
+
+=== Request
 ====
-operation::chassis-controller-tests/should-retrieve-all-chassis-items[snippets='curl-request,httpie-request,http-request,http-response']
+.Curl
+include::{snippets}/chassis-controller-tests/should-retrieve-all-chassis-items/curl-request.adoc[]
+
+.HTTPie
+include::{snippets}/chassis-controller-tests/should-retrieve-all-chassis-items/httpie-request.adoc[]
+
+.HTTP
+include::{snippets}/chassis-controller-tests/should-retrieve-all-chassis-items/http-request.adoc[]
+====
+
+=== Response
+====
+include::{snippets}/chassis-controller-tests/should-retrieve-all-chassis-items/http-response.adoc[]
 ====
 
 [[github]]
 == List GitHub users
+
+=== Request
 ====
-operation::chassis-controller-tests/should-retrieve-chassis-client-response[snippets='curl-request,httpie-request,http-request,http-response']
+.Curl
+include::{snippets}/chassis-controller-tests/should-retrieve-chassis-client-response/curl-request.adoc[]
+
+.HTTPie
+include::{snippets}/chassis-controller-tests/should-retrieve-chassis-client-response/httpie-request.adoc[]
+
+.HTTP
+include::{snippets}/chassis-controller-tests/should-retrieve-chassis-client-response/http-request.adoc[]
+====
+
+=== Response
+====
+include::{snippets}/chassis-controller-tests/should-retrieve-chassis-client-response/http-response.adoc[]
 ====
 
 [[contract-testing]]
 == Contract testing list all chassis
+
+=== Request
 ====
-operation::chassis-test/validate_should_list_all_chassis_items[snippets='curl-request,httpie-request,http-request,http-response']
+.Curl
+include::{snippets}/chassis-test/validate_should_list_all_chassis_items/curl-request.adoc[]
+
+.HTTPie
+include::{snippets}/chassis-test/validate_should_list_all_chassis_items/httpie-request.adoc[]
+
+.HTTP
+include::{snippets}/chassis-test/validate_should_list_all_chassis_items/http-request.adoc[]
+====
+
+=== Response
+====
+include::{snippets}/chassis-test/validate_should_list_all_chassis_items/http-response.adoc[]
 ====
