@@ -1,4 +1,4 @@
-= AsciiDoc Example Initial Document
+= AsciiDoc Example Document
 Berchris Requiao <berchris.requiao@neueda.com>
 :icons: font
 :source-highlighter: highlightjs
