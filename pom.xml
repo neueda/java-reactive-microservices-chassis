@@ -10,7 +10,7 @@
 		<version>2.5.3</version>
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
-	
+
 	<groupId>com.neueda.microservice.reactive</groupId>
 	<artifactId>java-reactive-microservices-chassis</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
@@ -260,12 +260,6 @@
 						<artifactId>spring-restdocs-asciidoctor</artifactId>
 						<version>${spring-restdocs.version}</version>
 					</dependency>
-<!--					https://github.com/spring-io/spring-asciidoctor-extensions-->
-<!--					<dependency>-->
-<!--						<groupId>io.spring.asciidoctor</groupId>-->
-<!--						<artifactId>spring-asciidoctor-extensions-block-switch</artifactId>-->
-<!--						<version>0.6.0</version>-->
-<!--					</dependency>-->
 				</dependencies>
 			</plugin>
 			<plugin>
@@ -289,12 +283,5 @@
 			</plugin>
 		</plugins>
 	</build>
-
-	<repositories>
-		<repository>
-			<id>my-repo1</id>
-			<url>https://repo.spring.io/artifactory/plugins-release</url>
-		</repository>
-	</repositories>
 
 </project>
