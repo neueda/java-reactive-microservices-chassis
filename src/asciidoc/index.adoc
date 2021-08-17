@@ -6,8 +6,8 @@ Berchris Requiao <berchris.requiao@neueda.com>
 //:toclevels: 3
 :sectlinks:
 
-:sourcedir: ../main/java/com/neueda/microservice/reactive
-:test-resources: ../test/resources
+:pkgsrc: ../main/java/com/neueda/microservice/reactive
+:asciidoctlp: ../test/resources/org/springframework/restdocs/templates/asciidoctor
 
 :block-switch: https://github.com/spring-io/spring-asciidoctor-extensions#block-switch
 :snippet-templates: https://github.com/spring-projects/spring-restdocs/tree/v2.0.5.RELEASE/spring-restdocs-core/src/main/resources/org/springframework/restdocs/templates/asciidoctor
@@ -40,20 +40,20 @@ icon:twitter[role=aqua] about it!
 == Router Handler Function
 
 ====
-.Retrieve
+.Create
 [source,java,indent=0,role="primary"]
 ----
-include::{sourcedir}/handler/ChassisRouterHandler.java[tag=retrieve]
-----
-<1> Convert the `Entity` object into a `Model` one.
-
-.Create
-[source,java,indent=0,role="secondary"]
-----
-include::{sourcedir}/handler/ChassisRouterHandler.java[tag=create]
+include::{pkgsrc}/handler/ChassisRouterHandler.java[tag=create]
 ----
 <1> Process a validation from the request body object.
 <2> Add the validated request body object into database.
+
+.Retrieve
+[source,java,indent=0,role="secondary"]
+----
+include::{pkgsrc}/handler/ChassisRouterHandler.java[tag=retrieve]
+----
+<1> Convert the `Entity` object into a `Model` one.
 ====
 NOTE: This project uses the {block-switch}[Block Switch Spring Asciidoctor Extension^].
 
@@ -67,13 +67,13 @@ To allow the generated snippets properly works with `Block Switch Spring Asciido
 .Primary
 [source,adoc]
 ....
-include::{test-resources}/org/springframework/restdocs/templates/asciidoctor/curl-request.snippet[]
+include::{asciidoctlp}/curl-request.snippet[]
 ....
 
 .Secondary
 [source,adoc]
 ....
-include::{test-resources}/org/springframework/restdocs/templates/asciidoctor/httpie-request.snippet[]
+include::{asciidoctlp}/httpie-request.snippet[]
 ....
 ====
 
