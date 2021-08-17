@@ -260,6 +260,12 @@
 						<artifactId>spring-restdocs-asciidoctor</artifactId>
 						<version>${spring-restdocs.version}</version>
 					</dependency>
+<!--					https://github.com/spring-io/spring-asciidoctor-extensions-->
+<!--					<dependency>-->
+<!--						<groupId>io.spring.asciidoctor</groupId>-->
+<!--						<artifactId>spring-asciidoctor-extensions-block-switch</artifactId>-->
+<!--						<version>0.5.0</version>-->
+<!--					</dependency>-->
 				</dependencies>
 			</plugin>
 			<plugin>

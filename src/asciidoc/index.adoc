@@ -1,7 +1,14 @@
 = AsciiDoc Example Initial Document
-Doc Writer <berchris.requiao@neueda.com>
+Berchris Requiao <berchris.requiao@neueda.com>
 :icons: font
+:source-highlighter: highlightjs
+:toc: left
+:toclevels: 3
+:sectlinks:
+
 :sourcedir: ../main/java/com/neueda/microservice/reactive
+
+[[abstract]]
 
 This _Hello World_ document has been written in `plain text` with
 http://asciidoc.org[AsciiDoc].
@@ -14,34 +21,46 @@ https://docs.asciidoctor.org/asciidoctor/latest/docbook-backend[DocBook4], and
 https://docs.asciidoctor.org/asciidoctor/latest/manpage-backend[man page]. Feel free to
 icon:twitter[role=aqua] about it!
 
+[[sample-section]]
 == List Items Sample Section
 [square]
-* item 1
-* item 2
+* <<list-chassis, List chassis items>>
+* <<github, List GitHub users>>
+* <<contract-testing, Contract testing>>
 
+[[router-handler]]
 == Router Handler Function
 ====
 [source,java,indent=0,role="primary]
-.Retrieve an item
+.Retrieve
 ----
 include::{sourcedir}/handler/ChassisRouterHandler.java[tag=retrieve]
 ----
-<1> Convert the Entity object into a Model one
+<1> Convert the `Entity` object into a `Model` one.
 
 [source,java,indent=0,role="secondary"]
-.Create an item
+.Create
 ----
 include::{sourcedir}/handler/ChassisRouterHandler.java[tag=create]
 ----
-<1> Process a validation from the request body object
-<2> Add the validated request body object into database
+<1> Process a validation from the request body object.
+<2> Add the validated request body object into database.
 ====
 
-== List all chassis call
+[[list-demo]]
+== List all chassis items
+====
 operation::chassis-controller-tests/should-retrieve-all-chassis-items[snippets='curl-request,httpie-request,http-request,http-response']
+====
 
-== GitHub search username
+[[github]]
+== List GitHub users
+====
 operation::chassis-controller-tests/should-retrieve-chassis-client-response[snippets='curl-request,httpie-request,http-request,http-response']
+====
 
+[[contract-testing]]
 == Contract testing list all chassis
+====
 operation::chassis-test/validate_should_list_all_chassis_items[snippets='curl-request,httpie-request,http-request,http-response']
+====
