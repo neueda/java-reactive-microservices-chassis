@@ -89,7 +89,7 @@ include::{snippets}/chassis-controller-tests/should-retrieve-chassis-client-resp
 ====
 
 [[contract-testing]]
-== Contract testing list all chassis
+== Contract testing list all chassis item
 
 === Request
 ====
