@@ -16,7 +16,7 @@
 	<version>0.0.1-SNAPSHOT</version>
 	<name>Java Reactive Microservice Chassis</name>
 	<description>Microservice Chassis for Reactive Restful API with Spring Boot</description>
-	
+
 	<properties>
 		<java.version>16</java.version>
 		<!-- dependency -->
@@ -26,6 +26,7 @@
 		<!-- plugin -->
 		<spring-cloud-contract-plugin.version>3.0.3</spring-cloud-contract-plugin.version>
 		<asciidoctor-plugin.version>2.2.1</asciidoctor-plugin.version>
+		<asciidoctor-block-switch-extension.version>0.6.0</asciidoctor-block-switch-extension.version>
 		<openapi-plugin.version>1.1</openapi-plugin.version>
 		<!-- consumed by spring-boot application -->
 		<build.name>${project.artifactId}-${project.version}</build.name>
@@ -105,7 +106,7 @@
 			<artifactId>spring-restdocs-webtestclient</artifactId>
 			<scope>test</scope>
 		</dependency>
-		
+
 		<!-- Testing -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
@@ -162,7 +163,7 @@
 			<scope>test</scope>
 		</dependency>
 	</dependencies>
-	
+
 	<dependencyManagement>
 		<dependencies>
 			<dependency>
@@ -181,6 +182,13 @@
 			</dependency>
 		</dependencies>
 	</dependencyManagement>
+
+	<pluginRepositories>
+		<pluginRepository>
+			<id>spring-io</id>
+			<url>https://repo.spring.io/release</url>
+		</pluginRepository>
+	</pluginRepositories>
 
 	<build>
 		<finalName>${build.name}</finalName>
@@ -259,6 +267,11 @@
 						<groupId>org.springframework.restdocs</groupId>
 						<artifactId>spring-restdocs-asciidoctor</artifactId>
 						<version>${spring-restdocs.version}</version>
+					</dependency>
+					<dependency>
+						<groupId>io.spring.asciidoctor</groupId>
+						<artifactId>spring-asciidoctor-extensions-block-switch</artifactId>
+						<version>${asciidoctor-block-switch-extension.version}</version>
 					</dependency>
 				</dependencies>
 			</plugin>
