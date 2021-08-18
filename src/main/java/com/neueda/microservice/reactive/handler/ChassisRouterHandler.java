@@ -23,7 +23,7 @@ import java.util.function.BiFunction;
 import java.util.function.Function;
 
 import static com.neueda.microservice.reactive.handler.HandlerHelper.VAR_IN_USERNAME;
-import static com.neueda.microservice.reactive.handler.HandlerHelper.createErrorRespondAndLog;
+import static com.neueda.microservice.reactive.handler.HandlerHelper.buildErrorResponse;
 import static org.springframework.http.MediaType.APPLICATION_JSON;
 import static org.springframework.web.reactive.function.server.ServerResponse.badRequest;
 import static org.springframework.web.reactive.function.server.ServerResponse.created;
@@ -105,7 +105,7 @@ public class ChassisRouterHandler {
         return next.handle(request)
                 .onErrorResume(IllegalArgumentException.class, ex -> badRequest()
                         .contentType(APPLICATION_JSON)
-                        .body(createErrorRespondAndLog(ex, request.path()), ErrorResponse.class))
+                        .body(buildErrorResponse(ex, request.path()).log(), ErrorResponse.class))
                 .onErrorResume(ItemNotFoundException.class, ex -> notFound().build().log());
     }
 }

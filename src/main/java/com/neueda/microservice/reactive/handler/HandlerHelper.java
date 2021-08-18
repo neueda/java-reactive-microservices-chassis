@@ -4,6 +4,9 @@ import com.neueda.microservice.reactive.exception.ParameterFormatException;
 import com.neueda.microservice.reactive.model.ErrorResponse;
 import reactor.core.publisher.Mono;
 
+import static reactor.core.publisher.Mono.error;
+import static reactor.core.publisher.Mono.just;
+
 
 public class HandlerHelper {
 
@@ -11,15 +14,13 @@ public class HandlerHelper {
 
     static Mono<Long> parseLong(String strNum) {
         try {
-            return Mono.just(Long.parseLong(strNum));
-        } catch (NumberFormatException nfe) {
-            return Mono.error(new ParameterFormatException(strNum, Long.class.getTypeName(), nfe));
+            return just(Long.parseLong(strNum));
+        } catch (NumberFormatException ex) {
+            return error(new ParameterFormatException(strNum, Long.class.getTypeName(), ex));
         }
     }
 
-    static Mono<ErrorResponse> createErrorRespondAndLog(Exception ex, String path) {
-        return Mono
-                .just(new ErrorResponse(ex.getLocalizedMessage(), path, ex.getClass().getTypeName()))
-                .log();
+    static Mono<ErrorResponse> buildErrorResponse(Exception ex, String path) {
+        return just(new ErrorResponse(ex.getLocalizedMessage(), path, ex.getClass().getTypeName()));
     }
 }
