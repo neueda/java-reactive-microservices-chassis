@@ -103,9 +103,11 @@ public class ChassisRouterHandler {
 
     public Mono<ServerResponse> errorHandlerFilter(ServerRequest request, HandlerFunction<ServerResponse> next) {
         return next.handle(request)
-                .onErrorResume(IllegalArgumentException.class, ex -> badRequest()
-                        .contentType(APPLICATION_JSON)
-                        .body(buildErrorResponse(ex, request.path()).log(), ErrorResponse.class))
-                .onErrorResume(ItemNotFoundException.class, ex -> notFound().build().log());
+                .onErrorResume(IllegalArgumentException.class,
+                        ex -> badRequest()
+                                .contentType(APPLICATION_JSON)
+                                .body(buildErrorResponse(ex, request.path()).log(), ErrorResponse.class))
+                .onErrorResume(ItemNotFoundException.class,
+                        ex -> notFound().build().log());
     }
 }
