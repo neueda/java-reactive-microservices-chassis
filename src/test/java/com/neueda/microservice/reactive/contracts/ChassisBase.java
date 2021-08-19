@@ -27,9 +27,6 @@ import static org.mockito.BDDMockito.given;
         ChassisRouteHandler.class, ChassisRouterConfig.class})
 abstract class ChassisBase {
 
-    @Autowired
-    private WebTestClient webClient;
-
     @MockBean
     private ChassisService chassisService;
 
@@ -37,9 +34,9 @@ abstract class ChassisBase {
     private GitHubClient gitHubClient;
 
     @BeforeEach
-    void setUp() {
+    void setUp(@Autowired WebTestClient webTestClient) {
         // setup
-        RestAssuredWebTestClient.webTestClient(webClient);
+        RestAssuredWebTestClient.webTestClient(webTestClient);
 
         // given
         var chassisEntity =
