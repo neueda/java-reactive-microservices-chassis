@@ -1,22 +1,19 @@
-package com.neueda.microservice.reactive.controller;
+package com.neueda.microservice.reactive.handler;
 
 import com.neueda.microservice.reactive.client.GitHubClient;
 import com.neueda.microservice.reactive.configuration.ChassisRouterConfig;
+import com.neueda.microservice.reactive.configuration.RestDocsConfig;
 import com.neueda.microservice.reactive.entity.ChassisEntity;
-import com.neueda.microservice.reactive.handler.ChassisRouterHandler;
 import com.neueda.microservice.reactive.model.Chassis;
 import com.neueda.microservice.reactive.service.ChassisService;
 import com.neueda.microservice.reactive.validation.DefaultFunctionalValidator;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.restdocs.AutoConfigureRestDocs;
 import org.springframework.boot.test.autoconfigure.web.reactive.WebFluxTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
-import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Import;
-import org.springframework.restdocs.webtestclient.WebTestClientRestDocumentationConfigurer;
 import org.springframework.test.web.reactive.server.WebTestClient;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
@@ -24,35 +21,21 @@ import reactor.core.publisher.Mono;
 import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.BDDMockito.given;
 import static org.springframework.http.MediaType.APPLICATION_JSON;
-import static org.springframework.restdocs.webtestclient.WebTestClientRestDocumentation.document;
 
-@Import({ChassisRouterConfig.class,
-        ChassisRouterHandler.class,
-        DefaultFunctionalValidator.class})
 @WebFluxTest
 @AutoConfigureRestDocs
-class ChassisControllerTests {
+@Import({RestDocsConfig.class, DefaultFunctionalValidator.class,
+        ChassisRouteHandler.class, ChassisRouterConfig.class})
+class ChassisRouteHandlerTests {
+
+    @Autowired
+    private WebTestClient webTestClient;
 
     @MockBean
     private ChassisService chassisService;
 
     @MockBean
     private GitHubClient gitHubClient;
-
-    private WebTestClient webClient;
-
-    @BeforeEach
-    void setUp(
-            @Autowired ApplicationContext context,
-            @Autowired WebTestClientRestDocumentationConfigurer configurer) {
-
-        webClient = WebTestClient
-                .bindToApplicationContext(context)
-                .configureClient()
-                .filter(configurer)
-                .entityExchangeResultConsumer(document("{class-name}/{method-name}"))
-                .build();
-    }
 
     @Test
     @DisplayName("Should retrieve all chassis items")
@@ -68,7 +51,7 @@ class ChassisControllerTests {
                 .willReturn(Flux.just(chassisEntity));
 
         // when
-        webClient.get()
+        webTestClient.get()
                 .uri("/api/v1/chassis")
                 .accept(APPLICATION_JSON)
                 .exchange()
@@ -87,7 +70,7 @@ class ChassisControllerTests {
                 .willReturn(Mono.just(expected));
 
         // when
-        webClient.get()
+        webTestClient.get()
                 .uri("/api/v1/chassis/client/nameContain/clientPartialNameTest")
                 .accept(APPLICATION_JSON)
                 .exchange()

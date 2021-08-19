@@ -1,7 +1,7 @@
 package com.neueda.microservice.reactive.configuration;
 
 import com.neueda.microservice.reactive.client.GitHubClient;
-import com.neueda.microservice.reactive.handler.ChassisRouterHandler;
+import com.neueda.microservice.reactive.handler.ChassisRouteHandler;
 import com.neueda.microservice.reactive.model.Chassis;
 import com.neueda.microservice.reactive.model.ErrorResponse;
 import com.neueda.microservice.reactive.service.ChassisService;
@@ -29,7 +29,7 @@ import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 import static org.springframework.web.reactive.function.server.RequestPredicates.accept;
 import static org.springframework.web.reactive.function.server.RouterFunctions.route;
 
-@Configuration
+@Configuration(proxyBeanMethods = false)
 public class ChassisRouterConfig {
     @RouterOperations({
             @RouterOperation(path = "/api/v1/chassis/{id}",
@@ -118,7 +118,7 @@ public class ChassisRouterConfig {
                             }))
     })
     @Bean
-    public RouterFunction<ServerResponse> routes(ChassisRouterHandler handler) {
+    RouterFunction<ServerResponse> routes(ChassisRouteHandler handler) {
         return route().path("/api/v1/chassis", b1 -> b1
                         .path("/client", b2 -> b2
                                 .GET("/nameContain/{" + VAR_IN_USERNAME + "}", handler::getChassisClientResponse)
@@ -132,7 +132,7 @@ public class ChassisRouterConfig {
     }
 
     @Bean
-    public ErrorProperties errorProperties() {
+    ErrorProperties errorProperties() {
         ErrorProperties errorProperties = new ErrorProperties();
         errorProperties.setIncludeException(true);
         errorProperties.setIncludeMessage(IncludeAttribute.ALWAYS);

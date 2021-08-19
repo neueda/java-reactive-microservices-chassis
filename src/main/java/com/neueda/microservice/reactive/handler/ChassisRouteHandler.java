@@ -33,7 +33,7 @@ import static org.springframework.web.util.UriComponentsBuilder.fromPath;
 
 @Component
 @RequiredArgsConstructor
-public class ChassisRouterHandler {
+public class ChassisRouteHandler {
 
     private final ChassisService chassisService;
     private final GitHubClient gitHubClient;

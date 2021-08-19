@@ -7,14 +7,11 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
-@Configuration
-@RequiredArgsConstructor
+@Configuration(proxyBeanMethods = false)
 public class OpenApiConfig {
 
-    private final ApiInfoProperties props;
-
     @Bean
-    public OpenAPI apiInfo() {
+    public OpenAPI apiInfo(ApiInfoProperties props) {
         return new OpenAPI().info(
                 new Info().title(props.title())
                         .description(props.description())
