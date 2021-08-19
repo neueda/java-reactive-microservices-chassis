@@ -30,6 +30,8 @@ import static org.springframework.web.reactive.function.server.ServerResponse.cr
 import static org.springframework.web.reactive.function.server.ServerResponse.notFound;
 import static org.springframework.web.reactive.function.server.ServerResponse.ok;
 import static org.springframework.web.util.UriComponentsBuilder.fromPath;
+import static reactor.core.publisher.Mono.error;
+import static reactor.core.publisher.Mono.just;
 
 @Component
 @RequiredArgsConstructor
@@ -49,7 +51,7 @@ public class ChassisRouteHandler {
 
     public Mono<ServerResponse> getChassisItem(ServerRequest request) {
         // tag::retrieve[]
-        return Mono.just(request.pathVariable("id"))
+        return just(request.pathVariable("id"))
                 .flatMap(HandlerHelper::parseLong)
                 .flatMap(chassisService::getChassisItemById)
                 .map(toChassisModel) // <1>
@@ -77,10 +79,10 @@ public class ChassisRouteHandler {
     }
 
     public Mono<ServerResponse> listChassisItemsContainingName(ServerRequest request) {
-        return Mono.just(request.queryParam("value"))
+        String paramName = "value";
+        return just(request.queryParam(paramName))
                 .filter(Optional::isPresent)
-                .switchIfEmpty(
-                        Mono.error(new MissingQueryParameterException("value", String.class.getTypeName())))
+                .switchIfEmpty(error(new MissingQueryParameterException(paramName, String.class.getTypeName())))
                 .map(Optional::get)
                 .flatMap(v -> ok()
                         .contentType(APPLICATION_JSON)
@@ -88,7 +90,7 @@ public class ChassisRouteHandler {
     }
 
     public Mono<ServerResponse> getChassisClientResponse(ServerRequest request) {
-        return Mono.just(request.pathVariable(VAR_IN_USERNAME))
+        return just(request.pathVariable(VAR_IN_USERNAME))
                 .filter(StringUtils::hasText)
                 .flatMap(gitHubClient::searchUsernameContaining)
                 .flatMap(v -> ok()
@@ -97,7 +99,7 @@ public class ChassisRouteHandler {
     }
 
     public Mono<ServerResponse> invalidClientNamePath(ServerRequest request) {
-        return Mono.error(new MissingPathVariableException(request.path(), VAR_IN_USERNAME));
+        return error(new MissingPathVariableException(request.path(), VAR_IN_USERNAME));
     }
 
 
