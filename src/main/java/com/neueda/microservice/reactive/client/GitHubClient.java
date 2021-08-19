@@ -22,7 +22,7 @@ public class GitHubClient {
     public Mono<String> searchUsernameContaining(@NonNull String value) {
         return clientHelper.performGetRequest(ub ->
                         ub.pathSegment("search").pathSegment("users")
-                                .queryParam("q", value + "+repos:>0")
+                                .queryParam("q", value.concat("+repos:>0"))
                                 .build(), String.class);
     }
 }
