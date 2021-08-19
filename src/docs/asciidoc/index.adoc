@@ -1,13 +1,15 @@
 = AsciiDoc Example Document
 Berchris Requiao <berchris.requiao@neueda.com>
+:doctype: book
 :icons: font
 :source-highlighter: highlightjs
 //:toc: left
-//:toclevels: 3
+//:toclevels: 4
+:tabsize: 4
 :sectlinks:
 
-:pkgsrc: ../main/java/com/neueda/microservice/reactive
-:asciidoctlp: ../test/resources/org/springframework/restdocs/templates/asciidoctor
+:pkgsrc: ../../main/java/com/neueda/microservice/reactive
+:asciidoctlp: ../../test/resources/org/springframework/restdocs/templates/asciidoctor
 
 :block-switch: https://github.com/spring-io/spring-asciidoctor-extensions#block-switch
 :snippet-templates: https://github.com/spring-projects/spring-restdocs/tree/v2.0.5.RELEASE/spring-restdocs-core/src/main/resources/org/springframework/restdocs/templates/asciidoctor
@@ -43,7 +45,7 @@ icon:twitter[role=aqua] about it!
 .Create
 [source,java,indent=0,role="primary"]
 ----
-include::{pkgsrc}/handler/ChassisRouterHandler.java[tag=create]
+include::{pkgsrc}/handler/ChassisRouteHandler.java[tag=create]
 ----
 <1> Process a validation from the request body object.
 <2> Add the validated request body object into database.
@@ -51,7 +53,7 @@ include::{pkgsrc}/handler/ChassisRouterHandler.java[tag=create]
 .Retrieve
 [source,java,indent=0,role="secondary"]
 ----
-include::{pkgsrc}/handler/ChassisRouterHandler.java[tag=retrieve]
+include::{pkgsrc}/handler/ChassisRouteHandler.java[tag=retrieve]
 ----
 <1> Convert the `Entity` object into a `Model` one.
 ====
@@ -84,13 +86,13 @@ include::{asciidoctlp}/httpie-request.snippet[]
 === Request
 ====
 .Curl
-include::{snippets}/chassis-controller-tests/should-retrieve-all-chassis-items/curl-request.adoc[]
+include::{snippets}/chassis-route-handler-tests/should-retrieve-all-chassis-items/curl-request.adoc[]
 
 .HTTPie
-include::{snippets}/chassis-controller-tests/should-retrieve-all-chassis-items/httpie-request.adoc[]
+include::{snippets}/chassis-route-handler-tests/should-retrieve-all-chassis-items/httpie-request.adoc[]
 
 .HTTP
-include::{snippets}/chassis-controller-tests/should-retrieve-all-chassis-items/http-request.adoc[]
+include::{snippets}/chassis-route-handler-tests/should-retrieve-all-chassis-items/http-request.adoc[]
 ====
 NOTE: The Spring REST Docs uses
 https://github.com/spring-projects/spring-restdocs/tree/v2.0.5.RELEASE/spring-restdocs-core/src/main/resources/org/springframework/restdocs/templates/asciidoctor[default templates^]
@@ -100,7 +102,7 @@ https://docs.spring.io/spring-restdocs/docs/current/reference/html5/#documenting
 
 === Response
 ====
-include::{snippets}/chassis-controller-tests/should-retrieve-all-chassis-items/http-response.adoc[]
+include::{snippets}/chassis-route-handler-tests/should-retrieve-all-chassis-items/http-response.adoc[]
 ====
 
 
@@ -110,18 +112,18 @@ include::{snippets}/chassis-controller-tests/should-retrieve-all-chassis-items/h
 === Request
 ====
 .Curl
-include::{snippets}/chassis-controller-tests/should-retrieve-chassis-client-response/curl-request.adoc[]
+include::{snippets}/chassis-route-handler-tests/should-retrieve-chassis-client-response/curl-request.adoc[]
 
 .HTTPie
-include::{snippets}/chassis-controller-tests/should-retrieve-chassis-client-response/httpie-request.adoc[]
+include::{snippets}/chassis-route-handler-tests/should-retrieve-chassis-client-response/httpie-request.adoc[]
 
 .HTTP
-include::{snippets}/chassis-controller-tests/should-retrieve-chassis-client-response/http-request.adoc[]
+include::{snippets}/chassis-route-handler-tests/should-retrieve-chassis-client-response/http-request.adoc[]
 ====
 
 === Response
 ====
-include::{snippets}/chassis-controller-tests/should-retrieve-chassis-client-response/http-response.adoc[]
+include::{snippets}/chassis-route-handler-tests/should-retrieve-chassis-client-response/http-response.adoc[]
 ====
 
 
