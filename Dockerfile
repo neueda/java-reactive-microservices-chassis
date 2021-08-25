@@ -4,21 +4,21 @@
 
 ARG APP_NAME="reactive-microservice"
 ################ STAGE: BUILD ##################
-FROM maven:3.8.1-adoptopenjdk-16-openj9 AS builder
+FROM gradle:7.2-jdk16-openj9 AS builder
 ARG APP_NAME
 
-WORKDIR build/$APP_NAME
-COPY pom.xml ./
-COPY src src/
-COPY config config/
+WORKDIR /build/$APP_NAME
+COPY gradle.properties settings.gradle build.gradle ./
+COPY .git .git/
+RUN gradle -i dependencies
 
-RUN mvn dependency:go-offline dependency:resolve-plugins
-# '-Dbuild.name' defines the name of the jar file to be generated, as well as,
-# the name of log file saved under /var/log/spring-boot
-RUN mvn package "-Dbuild.name=$APP_NAME"
-RUN mkdir layers && \
-    cd layers && \
-    java -Djarmode=layertools -jar ../target/${APP_NAME}.jar extract
+COPY config config/
+COPY src src/
+# '-PjarBaseName' defines the name of the jar file to be generated, as well as,
+# the name of log file that will be created under /var/log/spring-boot
+RUN gradle -i build "-PjarBaseName=$APP_NAME" -x intTest
+RUN mkdir jar-layers && cd jar-layers && \
+    java -Djarmode=layertools -jar ../build/libs/${APP_NAME}.jar extract
 
 ################ STAGE: DEPLOY ##################
 FROM adoptopenjdk:16-jre-openj9
@@ -30,11 +30,11 @@ RUN mkdir -p /var/log/spring-boot
 EXPOSE 8080/tcp
 EXPOSE 8081/tcp
 
-COPY --from=builder build/$APP_NAME/layers/dependencies/ ./
-COPY --from=builder build/$APP_NAME/layers/spring-boot-loader/ ./
-COPY --from=builder build/$APP_NAME/layers/snapshot-dependencies/ ./
-COPY --from=builder build/$APP_NAME/layers/application/ ./
-COPY --from=builder build/$APP_NAME/config config/
+COPY --from=builder /build/$APP_NAME/jar-layers/dependencies/ ./
+COPY --from=builder /build/$APP_NAME/jar-layers/spring-boot-loader/ ./
+COPY --from=builder /build/$APP_NAME/jar-layers/snapshot-dependencies/ ./
+COPY --from=builder /build/$APP_NAME/jar-layers/application/ ./
+COPY --from=builder /build/$APP_NAME/config config/
 RUN chmod -R u+r config/
 
 ENTRYPOINT ["java", "org.springframework.boot.loader.JarLauncher"]

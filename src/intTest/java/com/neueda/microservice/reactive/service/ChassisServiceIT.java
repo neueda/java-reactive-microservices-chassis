@@ -22,8 +22,8 @@ class ChassisServiceIT extends PostgresTestContainer {
     private ChassisService chassisService;
 
     @BeforeEach
-    void setUp(
-            @Value("db/delete_all_chassis_entity.sql") Resource script) {
+    void setup(
+            @Value("classpath:db/delete_all_chassis_entity.sql") Resource script) {
 
         Hooks.onOperatorDebug();
         executeScript(script);

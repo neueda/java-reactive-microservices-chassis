@@ -3,7 +3,7 @@ spring:
     banner-mode: off
 
   application:
-    name: java-reactive-microservices-chassis-test
+    name: java-reactive-microservices-chassis-unit-test
 
   h2:
     console:
@@ -12,18 +12,6 @@ spring:
   sql:
     init:
       mode: never
-
-  liquibase:
-    change-log: db/changelog/db-test.changelog-master.xml
-    test-rollback-on-update: on
-    contexts: test
-
-  r2dbc:
-    pool:
-      initial-size: 5
-      max-size: 10
-      max-idle-time: 30m
-      validation-query: SELECT 1
 
   codec:
     log-request-details: on
@@ -34,18 +22,6 @@ server:
     include-stacktrace: always
     include-message: always
     include-binding-errors: always
-
-client:
-  base-url: https://mock.server.com
-
-springdoc:
-  api-docs:
-    enabled: off
-
-apidoc:
-  title: Java Reactive Microservice Test
-  description: Microservice Test for Reactive Restful API with Spring Boot
-  version: TEST
 
 debug: off
 trace: off
@@ -58,11 +34,3 @@ logging:
       netty:
         http:
           client: debug
-    org:
-      testcontainers: trace
-      springframework:
-        jdbc: trace
-        r2dbc: trace
-    liquibase:
-      database: trace
-

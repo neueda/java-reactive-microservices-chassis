@@ -26,6 +26,7 @@ Microservice Chassis for Reactive Restful API with Spring Boot.
 ## Getting Started
 
 ### Requirements
+- :elephant: [Gradle](https://gradle.org/install/)
 - :whale: [Docker Engine](https://docs.docker.com/engine/install/)
 
 ### Usage

@@ -5,7 +5,7 @@ spring:
     import: configtree:config/
 
   application:
-    name: @project.artifactId@
+    name: @name@
 
   h2:
     console:
@@ -44,26 +44,27 @@ client:
 
 management:
   server:
-    port: @management.port@
+    port: @managementPort@
   endpoints:
     web:
       exposure:
-        include: health, openapi, swaggerui # For yaml format access /actuator/openapi/springdocDefault/yaml
+        # For yaml format access /actuator/openapi/springdocDefault/yaml
+        include: refresh,health,info,openapi,swaggerui
 
 springdoc:
   use-management-port: on
   show-actuator: on
 
 apidoc:
-  title: @project.name@
-  description: @project.description@
-  version: @project.version@
+  title: @name@
+  description: @description@
+  version: @version@
 
 debug: off
 trace: off
 logging:
   file:
-    name: /var/log/spring-boot/@build.name@.log
+    name: /var/log/spring-boot/@jarBaseName@.log
   level:
     root: error
     web: trace
