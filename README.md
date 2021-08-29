@@ -70,7 +70,7 @@ serve.
 
 **Loading test command:**
 
-`ab -c 50 -n 1000000 -r http://<container-url>:<container-port>/v1/chassis`
+`ab -c 50 -n 1000000 -r http://<container-url>:<container-port>/api/v1/chassis`
 
 ---
 **OpenJ9 JVM load testing:**
