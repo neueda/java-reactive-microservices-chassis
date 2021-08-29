@@ -15,16 +15,22 @@ import org.springframework.util.StringUtils;
 import org.springframework.web.reactive.function.server.HandlerFunction;
 import org.springframework.web.reactive.function.server.ServerRequest;
 import org.springframework.web.reactive.function.server.ServerResponse;
+import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
+import reactor.core.scheduler.Schedulers;
 
 import java.net.URI;
+import java.time.LocalDateTime;
 import java.util.Optional;
 import java.util.function.BiFunction;
 import java.util.function.Function;
 
 import static com.neueda.microservice.reactive.handler.HandlerHelper.VAR_IN_USERNAME;
 import static com.neueda.microservice.reactive.handler.HandlerHelper.buildErrorResponse;
+import static java.time.Duration.ofSeconds;
+import static java.util.stream.Stream.generate;
 import static org.springframework.http.MediaType.APPLICATION_JSON;
+import static org.springframework.http.MediaType.TEXT_EVENT_STREAM;
 import static org.springframework.web.reactive.function.server.ServerResponse.badRequest;
 import static org.springframework.web.reactive.function.server.ServerResponse.created;
 import static org.springframework.web.reactive.function.server.ServerResponse.notFound;
@@ -102,6 +108,15 @@ public class ChassisRouteHandler {
         return error(new MissingPathVariableException(request.path(), VAR_IN_USERNAME));
     }
 
+    public Mono<ServerResponse> infiniteStream(ServerRequest r) {
+        return ok()
+                .contentType(TEXT_EVENT_STREAM)
+                .body(Flux
+                        .fromStream(generate(LocalDateTime::now))
+                        .delayElements(ofSeconds(1))
+                        .subscribeOn(Schedulers.boundedElastic()),
+                        LocalDateTime.class);
+    }
 
     public Mono<ServerResponse> errorHandlerFilter(ServerRequest request, HandlerFunction<ServerResponse> next) {
         return next.handle(request)

@@ -123,6 +123,7 @@ public class ChassisRouterConfig {
                         .path("/client", b2 -> b2
                                 .GET("/nameContain/{" + VAR_IN_USERNAME + "}", handler::getChassisClientResponse)
                                 .GET("/nameContain", handler::invalidClientNamePath))
+                        .GET("/infinite", handler::infiniteStream)
                         .GET("/nameContain", handler::listChassisItemsContainingName)
                         .GET("/{id}", handler::getChassisItem)
                         .GET( handler::listChassisItems)
