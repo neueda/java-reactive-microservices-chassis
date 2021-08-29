@@ -76,7 +76,7 @@ serve.
 **OpenJ9 JVM load testing:**
 
 ```
-Document Path:          /v1/chassis  
+Document Path:          /api/v1/chassis  
 Document Length:        100 bytes
 
 Concurrency Level:      50  
@@ -120,7 +120,7 @@ Percentage of the requests served within a certain time (ms)
 **HotSpot JVM load testing:**
 
 ```
-Document Path:          /v1/chassis
+Document Path:          /api/v1/chassis
 Document Length:        100 bytes
 
 Concurrency Level:      50
