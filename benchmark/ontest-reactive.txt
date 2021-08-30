@@ -1,0 +1,44 @@
+CONTAINER ID   NAME               CPU %     MEM USAGE / LIMIT     MEM %     NET I/O         BLOCK I/O         PIDS
+dcbce98b2fc7   chassis-reactive   73.37%    304.7MiB / 3.842GiB   7.75%     146MB / 169MB   1.18MB / 1.53MB   41
+CONTAINER ID   NAME               CPU %     MEM USAGE / LIMIT     MEM %     NET I/O         BLOCK I/O         PIDS
+dcbce98b2fc7   chassis-reactive   73.37%    304.7MiB / 3.842GiB   7.75%     146MB / 169MB   1.18MB / 1.53MB   41
+CONTAINER ID   NAME               CPU %     MEM USAGE / LIMIT     MEM %     NET I/O         BLOCK I/O         PIDS
+dcbce98b2fc7   chassis-reactive   92.71%    304.8MiB / 3.842GiB   7.75%     146MB / 169MB   1.18MB / 1.53MB   41
+CONTAINER ID   NAME               CPU %     MEM USAGE / LIMIT     MEM %     NET I/O         BLOCK I/O         PIDS
+dcbce98b2fc7   chassis-reactive   92.71%    304.8MiB / 3.842GiB   7.75%     146MB / 169MB   1.18MB / 1.53MB   41
+CONTAINER ID   NAME               CPU %     MEM USAGE / LIMIT     MEM %     NET I/O         BLOCK I/O         PIDS
+dcbce98b2fc7   chassis-reactive   100.35%   304.7MiB / 3.842GiB   7.75%     147MB / 169MB   1.18MB / 1.53MB   41
+CONTAINER ID   NAME               CPU %     MEM USAGE / LIMIT     MEM %     NET I/O         BLOCK I/O         PIDS
+dcbce98b2fc7   chassis-reactive   100.35%   304.7MiB / 3.842GiB   7.75%     147MB / 169MB   1.18MB / 1.53MB   41
+CONTAINER ID   NAME               CPU %     MEM USAGE / LIMIT     MEM %     NET I/O         BLOCK I/O         PIDS
+dcbce98b2fc7   chassis-reactive   131.73%   304.6MiB / 3.842GiB   7.74%     147MB / 170MB   1.18MB / 1.53MB   41
+CONTAINER ID   NAME               CPU %     MEM USAGE / LIMIT     MEM %     NET I/O         BLOCK I/O         PIDS
+dcbce98b2fc7   chassis-reactive   131.73%   304.6MiB / 3.842GiB   7.74%     147MB / 170MB   1.18MB / 1.53MB   41
+CONTAINER ID   NAME               CPU %     MEM USAGE / LIMIT     MEM %     NET I/O         BLOCK I/O         PIDS
+dcbce98b2fc7   chassis-reactive   86.31%    304.5MiB / 3.842GiB   7.74%     147MB / 170MB   1.18MB / 1.53MB   41
+CONTAINER ID   NAME               CPU %     MEM USAGE / LIMIT     MEM %     NET I/O         BLOCK I/O         PIDS
+dcbce98b2fc7   chassis-reactive   86.31%    304.5MiB / 3.842GiB   7.74%     147MB / 170MB   1.18MB / 1.53MB   41
+CONTAINER ID   NAME               CPU %     MEM USAGE / LIMIT     MEM %     NET I/O         BLOCK I/O         PIDS
+dcbce98b2fc7   chassis-reactive   95.04%    304.9MiB / 3.842GiB   7.75%     147MB / 170MB   1.18MB / 1.53MB   41
+CONTAINER ID   NAME               CPU %     MEM USAGE / LIMIT     MEM %     NET I/O         BLOCK I/O         PIDS
+dcbce98b2fc7   chassis-reactive   95.04%    304.9MiB / 3.842GiB   7.75%     147MB / 170MB   1.18MB / 1.53MB   41
+CONTAINER ID   NAME               CPU %     MEM USAGE / LIMIT     MEM %     NET I/O         BLOCK I/O         PIDS
+dcbce98b2fc7   chassis-reactive   123.18%   304.8MiB / 3.842GiB   7.75%     148MB / 171MB   1.18MB / 1.53MB   41
+CONTAINER ID   NAME               CPU %     MEM USAGE / LIMIT     MEM %     NET I/O         BLOCK I/O         PIDS
+dcbce98b2fc7   chassis-reactive   123.18%   304.8MiB / 3.842GiB   7.75%     148MB / 171MB   1.18MB / 1.53MB   41
+CONTAINER ID   NAME               CPU %     MEM USAGE / LIMIT     MEM %     NET I/O         BLOCK I/O         PIDS
+dcbce98b2fc7   chassis-reactive   91.51%    305.1MiB / 3.842GiB   7.75%     148MB / 171MB   1.18MB / 1.53MB   41
+CONTAINER ID   NAME               CPU %     MEM USAGE / LIMIT     MEM %     NET I/O         BLOCK I/O         PIDS
+dcbce98b2fc7   chassis-reactive   91.51%    305.1MiB / 3.842GiB   7.75%     148MB / 171MB   1.18MB / 1.53MB   41
+CONTAINER ID   NAME               CPU %     MEM USAGE / LIMIT     MEM %     NET I/O         BLOCK I/O         PIDS
+dcbce98b2fc7   chassis-reactive   93.19%    305.2MiB / 3.842GiB   7.76%     148MB / 171MB   1.18MB / 1.53MB   41
+CONTAINER ID   NAME               CPU %     MEM USAGE / LIMIT     MEM %     NET I/O         BLOCK I/O         PIDS
+dcbce98b2fc7   chassis-reactive   93.19%    305.2MiB / 3.842GiB   7.76%     148MB / 171MB   1.18MB / 1.53MB   41
+CONTAINER ID   NAME               CPU %     MEM USAGE / LIMIT     MEM %     NET I/O         BLOCK I/O         PIDS
+dcbce98b2fc7   chassis-reactive   131.54%   304.8MiB / 3.842GiB   7.75%     149MB / 172MB   1.18MB / 1.53MB   41
+CONTAINER ID   NAME               CPU %     MEM USAGE / LIMIT     MEM %     NET I/O         BLOCK I/O         PIDS
+dcbce98b2fc7   chassis-reactive   131.54%   304.8MiB / 3.842GiB   7.75%     149MB / 172MB   1.18MB / 1.53MB   41
+CONTAINER ID   NAME               CPU %     MEM USAGE / LIMIT     MEM %     NET I/O         BLOCK I/O         PIDS
+dcbce98b2fc7   chassis-reactive   94.95%    304.8MiB / 3.842GiB   7.75%     149MB / 172MB   1.18MB / 1.53MB   41
+CONTAINER ID   NAME               CPU %     MEM USAGE / LIMIT     MEM %     NET I/O         BLOCK I/O         PIDS
+dcbce98b2fc7   chassis-reactive   94.95%    304.8MiB / 3.842GiB   7.75%     149MB / 172MB   1.18MB / 1.53MB   41
