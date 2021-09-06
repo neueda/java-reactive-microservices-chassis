@@ -117,8 +117,8 @@ processResources {
     eachFile {
         if (relativeSourcePath ==~ /^(config\/)?application(-\w+)?.(ya?ml|properties)$/) {
             project.properties
-                    .findAll({ it?.value instanceof String })
-                    .each({ filter(ReplaceTokens, tokens: [(it.key): it.value]) })
+                    .findAll { it?.value instanceof String }
+                    .each { filter(ReplaceTokens, tokens: [(it.key): it.value]) }
         }
     }
 }
