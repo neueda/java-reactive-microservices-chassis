@@ -29,10 +29,10 @@ ext {
     managementPort = '8081'
 }
 
-if (project.hasProperty('jarBaseName'))
-    bootJar.archiveName = "${jarBaseName}.jar"
+if (hasProperty('jarBaseName'))
+    bootJar.archiveFileName = "${jarBaseName}.jar"
 else
-    ext.jarBaseName = bootJar.baseName
+    ext.jarBaseName = archivesBaseName
 
 sourceSets {
     intTest {
