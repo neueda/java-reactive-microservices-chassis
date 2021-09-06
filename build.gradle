@@ -182,8 +182,8 @@ asciidoctor {
     // outputDir to ${buildDir}/docs/asciidoc
     // https://asciidoctor.github.io/asciidoctor-gradle-plugin/development-3.x/user-guide/#_include_directives_and_base_directory
     dependsOn test, contractTest
-    configurations 'asciidoctorExt'
     inputs.dir snippetsDir
+    configurations 'asciidoctorExt'
     baseDirFollowsSourceDir()
     options backend: 'html', doctype: 'book'
 }
