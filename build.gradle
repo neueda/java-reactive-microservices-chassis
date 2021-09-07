@@ -13,7 +13,9 @@ plugins {
     id 'org.springdoc.openapi-gradle-plugin' version '1.3.3'
     id 'org.asciidoctor.jvm.convert' version '3.3.2'
 
+    // Core
     id 'java'
+    id 'jacoco'
 }
 
 group = 'com.neueda.microservice.reactive'
@@ -174,7 +176,9 @@ contractTest {
 test {
     useJUnitPlatform { excludeEngines 'junit-vintage' }
     outputs.dir snippetsDir
+    finalizedBy jacocoTestReport
 }
+jacocoTestReport.dependsOn test
 
 asciidoctor {
     // By convention it sets
