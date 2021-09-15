@@ -24,10 +24,13 @@ sourceCompatibility = '16'
 
 ext {
     snippetsDir = file 'build/generated-snippets'
+    managementPort = '8081'
+
     springCloudVersion = '2020.0.3'
     springDocVersion = '1.5.10'
+    springRestdocsVersion = '2.0.5.RELEASE'
+    springBlockSwitchVersion = '0.6.0'
     testcontainersVersion = '1.15.3'
-    managementPort = '8081'
 }
 
 if (hasProperty('jarBaseName'))
@@ -82,13 +85,13 @@ dependencies {
     annotationProcessor 'org.springframework.boot:spring-boot-configuration-processor'
 
     // Documentation
-    implementation "org.springdoc:springdoc-openapi-webflux-core:${springDocVersion}"
-    runtimeOnly "org.springdoc:springdoc-openapi-webflux-ui:${springDocVersion}"
+    implementation 'org.springdoc:springdoc-openapi-webflux-core'
+    runtimeOnly 'org.springdoc:springdoc-openapi-webflux-ui'
     testImplementation 'org.springframework.restdocs:spring-restdocs-webtestclient'
 
     // Asciidoctor Extensions
-    asciidoctorExt 'org.springframework.restdocs:spring-restdocs-asciidoctor:2.0.5.RELEASE'
-    asciidoctorExt 'io.spring.asciidoctor:spring-asciidoctor-extensions-block-switch:0.6.0'
+    asciidoctorExt "org.springframework.restdocs:spring-restdocs-asciidoctor:${springRestdocsVersion}"
+    asciidoctorExt "io.spring.asciidoctor:spring-asciidoctor-extensions-block-switch:${springBlockSwitchVersion}"
 
     // UnitTesting
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
@@ -111,6 +114,12 @@ dependencyManagement {
     imports {
         mavenBom "org.springframework.cloud:spring-cloud-dependencies:${springCloudVersion}"
         mavenBom "org.testcontainers:testcontainers-bom:${testcontainersVersion}"
+    }
+    dependencies {
+        dependencySet(group: 'org.springdoc', version: springDocVersion) {
+            entry 'springdoc-openapi-webflux-core'
+            entry 'springdoc-openapi-webflux-ui'
+        }
     }
 }
 
