@@ -90,8 +90,8 @@ dependencies {
     testImplementation 'org.springframework.restdocs:spring-restdocs-webtestclient'
 
     // Asciidoctor Extensions
-    asciidoctorExt "org.springframework.restdocs:spring-restdocs-asciidoctor:${springRestdocsVersion}"
-    asciidoctorExt "io.spring.asciidoctor:spring-asciidoctor-extensions-block-switch:${springBlockSwitchVersion}"
+    asciidoctorExt "org.springframework.restdocs:spring-restdocs-asciidoctor:$springRestdocsVersion"
+    asciidoctorExt "io.spring.asciidoctor:spring-asciidoctor-extensions-block-switch:$springBlockSwitchVersion"
 
     // UnitTesting
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
@@ -112,8 +112,8 @@ dependencies {
 
 dependencyManagement {
     imports {
-        mavenBom "org.springframework.cloud:spring-cloud-dependencies:${springCloudVersion}"
-        mavenBom "org.testcontainers:testcontainers-bom:${testcontainersVersion}"
+        mavenBom "org.springframework.cloud:spring-cloud-dependencies:$springCloudVersion"
+        mavenBom "org.testcontainers:testcontainers-bom:$testcontainersVersion"
     }
     dependencies {
         dependencySet(group: 'org.springdoc', version: springDocVersion) {
