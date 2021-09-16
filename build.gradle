@@ -1,21 +1,21 @@
-import org.apache.tools.ant.filters.ReplaceTokens
-import org.springframework.cloud.contract.verifier.config.TestFramework
-
 plugins {
     // Spring
-    id 'org.springframework.boot' version '2.5.4'
-    id 'io.spring.dependency-management' version '1.0.11.RELEASE'
-    id 'org.springframework.cloud.contract' version '3.0.3'
-    id 'com.gorylenko.gradle-git-properties' version '2.3.1'
+    id 'org.springframework.boot'
+    id 'io.spring.dependency-management'
+    id 'org.springframework.cloud.contract'
+    id 'com.gorylenko.gradle-git-properties'
 
     // Docs
-    id 'com.github.johnrengelman.processes' version '0.5.0'
-    id 'org.springdoc.openapi-gradle-plugin' version '1.3.3'
-    id 'org.asciidoctor.jvm.convert' version '3.3.2'
+    id 'com.github.johnrengelman.processes'
+    id 'org.springdoc.openapi-gradle-plugin'
+    id 'org.asciidoctor.jvm.convert'
 
     // Core
     id 'jacoco'
 }
+
+import org.apache.tools.ant.filters.ReplaceTokens
+import org.springframework.cloud.contract.verifier.config.TestFramework
 
 group = 'com.neueda.microservice.reactive'
 description = 'Microservice Chassis for Reactive Restful API with Spring Boot'
@@ -64,6 +64,19 @@ repositories {
     maven { url 'https://repo.spring.io/release' }
 }
 
+dependencyManagement {
+    imports {
+        mavenBom "org.springframework.cloud:spring-cloud-dependencies:$springCloudVersion"
+        mavenBom "org.testcontainers:testcontainers-bom:$testcontainersVersion"
+    }
+    dependencies {
+        dependencySet(group: 'org.springdoc', version: springDocVersion) {
+            entry 'springdoc-openapi-webflux-core'
+            entry 'springdoc-openapi-webflux-ui'
+        }
+    }
+}
+
 dependencies {
     // Controller
     implementation 'org.springframework.boot:spring-boot-starter-webflux'
@@ -108,19 +121,6 @@ dependencies {
     testImplementation 'org.springframework.cloud:spring-cloud-starter-contract-verifier'
     testImplementation 'org.springframework.cloud:spring-cloud-starter-contract-stub-runner'
     testImplementation 'io.rest-assured:spring-web-test-client'
-}
-
-dependencyManagement {
-    imports {
-        mavenBom "org.springframework.cloud:spring-cloud-dependencies:$springCloudVersion"
-        mavenBom "org.testcontainers:testcontainers-bom:$testcontainersVersion"
-    }
-    dependencies {
-        dependencySet(group: 'org.springdoc', version: springDocVersion) {
-            entry 'springdoc-openapi-webflux-core'
-            entry 'springdoc-openapi-webflux-ui'
-        }
-    }
 }
 
 processResources {

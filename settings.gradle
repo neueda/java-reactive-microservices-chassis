@@ -1,1 +1,15 @@
+pluginManagement {
+    plugins {
+        // Spring
+        id 'org.springframework.boot' version sprinbBootVersion
+        id 'io.spring.dependency-management' version springDependencyManagementVersion
+        id 'org.springframework.cloud.contract' version springContractVersion
+        id 'com.gorylenko.gradle-git-properties' version gitPropertiesVersion
+
+        // Docs
+        id 'com.github.johnrengelman.processes' version gradleProcessesVersion
+        id 'org.springdoc.openapi-gradle-plugin' version springdocOpenapiVersion
+        id 'org.asciidoctor.jvm.convert' version asciidoctorConvertVersion
+    }
+}
 rootProject.name = 'java-reactive-microservices-chassis'
