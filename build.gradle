@@ -1,4 +1,7 @@
 plugins {
+    // Core
+    id 'jacoco'
+
     // Spring
     id 'org.springframework.boot'
     id 'io.spring.dependency-management'
@@ -10,8 +13,8 @@ plugins {
     id 'org.springdoc.openapi-gradle-plugin'
     id 'org.asciidoctor.jvm.convert'
 
-    // Core
-    id 'jacoco'
+    // Tests
+    id 'com.adarshr.test-logger'
 }
 
 import org.apache.tools.ant.filters.ReplaceTokens
@@ -186,6 +189,26 @@ test {
     outputs.dir snippetsDir
     finalizedBy jacocoTestReport
 }
+
+testlogger {
+    theme 'mocha'
+    showExceptions true
+    showStackTraces true
+    showFullStackTraces false
+    showCauses true
+    slowThreshold 2000
+    showSummary true
+    showSimpleNames false
+    showPassed true
+    showSkipped true
+    showFailed true
+    showStandardStreams false
+    showPassedStandardStreams true
+    showSkippedStandardStreams true
+    showFailedStandardStreams true
+    logLevel 'lifecycle'
+}
+
 jacocoTestReport.dependsOn test
 
 asciidoctor {

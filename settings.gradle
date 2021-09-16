@@ -10,6 +10,9 @@ pluginManagement {
         id 'com.github.johnrengelman.processes' version gradleProcessesVersion
         id 'org.springdoc.openapi-gradle-plugin' version springdocOpenapiVersion
         id 'org.asciidoctor.jvm.convert' version asciidoctorConvertVersion
+
+        // Tests
+        id 'com.adarshr.test-logger' version testLoggerVersion
     }
 }
 rootProject.name = 'java-reactive-microservices-chassis'
